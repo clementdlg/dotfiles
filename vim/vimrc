@@ -25,10 +25,10 @@ set signcolumn=yes                  " add a column before line number
 " graphics
 syntax on                           " syntax highlighting
 set termguicolors			        " 24bit color support
-colorscheme sorbet                  " color theme, wildcharm is okay too
+colorscheme tokyonight                  " color theme, wildcharm is okay too
 set background=dark                 " black background
 set lazyredraw				        " do not redraw screen everytime
-highlight CursorLineNr guifg=orange " color of the current line number
+highlight CursorLineNr guifg=#ff9e64 " color of the current line number
 
 " file specific
 set autoread				        " read file changes (outside of vim)
@@ -55,40 +55,39 @@ set undodir=~/.vim/undo.d           " Set undo directory
 "REMAPS
 "------
 " leader key
-let mapleader = "\<Space>"
+let mapleader = " "
 
 " autocomplete symbols
 inoremap '    ''<Left>
-inoremap "    ""<Left>
 inoremap (    ()<Left>
 inoremap {    {}<Left>
-
-" buffer navigation
-nnoremap <silent> <leader>n      :enew<CR>
-nnoremap <silent> <leader>bn     :bnext<CR>
-nnoremap <silent> <leader>bp     :bprevious<CR>
-nnoremap <silent> <leader>bd     :bdelete<CR>
-nnoremap <silent> <leader>bl     :ls<CR>
-
-" split navigation
-nnoremap <silent> <leader>h    :wincmd h<CR>
-nnoremap <silent> <leader>j    :wincmd j<CR>
-nnoremap <silent> <leader>k    :wincmd k<CR>
-nnoremap <silent> <leader>l    :wincmd l<CR>
-
-" window navigation
-nnoremap <silent> <leader>wn    :belowright vnew<CR>
-nnoremap <silent> <leader>wh     <C-w>H
-nnoremap <silent> <leader>wl     <C-w>L
-nnoremap <silent> <leader>q     :q<CR>
 
 " misc remaps
 nnoremap <silent> <Esc>         :nohlsearch<CR>
 nnoremap <silent> <leader>rc    :source %<CR>
 nnoremap <silent> <leader>rn    :set relativenumber!<CR>
 
-" FEATURES
-" status line
+"BUFFER AND WINDOW REMAPS
+" buffer navigation
+nnoremap <silent> <leader>bn     :bnext<CR>
+nnoremap <silent> <leader>bp     :bprevious<CR>
+nnoremap <silent> <leader>bd     :bdelete<CR>
+nnoremap <silent> <leader>bl     :ls<CR>
+
+" window navigation
+nnoremap <silent> <leader>h    :wincmd h<CR>
+nnoremap <silent> <leader>j    :wincmd j<CR>
+nnoremap <silent> <leader>k    :wincmd k<CR>
+nnoremap <silent> <leader>l    :wincmd l<CR>
+
+" new buffer
+nnoremap <silent> <leader>n      :enew<CR>
+" next buffer in a new split
+nnoremap <silent> <leader>vs    :belowright vsplit \| bnext<CR>
+nnoremap <silent> <leader>sp    :belowright split \| bnext<CR>
+
+"STATUS LINE
+"-----------
 set laststatus=2                                    " Always display the status line
 set statusline=%#Mode#\ %{toupper(MyMode())}\       " Mode (unabbreviated)
 set statusline+=%#Path#\ %F\                        " Full file path
@@ -115,24 +114,15 @@ function! MyMode()
           \ l:current_mode ==# 'c' ? 'COMMAND' : 'UNKNOWN'
 endfunction
 
-" netrw (file view)
+" NETRW (FILE VIEW)
+" -----------------
 nnoremap <silent> <leader>f    :Lexplore<CR>
-noremap <leader>vs :call BufferVSplit()<CR>
 
 let g:netrw_banner = 0          "Remove banner
 let g:netrw_liststyle = 3       "File view
 let g:netrw_browse_split = 4    "Open file in previous window
 let g:netrw_winsize = 20        "Width of netrw
 let g:netrw_preview = 1         "Split vertically
-
-" open buffer in vertical split
-function! BufferVSplit()
-    :normal v
-    let g:path=expand('%:p')
-    :q!
-    execute 'belowright vnew' g:path
-    :Lexplore
-endfunction
 
 "AUTOCOMMADS
 "-----------
