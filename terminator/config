@@ -5,7 +5,7 @@
     background_color = "#242533"
     background_darkness = 0.78
     background_type = transparent
-    font = DejaVuSansM Nerd Font Propo 20
+    font = DejaVuSansM Nerd Font Propo 18
     foreground_color = "#ffffff"
     show_titlebar = False
     use_system_font = False
