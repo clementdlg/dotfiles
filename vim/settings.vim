@@ -62,5 +62,5 @@ set undodir=~/.vim/undo.d           " Set undo directory
 let g:netrw_banner = 0          "Remove banner
 let g:netrw_liststyle = 3       "File view
 let g:netrw_browse_split = 4    "Open file in previous window
-let g:netrw_winsize = 20        "Width of netrw
+let g:netrw_winsize = 25        "Width of netrw
 let g:netrw_preview = 1         "Split vertically

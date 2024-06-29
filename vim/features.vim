@@ -9,6 +9,7 @@ function! BufferList()
         "removing Netrw and the Vim manual
         if stridx(buf['name'], 'NetrwTreeListing') == -1 
         \&& stridx(buf['name'], '/usr/share/vim') == -1 
+        \&& buf['name'] !=  '' 
             call add(qf_list, {'bufnr' : buf['bufnr'], 'lnum' : buf['lnum']})
             let sum+=1
         endif
@@ -20,9 +21,8 @@ endfunction
 "display the quickfix list loaded with buffers
 function OpenBuffList()
     let sum = BufferList()
-    execute 'copen ' . sum
+    execute 'copen ' . sum | wincmd J
     set norelativenumber
-    set laststatus=0
 endfunction
 
-autocmd FileType qf nnoremap <Enter> <Enter>:cclose<CR>
+autocmd FileType qf nnoremap <silent> <Enter> <Enter>:cclose<CR>

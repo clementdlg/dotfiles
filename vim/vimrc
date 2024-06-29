@@ -5,14 +5,8 @@ source ~/.config/vim/autocmd.vim
 source ~/.config/vim/features.vim
 
 "TODO : 
-" [x] change color of the elements in the statusline on modechange with
-"   autocommads
-" [x] add error handling if theme not present
-" [x] configure theme
-" - display all buffers into the quickfix list
 " - use the find command / fuzzy finding / quickfix list / find and replace
 "   globall
 " - try to integrate git
 " - resize the bar when width is too small
 " - remove elements from the bar when window isnt focused
-" [x] add terminal mode support
