@@ -2,14 +2,16 @@
 "-----------
 set laststatus=2                                    " Always display the status line
 set statusline=%#Mode#\ %{CustomModes()}\       " Mode (unabbreviated)
+set statusline+=%#Git#%{Git()}
 set statusline+=%#Path#\ %F\                        " Full file path
 set statusline+=%=%#File#\ [%{&filetype}\]\         " Filetype
 set statusline+=%#Cursor1#\ \ %l:%c\ \              " Line and column numbers
 
 " status colors
 highlight Mode gui=bold cterm=bold guifg=black guibg=#7aa2f7
+highlight Git guifg=#d0d0d0 guibg=#1c223a
 highlight Path guifg=white guibg=#3b4261
-highlight File guifg=white guibg=#1c223a
+highlight File guifg=#d0d0d0 guibg=#1c223a
 highlight Cursor1 gui=bold cterm=bold guifg=black guibg=#7aa2f7
 
 " display modes unabreviated and change color
@@ -63,3 +65,11 @@ function! CustomModes()
     endif
 endfunction
 
+function! Git()
+    let branch = system("git branch 2>/dev/null | awk '{ print $2 }'")
+    if !empty(branch)
+        let branch = substitute(branch, '[^a-zA-Z0-9]', '', 'g')
+        return ' git:' . branch . ' '
+    else
+        return ''
+endfunction

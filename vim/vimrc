@@ -5,6 +5,7 @@ source ~/.config/vim/autocmd.vim
 source ~/.config/vim/features.vim
 
 "TODO : 
+" - display all buffers into the quickfix list
 " - use the find command / fuzzy finding / quickfix list / find and replace
 "   globall
 " - try to integrate git
