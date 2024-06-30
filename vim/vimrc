@@ -10,3 +10,4 @@ source ~/.config/vim/features.vim
 " - try to integrate git
 " - resize the bar when width is too small
 " - remove elements from the bar when window isnt focused
+" [x] add terminal mode support
