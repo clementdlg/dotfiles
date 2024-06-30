@@ -1,4 +1,3 @@
-
 " OPTIONS
 "--------
 "basics
@@ -64,3 +63,4 @@ let g:netrw_liststyle = 3       "File view
 let g:netrw_browse_split = 4    "Open file in previous window
 let g:netrw_winsize = 25        "Width of netrw
 let g:netrw_preview = 1         "Split vertically
+

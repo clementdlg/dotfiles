@@ -1,14 +1,8 @@
 source ~/.config/vim/settings.vim
 source ~/.config/vim/mappings.vim
-source ~/.config/vim/statusline.vim
 source ~/.config/vim/autocmd.vim
-source ~/.config/vim/features.vim
+source ~/.config/vim/quickfix.vim
+source ~/.config/vim/statusline.vim
 
-"TODO : 
-" - display all buffers into the quickfix list
-" - use the find command / fuzzy finding / quickfix list / find and replace
-"   globall
-" - try to integrate git
-" - resize the bar when width is too small
-" - remove elements from the bar when window isnt focused
-" [x] add terminal mode support
+" cat vim/settings.vim vim/statusline.vim vim/mappings.vim vim/autocmd.vim
+" vim/autocmd.vim vim/quickfix.vim
