@@ -8,4 +8,5 @@ source ~/.config/vim/mappings.vim
 source ~/.config/vim/autocmd.vim
 source ~/.config/vim/quickfix.vim
 
-" cat vim/settings.vim vim/statusline.vim vim/mappings.vim vim/autocmd.vim vim/quickfix.vim
+" CONCATENATE
+" cat vim/settings.vim vim/statusline.vim vim/mappings.vim vim/autocmd.vim vim/quickfix.vim > vimrc_merged
