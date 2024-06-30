@@ -1,0 +1,204 @@
+" OPTIONS
+"--------
+"basics
+set nocompatible			        " Vi compatibility
+set ignorecase                      " Ignore case search
+set incsearch                       " Incremental search
+set cursorline				        " Highlight current line
+set scrolloff=10			        " Keep cursor centered
+set clipboard=unnamedplus   		" Use system clipboard
+set hidden				            " Switch between buffers
+set mouse=a				            " Mouse support
+set backspace=indent,eol,start 		" Make backspace more powerful
+set noshowmode                      " Do not show mode
+set path+=**
+
+" display
+set number				            " Line numbers
+set relativenumber			        " Relative line number
+set wildmenu				        " List completion for commands
+set showcmd				            " Display command keystrokes
+set wrap                            " Wrap lines that are too long
+set linebreak                       " Wrap lines without cutting words
+set signcolumn=yes                  " Add a column before line number
+
+" graphics
+syntax on                           " Syntax highlighting
+set termguicolors			        " 24bit color support
+set background=dark                 " Black background
+set lazyredraw				        " Do not redraw screen everytime
+                                    " Setting up theme with fallback
+try                                 " Try to apply foreign theme
+    colorscheme tokyonight
+catch
+   colorscheme sorbet               " Fallback on builtin theme
+endtry
+
+highlight CursorLineNr guifg=#ff9e64 " color of the current line number
+
+" file specific
+set autoread				        " Read file changes (outside of vim)
+set noswapfile                      " Disable swap file
+filetype on                         " Detect filetype
+filetype indent on                  " Base indentation filetype
+filetype plugin on                  " Filetype specific operation
+set encoding=utf-8                  " Global encoding
+set fileencoding=utf-8              " Local encoding
+set formatoptions+=ro               " Add comment header auto
+
+" indent settings
+set expandtab               		" Convert tabs to spaces
+set tabstop=4               		" Number of spaces tabs count for
+set shiftwidth=4            		" Number of spaces to use for autoindent
+set softtabstop=4           		" Number of spaces for tab key
+set autoindent              		" Copy indent from current line when starting a new line
+set smartindent             		" Smart autoindenting for C-like programs
+
+" persistant undo
+set undofile                        " Enable persistent undo
+set undodir=~/.vim/undo.d           " Set undo directory
+" netrw
+let g:netrw_banner = 0              " Remove banner
+let g:netrw_liststyle = 3           " File view
+let g:netrw_browse_split = 4        " Open file in previous window
+let g:netrw_winsize = 25            " Width of netrw
+let g:netrw_preview = 1             " Split vertically
+
+"STATUS LINE
+"-----------
+set laststatus=2                                " Always display the status line
+set statusline=%#Mode#\ %{CustomModes()}\       " Mode names
+set statusline+=%#Git#%{Git()}                  " git integration
+set statusline+=%#Path#\ %F\                    " Full file path
+set statusline+=%=%#File#\ [%{&filetype}\]\     " Filetype
+set statusline+=%#Cursor1#\ \ %l:%c\ \          " Line and column numbers
+
+" static status colors
+highlight Git   guifg=#d0d0d0   guibg=#1c223a
+highlight Path  guifg=white     guibg=#3b4261
+highlight File  guifg=#d0d0d0   guibg=#1c223a
+
+" mode names and dynamic color
+function! CustomModes()
+    let currentMode = mode()
+    let hlMode   = "highlight Mode    gui=bold cterm=bold guifg=black guibg="
+    let hlCursor = "highlight Cursor1 gui=bold cterm=bold guifg=black guibg="
+    " possible modes
+    let modes = ['n', 'i', 'R', 'V', 'v', "\<C-v>", 'c', 't']
+    " colors to apply
+    let colors = ['#7aa2f7', '#9ece6a', '#f7768e', '#bb9af7', '#bb9af7',  '#bb9af7', '#e0ac60', '#1abc9c']
+    " name of the mode
+    let returnVal = ['Normal', 'Insert', 'Replace', 'V-Line', 'Visual',  'V-BLock', 'Command', 'Terminal']
+    
+    for i in range(0, 7)
+        if currentMode ==# modes[i]
+            execute hlMode . colors[i]
+            execute hlCursor . colors[i]
+            return returnVal[i]
+        endif
+    endfor
+endfunction
+
+" Git branch display
+" .git/HEAD is read to retrieve the branch name
+function! Git()
+    let head = '.git/HEAD'
+    " check if in a git repo
+    if !filereadable(head)
+        return ''
+    endif
+    " HEAD min characters 
+    if getfsize(head) < 16 
+        return ''
+    endif
+    " reading HEAD
+    let head = readfile(head)
+    " parsing HEAD 
+    if len(head) > 1 || stridx(head[0], 'ref: refs/heads/') == -1
+        return ''
+    else
+        return ' git:' . strpart(head[0], 16) . ' '
+    endif 
+endfunction
+
+"REMAPS
+"------
+" leader key
+let mapleader = " "
+
+" exit of search
+nnoremap <silent> <Esc>         :nohlsearch<CR>
+" source config file
+nnoremap <silent> <leader>rc    :source %<CR>
+" toggle relative number
+nnoremap <silent> <leader>rn    :set relativenumber!<CR>
+" toggle Netrw
+nnoremap <silent> <leader>f     :Lexplore<CR>
+" terminal mode
+nnoremap <silent> <leader>t     :belowright terminal ++rows=15<CR>
+" search projectwide
+nnoremap <silent> <leader>vg    :echo ":call FindAll('')"<CR>:call FindAll('')<left><left>
+
+" buffer navigation
+nnoremap <silent> <leader>bn    :bnext<CR>
+nnoremap <silent> <leader>bp    :bprevious<CR>
+nnoremap <silent> <leader>bd    :bdelete<CR>
+nnoremap <silent> <leader>bl    :call OpenBuffList()<CR>
+" new buffer
+nnoremap <silent> <leader>n     :enew<CR>
+" next buffer in a new split
+nnoremap <silent> <leader>vs    :belowright vsplit \| bnext<CR>
+nnoremap <silent> <leader>sp    :belowright split \| bnext<CR>
+
+" window navigation
+nnoremap <silent> <leader>h     :wincmd h<CR>
+nnoremap <silent> <leader>j     :wincmd j<CR>
+nnoremap <silent> <leader>k     :wincmd k<CR>
+nnoremap <silent> <leader>l     :wincmd l<CR>
+
+" quickfix panel navigation
+nnoremap <silent> <C-j>         :cnext<CR>
+nnoremap <silent> <C-k>         :cprev<CR>
+nnoremap <silent> <leader>co    :copen<CR>
+nnoremap <silent> <leader>cc    :cclose<CR>
+
+"AUTOCOMMADS
+"-----------
+" toggle cursorline when entering/leaving insert mode
+autocmd InsertEnter,InsertLeave * set cursorline!
+" exit of quickfix on enter
+autocmd FileType qf nnoremap <silent> <Enter> <Enter>:cclose<CR>
+
+" add the buffers from :ls to the quickfix list
+function! BufferList()
+    call setqflist([])
+    let qf_list = [] " list of the buffers
+    let sum = 0      " nbr of buffers
+
+    for buf in getbufinfo({'buflisted' : 1})
+        "removing Netrw and the Vim manual
+        if stridx(buf['name'], 'NetrwTreeListing') == -1 
+        \&& stridx(buf['name'], '/usr/share/vim') == -1 
+            " adding the buffer to the list       
+            call add(qf_list, {'bufnr' : buf['bufnr'], 'lnum' : buf['lnum']})
+            let sum+=1
+        endif
+    endfor
+    " set the QF list to the listed buffers
+    call setqflist(qf_list)
+    return sum
+endfunction
+
+"display the quickfix list loaded with buffers
+function OpenBuffList()
+    let sum = BufferList()
+    execute 'copen ' . sum 
+    set norelativenumber
+endfunction
+
+" find a pattern through all the codebase
+function FindAll(pattern)
+    execute "vimgrep /" . a:pattern . "/ **/*." . &filetype
+    copen
+endfunction
+
