@@ -2,7 +2,7 @@
 "-----------
 set laststatus=2                                    " Always display the status line
 set statusline=%#Mode#\ %{CustomModes()}\       " Mode (unabbreviated)
-set statusline+=%#Git#%{Git()}
+"set statusline+=%#Git#%{Git()}
 set statusline+=%#Path#\ %F\                        " Full file path
 set statusline+=%=%#File#\ [%{&filetype}\]\         " Filetype
 set statusline+=%#Cursor1#\ \ %l:%c\ \              " Line and column numbers
@@ -65,11 +65,21 @@ function! CustomModes()
     endif
 endfunction
 
-function! Git()
-    let branch = system("git branch 2>/dev/null | awk '{ print $2 }'")
-    if !empty(branch)
-        let branch = substitute(branch, '[^a-zA-Z0-9]', '', 'g')
-        return ' git:' . branch . ' '
-    else
-        return ''
-endfunction
+"function! Git()
+"    let $PATH = \"/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+"
+"    if !executable('git')
+"        return ''
+"    endif
+"
+"    let command = \"git branch --show-current 2>/dev/null"
+"    let branch = system(command)
+"
+"    if v:shell_error != 0 || empty(branch)
+"        return ''
+"    else
+"        let branch = trim(branch)
+"        let branch = substitute(branch, '[^a-zA-Z0-9]', '', 'g')
+"        return ' git:' . branch . ' '
+"    endif
+"endfunction

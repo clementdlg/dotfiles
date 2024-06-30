@@ -35,12 +35,13 @@ nnoremap <silent> <leader>sp    :belowright split \| bnext<CR>
 " netrw
 nnoremap <silent> <leader>f    :Lexplore<CR>
 " terminal mode
-nnoremap <leader>t :belowright terminal ++rows=12<CR>
+nnoremap <silent> <leader>t :belowright terminal ++rows=15<CR>
 
-" git
-nnoremap <silent> <leader>gs     :belowright terminal ++rows=12 git status<CR>
-nnoremap <silent> <leader>gl     :echo system('git log -3')<CR>
-nnoremap <silent> <leader>ga     :call system('git add .') \| echo 'Added the whole directory to staging'<CR>
-nnoremap <silent> <leader>gp     ::belowright terminal ++rows=12 git push<CR>
-nnoremap <silent> <leader>gc     :!EDITOR=vim; git commit<CR>
+" quickfix
+nnoremap <silent> <C-j>     :cnext<CR>
+nnoremap <silent> <C-k>     :cprev<CR>
+nnoremap <silent> <leader>co     :copen<CR>
+nnoremap <silent> <leader>cc     :cclose<CR>
+" custom function to search projectwide
+nnoremap <silent> <leader>vg    :echo ":call FindAll('')"<CR>:call FindAll('')<left><left>
 

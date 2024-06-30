@@ -22,6 +22,11 @@ function OpenBuffList()
     let sum = BufferList()
     execute 'copen ' . sum 
     set norelativenumber
+    set laststatus=0 
 endfunction
 
-autocmd FileType qf nnoremap <silent> <Enter> <Enter>:cclose<CR>
+function FindAll(term)
+    execute "vimgrep /" . a:term . "/ **/*." . &filetype
+    copen
+endfunction
+
