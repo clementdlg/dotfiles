@@ -32,7 +32,7 @@ set lazyredraw				        " do not redraw screen everytime
 try
     colorscheme tokyonight
 catch
-    colorscheme sorbet
+   colorscheme sorbet
 endtry
 
 highlight CursorLineNr guifg=#ff9e64 " color of the current line number
