@@ -4,13 +4,13 @@ set laststatus=2                                " Always display the status line
 set statusline=%#Mode#\ %{CustomModes()}\       " Mode names
 set statusline+=%#Git#%{Git()}                  " git integration
 set statusline+=%#Path#\ %F\                    " Full file path
-set statusline+=%=%#File#\ [%{&filetype}\]\     " Filetype
-set statusline+=%#Cursor1#\ \ %l:%c\ \          " Line and column numbers
+set statusline+=%=%#File#\ %{&filetype}\      " Filetype
+set statusline+=%#Cursor1#\ %l:%c\            " Line and column numbers
 
 " static status colors
-highlight Git   guifg=#d0d0d0   guibg=#1c223a
-highlight Path  guifg=white     guibg=#3b4261
-highlight File  guifg=#d0d0d0   guibg=#1c223a
+highlight Git   guifg=#a6aed3   guibg=#1c223a
+highlight Path  guifg=#dee2f5   guibg=#3b4261
+highlight File  guifg=#a6aed3   guibg=#1c223a
 
 " mode names and dynamic color
 function! CustomModes()
