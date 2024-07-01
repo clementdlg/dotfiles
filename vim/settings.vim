@@ -35,6 +35,8 @@ catch
 endtry
 
 highlight CursorLineNr guifg=#ff9e64 " color of the current line number
+set fillchars=vert:┃
+highlight VertSplit gui=bold cterm=bold guifg=#3f4766
 
 " file specific
 set autoread				        " Read file changes (outside of vim)
