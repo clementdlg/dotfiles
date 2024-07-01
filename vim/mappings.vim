@@ -34,8 +34,15 @@ nnoremap <silent> <leader>k     :wincmd k<CR>
 nnoremap <silent> <leader>l     :wincmd l<CR>
 
 " quickfix panel navigation
-nnoremap <silent> <C-j>         :cnext<CR>
-nnoremap <silent> <C-k>         :cprev<CR>
+nnoremap <silent> J             :cnext<CR>
+nnoremap <silent> K             :cprev<CR>
 nnoremap <silent> <leader>co    :copen<CR>
 nnoremap <silent> <leader>cc    :cclose<CR>
 
+" resize window
+nnoremap <silent> <leader>=     :vertical resize +5<CR>
+nnoremap <silent> <leader>-     :vertical resize -5<CR>
+
+" center screen on half page up/down
+nnoremap <C-u>                  <C-u>zz
+nnoremap <C-d>                  <C-d>zz
