@@ -10,7 +10,7 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.cursorline = true --Highlight cursorline
 vim.opt.scrolloff = 10 --Max cursor scroll
-vim.opt.clipboard = "unnamedplus" --Use system clipboard
+vim.opt.clipboard = "" -- Do not use system clipboard
 vim.opt.hidden = true --Put buffer in background
 vim.opt.mouse = "a" --Mouse support
 vim.g.have_nerd_font = true --Use nerd font
@@ -29,7 +29,7 @@ vim.opt.signcolumn = "yes" --Sign column (left) Decrease update time vim.opt.upd
 
 vim.opt.breakindent = true --Wrapped lines stay indented
 vim.opt.undofile = true --Persistant undo
-vim.opt.timeoutlen = 300 --timeouf for sequences
+vim.opt.timeoutlen = 800 --timeout for sequences
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -103,7 +103,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 #    PLUGINS    #
 #               #
 ]]
--- Lazy Install
+-- [[ Lazy ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -111,9 +111,9 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- Plugins Install
-
 require("lazy").setup({
+	-- NOTE : Insert plugins here
+
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
 
@@ -126,27 +126,24 @@ require("lazy").setup({
 			signs = {
 				add = { text = "+" },
 				change = { text = "~" },
-				delete = { text = "_" },
+				delete = { text = "‒" },
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
 		},
 	},
 
-	-- NOTE: Plugins can specify dependencies.
-	-- Use the `dependencies` key to specify the dependencies of a particular plugin
-
-	{ -- Fuzzy Finder (files, lsp, etc)
+	{ -- [[ Telescope ]]
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+
 			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
 				"nvim-telescope/telescope-fzf-native.nvim",
 
 				build = "make",
-
 				cond = function()
 					return vim.fn.executable("make") == 1
 				end,
@@ -159,16 +156,11 @@ require("lazy").setup({
 		config = function()
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
+			-- It's also possible to pass additional configuration options.
+			--  See `:help telescope.builtin.live_grep()` for information about particular keys
 			require("telescope").setup({
 				-- You can put your default mappings / updates / etc. in here
-				--  All the info you're looking for is in `:help telescope.setup()`
-				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
-				-- pickers = {}
+
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -180,54 +172,73 @@ require("lazy").setup({
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 
-			-- See `:help telescope.builtin`
+			-- See `:help telescope.builtin` to get all the possible places to search
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			-- vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			-- vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-			-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			-- vim.keymap.set("n", "<leader>s;", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
-			-- Slightly advanced example of overriding default behavior and theme
-			vim.keymap.set("n", "<leader>/", function()
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
+			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
+			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
+			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+			vim.keymap.set("n", "<leader>fp", builtin.find_files, { desc = "[F]ind in [P]roject" })
+			vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = "[F]ind in [O]pened files" })
+			vim.keymap.set("n", "<leader>gp", builtin.live_grep, { desc = "[G]rep in [P]roject" })
+			-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+
+			vim.keymap.set("n", "<leader>go", function()
+				builtin.live_grep({
+					grep_open_files = true,
+					prompt_title = "Live Grep in Open Files",
+				})
+			end, { desc = "[G]rep in [O]pen Files" })
+
+			vim.keymap.set("n", "<leader>fz", function()
 				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 					winblend = 10,
 					previewer = false,
 				}))
 			end, { desc = "[/] Fuzzily search in current buffer" })
-
-			-- It's also possible to pass additional configuration options.
-			--  See `:help telescope.builtin.live_grep()` for information about particular keys
-			vim.keymap.set("n", "<leader>s/", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep in Open Files",
-				})
-			end, { desc = "[S]earch [/] in Open Files" })
-
-			-- Shortcut for searching your Neovim configuration files
-			-- vim.keymap.set("n", "<leader>sn", function()
-			-- 	builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			-- end, { desc = "[S]earch [N]eovim files" })
 		end,
 	},
 
-	{ -- LSP Configuration & Plugins
+	--[[ 
+#           #
+#    LSP    #
+#           #
+]]
+	{
+		-- Quickstart configs for Nvim LSP
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for Neovim
+			--  Package Manager for LSP
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+
+			--  Extension to mason.nvim that makes it easier to use lspconfig with Mason
 			"williamboman/mason-lspconfig.nvim",
+
+			-- Install and upgrade third party tools automatically
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
-			-- Useful status updates for LSP.
-			{ "j-hui/fidget.nvim", opts = {} },
+			-- LSP progress messages
+			{
+				"j-hui/fidget.nvim",
+				opts = {
+					-- Options related to LSP progress subsystem
+					progress = {
+						-- Options related to how LSP progress messages are displayed as notifications
+						display = {
+							render_limit = 3, -- How many LSP messages to show at once
+							done_ttl = 1, -- How long a message should persist after completion
+							progress_icon = { pattern = "clock", period = 2 },
+						},
+					},
+
+					-- Options related to notification subsystem
+					notification = {
+						filter = vim.log.levels.WARN, -- Minimum notifications level
+					},
+				},
+			},
 
 			-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
 			-- used for completion, annotations and signatures of Neovim apis
