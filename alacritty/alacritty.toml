@@ -1,0 +1,38 @@
+[window]
+opacity = 0.8
+
+[colors.primary]
+background = "0x222436"
+foreground = "0xFFFFFF"
+
+[colors.normal]
+black =   "0x000000"
+red =     "#ac4242"
+green =   "#1abc9c"
+yellow =  "#e0ac60"
+blue =    "#1a4aa2"
+magenta = "#bb9af7"
+cyan =    "#75b5aa"
+white =   "#d8d8d8"
+
+[font]
+size = 20.0
+
+[[font.fallback]]
+family = "Noto Color Emoji"
+
+[[font.fallback]]
+family = "EmojiOne"
+
+[font.bold]
+family = "DejaVuSansM Nerd Font Propo"
+style = "Bold"
+
+[font.italic]
+family = "DejaVuSansM Nerd Font Propo"
+style = "Italic"
+
+[font.normal]
+family = "DejaVuSansM Nerd Font Propo"
+style = "Regular"
+
