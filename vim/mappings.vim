@@ -46,3 +46,8 @@ nnoremap <silent> <leader>-     :vertical resize -5<CR>
 " center screen on half page up/down
 nnoremap <C-u>                  <C-u>zz
 nnoremap <C-d>                  <C-d>zz
+
+" yank to system clipboard
+nnoremap <leader>y              "+y
+nnoremap <leader>Y              "+Y      
+vnoremap <leader>y              "+y

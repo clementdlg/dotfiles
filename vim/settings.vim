@@ -6,7 +6,7 @@ set ignorecase                      " Ignore case search
 set incsearch                       " Incremental search
 set cursorline				        " Highlight current line
 set scrolloff=10			        " Keep cursor centered
-set clipboard=unnamedplus   		" Use system clipboard
+set clipboard=                      " Do not use system clipboard
 set hidden				            " Switch between buffers
 set mouse=a				            " Mouse support
 set backspace=indent,eol,start 		" Make backspace more powerful
