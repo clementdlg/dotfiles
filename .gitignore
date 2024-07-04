@@ -1,0 +1,20 @@
+# Ignore everything
+*
+
+!.gitignore
+# Don't ignore specific directories
+!vim/**
+!nvim/**
+!alacritty/**
+!awesome/**
+!picom/**
+!terminator/**
+!bash/**
+!gtk-3.0/**
+!rofi/**
+!vimrc_merged
+!xfce-panel.tar.bz2
+
+# Ignore specific files inside of unignored specific dirs
+vim/.netrwhist
+nvim/lazy-lock.json
