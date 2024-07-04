@@ -4,9 +4,12 @@
 !.gitignore
 # Don't ignore specific directories
 !vim/**
+!i3/
+!i3/**
 !nvim/**
 !alacritty/**
 !awesome/**
+!picom/
 !picom/**
 !terminator/**
 !bash/**
