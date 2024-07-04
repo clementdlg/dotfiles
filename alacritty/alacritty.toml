@@ -16,13 +16,7 @@ cyan =    "#75b5aa"
 white =   "#d8d8d8"
 
 [font]
-size = 20.0
-
-[[font.fallback]]
-family = "Noto Color Emoji"
-
-[[font.fallback]]
-family = "EmojiOne"
+size = 18.0
 
 [font.bold]
 family = "DejaVuSansM Nerd Font Propo"
@@ -35,4 +29,7 @@ style = "Italic"
 [font.normal]
 family = "DejaVuSansM Nerd Font Propo"
 style = "Regular"
+
+#[[font.fallback]]
+#family = "Noto Color Emoji"
 
