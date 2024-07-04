@@ -2,7 +2,7 @@
 .toggle {
   font-family: 'DejaVuSans Nerd Font';
   font-size: 18px;
-  padding: 3px 7px;
+  padding: 3px 6px;
 }
 .flat:hover,
 .toggle:hover {
