@@ -56,6 +56,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 --###################################
 -- my applications
 
+launcher = "rofi -show drun"
 terminal = "alacritty"
 browser = "firefox"
 editor = os.getenv("EDITOR") or "vi"
@@ -312,6 +313,11 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "t", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
+
+	--Rofi
+	awful.key({ modkey }, "r", function()
+		awful.spawn(launcher)
+	end, { description = "rofi", group = "launcher" }),
 
 	--Obsidian
 	awful.key({ modkey }, "o", function()
