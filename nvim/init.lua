@@ -395,6 +395,9 @@ require("lazy").setup({
 					},
 				},
 			}
+			local formatters = {
+				stylua = {},
+			}
 
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
@@ -586,11 +589,17 @@ require("lazy").setup({
 			-- Load the colorscheme here.
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("tokyonight-night")
+			vim.cmd.colorscheme("tokyonight")
 
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
+		opts = {
+			style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
+			light_style = "day", -- The theme is used when the background is set to light
+			transparent = true, -- Enable this to disable setting the background color
+			day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+		},
 	},
 
 	-- Highlight todo, notes, etc in comments

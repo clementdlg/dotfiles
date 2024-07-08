@@ -25,9 +25,9 @@ theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#ffffff"
 
 theme.useless_gap = dpi(0)
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_normal = "#161924"
-theme.border_focus = "#97A2C9"
+theme.border_focus = "#7aa2f7"
 theme.border_marked = "#00FF00"
 
 -- There are other variable sets
@@ -93,7 +93,7 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titleba
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path .. "default/bg03.png"
+theme.wallpaper = "~/Documents/syncthing-share/earth-bg.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
