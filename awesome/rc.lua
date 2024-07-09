@@ -192,7 +192,7 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
+	awful.tag({ "󰈹", "", "", "󰭻", "󰝰", " " }, s, awful.layout.layouts[1])
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -253,13 +253,13 @@ end)
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(gears.table.join(
-	--awful.button({}, 3, function()
-	--mymainmenu:toggle()
-	--end),
-	awful.button({}, 4, awful.tag.viewnext),
-	awful.button({}, 5, awful.tag.viewprev)
-))
+--root.buttons(gears.table.join(
+--	--awful.button({}, 3, function()
+--	--mymainmenu:toggle()
+--	--end),
+--	awful.button({}, 4, awful.tag.viewnext),
+--	awful.button({}, 5, awful.tag.viewprev)
+--))
 -- }}}
 
 -- {{{ Key bindings
