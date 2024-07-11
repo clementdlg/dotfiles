@@ -68,6 +68,14 @@ browser = "firefox"
 txteditor = "terminator -e nvim"
 settings = "xfce4-settings-manager"
 
+tag_icons = {}
+tag_icons[1] = "󰈹 "
+tag_icons[2] = " "
+tag_icons[3] = " "
+tag_icons[4] = "󰭻 "
+tag_icons[5] = "󰝰 "
+tag_icons[6] = "󰝚 "
+
 -- Launch at startup
 os.execute("picom -b")
 
@@ -121,9 +129,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = myma
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -184,6 +189,7 @@ local function set_wallpaper(s)
 	end
 end
 
+-- beautiful.taglist_font = "DejaVuSansM Nerd Font Propo 14"
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
@@ -192,7 +198,11 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "󰈹", "", "", "󰭻", "󰝰", " " }, s, awful.layout.layouts[1])
+	awful.tag(
+		{ tag_icons[1], tag_icons[2], tag_icons[3], tag_icons[4], tag_icons[5], tag_icons[6] },
+		s,
+		awful.layout.layouts[1]
+	)
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -218,6 +228,65 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
+		style = {
+			fg_focus = "#FFFFFF",
+			bg_focus = "#000000",
+			fg_occupied = "#d6dfff",
+			fg_empty = "#d6dfff",
+			bg_occupied = "#161924",
+			bg_empty = "#161924",
+		},
+		layout = {
+			layout = wibox.layout.fixed.horizontal,
+		},
+		widget_template = {
+			{
+				{
+					{
+						id = "text_role",
+						widget = wibox.widget.textbox,
+					},
+					layout = wibox.layout.fixed.horizontal,
+				},
+				left = 18,
+				right = 10,
+				top = 3,
+				bottom = 3,
+				widget = wibox.container.margin,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+			create_callback = function(self, t, index, objects) --luacheck: no unused
+				self:connect_signal("mouse::enter", function()
+					if self.bg ~= "#ff0000" then
+						self.backup = self.bg
+						self.has_backup = true
+					end
+					self.bg = "#2a3045"
+				end)
+				self:connect_signal("mouse::leave", function()
+					if self.has_backup then
+						self.bg = self.backup
+					end
+				end)
+				if t.selected then
+					self:get_children_by_id("underline")[1].bg = "#ffffff"
+				end
+			end,
+			update_callback = function(self, t, index, objects) --luacheck: no unused
+				if t.selected then
+					self:get_children_by_id("underline")[1].bg = "#ffffff"
+				else
+					self:get_children_by_id("underline")[1].bg = "#00000000"
+				end
+			end,
+			{
+				id = "underline",
+				bg = "#00000000", -- Transparent background
+				forced_height = 2,
+				widget = wibox.container.background,
+			},
+		},
 	})
 
 	-- Create a tasklist widget
@@ -229,21 +298,23 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Create the wibox
 
-	s.mywibox = awful.wibar({ position = "top", screen = s, visible = true })
+	s.mywibox = awful.wibar({
+		position = "top",
+		screen = s,
+		visible = true,
+		height = 28,
+	})
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
 			s.mytaglist,
-			s.mypromptbox,
 		},
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
-			mykeyboardlayout,
 			wibox.widget.systray(),
 			mytextclock,
 			s.mylayoutbox,
@@ -577,10 +648,10 @@ awful.rules.rules = {
 	-- Window Rules
 	--the names needs to match the following line : awful.tag({ "󰈹", "", "", "󰭻", "󰝰", " " }, s, awful.layout.layouts[1])
 	-- Spawn files on Workspace 3
-	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = "󰝰" } },
 	-- Spawn Obsidian on Workspace 3
-	{ rule = { class = "discord" }, properties = { screen = 1, tag = "󰭻" } },
-	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = "" } },
+	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
+	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag_icons[4] } },
+	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = tag_icons[5] } },
 
 	-- Spawn Settings on Workspace 6
 	{ rule = { class = "settings" }, properties = { screen = 1, tag = " ", floating = false } },
