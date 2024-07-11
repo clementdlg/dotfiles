@@ -19,14 +19,14 @@ function! BufferList()
 endfunction
 
 "display the quickfix list loaded with buffers
-function OpenBuffList()
+function! OpenBuffList()
     let sum = BufferList()
     execute 'copen ' . sum 
     set norelativenumber
 endfunction
 
 " find a pattern through all the codebase
-function FindAll(pattern)
+function! FindAll(pattern)
     execute "vimgrep /" . a:pattern . "/ **/*." . &filetype
     copen
 endfunction
