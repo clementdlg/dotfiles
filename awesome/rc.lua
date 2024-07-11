@@ -75,7 +75,7 @@ os.execute("picom -b")
 modkey = "Mod1"
 
 -- Windows gaps
-beautiful.useless_gap = 4
+beautiful.useless_gap = 6
 
 --###################################
 -- my layouts
@@ -227,28 +227,28 @@ awful.screen.connect_for_each_screen(function(s)
 		buttons = tasklist_buttons,
 	})
 
-	---- Create the wibox
+	-- Create the wibox
 
-	--s.mywibox = awful.wibar({ position = "top", screen = s, visible = false })
+	s.mywibox = awful.wibar({ position = "top", screen = s, visible = true })
 
-	---- Add widgets to the wibox
-	--s.mywibox:setup({
-	--	layout = wibox.layout.align.horizontal,
-	--	{ -- Left widgets
-	--		layout = wibox.layout.fixed.horizontal,
-	--		mylauncher,
-	--		s.mytaglist,
-	--		s.mypromptbox,
-	--	},
-	--	s.mytasklist, -- Middle widget
-	--	{ -- Right widgets
-	--		layout = wibox.layout.fixed.horizontal,
-	--		mykeyboardlayout,
-	--		wibox.widget.systray(),
-	--		mytextclock,
-	--		s.mylayoutbox,
-	--	},
-	--})
+	-- Add widgets to the wibox
+	s.mywibox:setup({
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+			layout = wibox.layout.fixed.horizontal,
+			mylauncher,
+			s.mytaglist,
+			s.mypromptbox,
+		},
+		s.mytasklist, -- Middle widget
+		{ -- Right widgets
+			layout = wibox.layout.fixed.horizontal,
+			mykeyboardlayout,
+			wibox.widget.systray(),
+			mytextclock,
+			s.mylayoutbox,
+		},
+	})
 end)
 -- }}}
 
@@ -575,17 +575,15 @@ awful.rules.rules = {
 
 	--#########################################################
 	-- Window Rules
-	-- Set Firefox to always map on the tag named "2" on screen 1.
-	-- { rule = { class = "Firefox" },
-	--   properties = { screen = 1, tag = "2" } },
+	--the names needs to match the following line : awful.tag({ "󰈹", "", "", "󰭻", "󰝰", " " }, s, awful.layout.layouts[1])
 	-- Spawn files on Workspace 3
-	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = "5" } },
+	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = "󰝰" } },
 	-- Spawn Obsidian on Workspace 3
-	{ rule = { class = "discord" }, properties = { screen = 1, tag = "4" } },
-	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = "3" } },
+	{ rule = { class = "discord" }, properties = { screen = 1, tag = "󰭻" } },
+	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = "" } },
 
 	-- Spawn Settings on Workspace 6
-	{ rule = { class = "settings" }, properties = { screen = 1, tag = "6", floating = false } },
+	{ rule = { class = "settings" }, properties = { screen = 1, tag = " ", floating = false } },
 }
 -- }}}
 
