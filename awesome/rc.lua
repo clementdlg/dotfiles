@@ -203,7 +203,6 @@ awful.screen.connect_for_each_screen(function(s)
 		s,
 		awful.layout.layouts[1]
 	)
-
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -223,18 +222,33 @@ awful.screen.connect_for_each_screen(function(s)
 			awful.layout.inc(-1)
 		end)
 	))
-	-- Create a taglist widget
+	local gradient_bg = gears.color.create_pattern({
+		type = "linear",
+		from = { 50, -50 },
+		to = { 50, 50 },
+		stops = { { 0, "#343d5e" }, { 1, "#161924" } },
+	})
+
+	local gradient_focus = gears.color.create_pattern({
+		type = "linear",
+		from = { 50, -10 },
+		to = { 50, 50 },
+		stops = { { 0, "#7aa2f7" }, { 1, "#161924" } },
+	})
+
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
 		style = {
 			fg_focus = "#FFFFFF",
-			bg_focus = "#000000",
-			fg_occupied = "#d6dfff",
-			fg_empty = "#d6dfff",
-			bg_occupied = "#161924",
-			bg_empty = "#161924",
+			bg_focus = gradient_focus,
+			fg_occupied = "#FFFFFF",
+			-- fg_occupied = "#d6dfff",
+			-- fg_empty = "#d6dfff",
+			fg_empty = "#FFFFFF",
+			bg_occupied = gradient_bg,
+			bg_empty = gradient_bg,
 		},
 		layout = {
 			layout = wibox.layout.fixed.horizontal,
@@ -256,36 +270,24 @@ awful.screen.connect_for_each_screen(function(s)
 			},
 			id = "background_role",
 			widget = wibox.container.background,
-			create_callback = function(self, t, index, objects) --luacheck: no unused
+
+			create_callback = function(self, t)
 				self:connect_signal("mouse::enter", function()
-					if self.bg ~= "#ff0000" then
-						self.backup = self.bg
-						self.has_backup = true
+					self.backup = self.bg
+					if not t.selected then
+						self.bg = "#3f4263"
 					end
-					self.bg = "#2a3045"
 				end)
 				self:connect_signal("mouse::leave", function()
-					if self.has_backup then
+					-- if self.backup then
+					if t.selected then
+						self.bg = gradient_focus
+					else
 						self.bg = self.backup
 					end
+					-- end
 				end)
-				if t.selected then
-					self:get_children_by_id("underline")[1].bg = "#ffffff"
-				end
 			end,
-			update_callback = function(self, t, index, objects) --luacheck: no unused
-				if t.selected then
-					self:get_children_by_id("underline")[1].bg = "#ffffff"
-				else
-					self:get_children_by_id("underline")[1].bg = "#00000000"
-				end
-			end,
-			{
-				id = "underline",
-				bg = "#00000000", -- Transparent background
-				forced_height = 2,
-				widget = wibox.container.background,
-			},
 		},
 	})
 
