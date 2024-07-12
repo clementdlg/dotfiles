@@ -231,9 +231,9 @@ awful.screen.connect_for_each_screen(function(s)
 
 	local gradient_focus = gears.color.create_pattern({
 		type = "linear",
-		from = { 50, 14 },
-		to = { 50, 30 },
-		stops = { { 1, "#94b6ff" }, { 0, "#161924" } },
+		from = { 1, 15 },
+		to = { 1, 28 },
+		stops = { { 1, "#94b6ff" }, { 0, "#000000" } },
 	})
 
 	s.mytaglist = awful.widget.taglist({
