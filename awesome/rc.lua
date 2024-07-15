@@ -449,110 +449,6 @@ globalkeys = gears.table.join(
 		end
 	end, { description = "go back", group = "client" }),
 
-	--[[-----------------
-	|					|
-	|	APP BINDINGS	|
-	|					|
-	-------------------]]
-	--Terminal
-	awful.key(
-		{ modkey }, --Modifier
-		"Return", --Key
-		function() --Action
-			awful.spawn(terminal)
-		end,
-		{ description = "open a terminal", group = "launcher" }
-	),
-
-	--Terminal
-	awful.key(
-		{ modkey }, --Modifier
-		"t", --Key
-		function() --Action
-			awful.spawn(terminal)
-		end,
-		{ description = "open a terminal", group = "launcher" }
-	),
-
-	--Rofi
-	awful.key(
-		{ modkey }, --Modifier
-		"r", --Key
-		function() --Action
-			awful.spawn(launcher)
-		end,
-		{ description = "rofi", group = "launcher" }
-	),
-
-	--Obsidian
-	awful.key(
-		{ modkey }, --Modifier
-		"o", --Key
-		function() --Action
-			awful.spawn(obsidian)
-		end,
-		{ description = "open Obsidian", group = "launcher" }
-	),
-
-	--Discord
-	awful.key(
-		{ modkey }, --Modifier
-		"c", --Key
-		function() --Action
-			awful.spawn(discord)
-		end,
-		{ description = "open Discord", group = "launcher" }
-	),
-
-	--File explorer
-	awful.key(
-		{ modkey }, --Modifier
-		"è", --Key
-		function() --Action
-			awful.spawn(files)
-		end,
-		{ description = "open file explorer", group = "launcher" }
-	),
-
-	--Browser
-	awful.key(
-		{ modkey }, --Modifier
-		"b", --Key
-		function() --Action
-			awful.spawn(browser)
-		end,
-		{ description = "open browser", group = "launcher" }
-	),
-
-	--Vim
-	awful.key(
-		{ modkey }, --Modifier
-		"v", --Key
-		function() --Action
-			awful.spawn(txteditor)
-		end,
-		{ description = "open txteditor", group = "launcher" }
-	),
-
-	--Settings
-	awful.key(
-		{ modkey }, --Modifier
-		"p", --Key
-		function() --Action
-			awful.spawn(settings)
-		end,
-		{ description = "open a settings", group = "launcher" }
-	),
-
-	--Print screen
-	awful.key(
-		{}, --Modifier
-		"Print", --Key
-		function() --Action
-			awful.spawn("flameshot gui")
-		end,
-		{ description = "Print screen", group = "Multimedia" }
-	),
 	--Restart Awesome
 	awful.key(
 		{
@@ -667,6 +563,110 @@ globalkeys = gears.table.join(
 			c:emit_signal("request::activate", "key.unminimize", { raise = true })
 		end
 	end, { description = "restore minimized", group = "client" }),
+	--[[-----------------
+	|					|
+	|	APP BINDINGS	|
+	|					|
+	-------------------]]
+	--Terminal
+	awful.key(
+		{ modkey }, --Modifier
+		"Return", --Key
+		function() --Action
+			awful.spawn(terminal)
+		end,
+		{ description = "open a terminal", group = "launcher" }
+	),
+
+	--Terminal
+	awful.key(
+		{ modkey }, --Modifier
+		"t", --Key
+		function() --Action
+			awful.spawn(terminal)
+		end,
+		{ description = "open a terminal", group = "launcher" }
+	),
+
+	--Rofi
+	awful.key(
+		{ modkey }, --Modifier
+		"r", --Key
+		function() --Action
+			awful.spawn(launcher)
+		end,
+		{ description = "rofi", group = "launcher" }
+	),
+
+	--Obsidian
+	awful.key(
+		{ modkey }, --Modifier
+		"o", --Key
+		function() --Action
+			awful.spawn(obsidian)
+		end,
+		{ description = "open Obsidian", group = "launcher" }
+	),
+
+	--Discord
+	awful.key(
+		{ modkey }, --Modifier
+		"c", --Key
+		function() --Action
+			awful.spawn(discord)
+		end,
+		{ description = "open Discord", group = "launcher" }
+	),
+
+	--File explorer
+	awful.key(
+		{ modkey }, --Modifier
+		"è", --Key
+		function() --Action
+			awful.spawn(files)
+		end,
+		{ description = "open file explorer", group = "launcher" }
+	),
+
+	--Browser
+	awful.key(
+		{ modkey }, --Modifier
+		"b", --Key
+		function() --Action
+			awful.spawn(browser)
+		end,
+		{ description = "open browser", group = "launcher" }
+	),
+
+	--Vim
+	awful.key(
+		{ modkey }, --Modifier
+		"v", --Key
+		function() --Action
+			awful.spawn(txteditor)
+		end,
+		{ description = "open txteditor", group = "launcher" }
+	),
+
+	--Settings
+	awful.key(
+		{ modkey }, --Modifier
+		"p", --Key
+		function() --Action
+			awful.spawn(settings)
+		end,
+		{ description = "open a settings", group = "launcher" }
+	),
+
+	--Print screen
+	awful.key(
+		{}, --Modifier
+		"Print", --Key
+		function() --Action
+			awful.spawn("flameshot gui")
+		end,
+		{ description = "Print screen", group = "Multimedia" }
+	),
 
 	-- -- Prompt
 	-- awful.key({ modkey }, "r", function()
@@ -687,11 +687,11 @@ globalkeys = gears.table.join(
 	--	menubar.show()
 	--end, { description = "show the menubar", group = "launcher" })
 
-	--[[---------------------
-	|						|
-	|	MULTIMEDIA KEYS		|
-	|						|
-	-----------------------]]
+	--[[-----------------------
+	|						  |
+	|	MULTIMEDIA BINDINGS   |
+	|						  |
+	-------------------------]]
 	--Volume Up
 	awful.key(
 		{}, --Modifier
@@ -717,7 +717,43 @@ globalkeys = gears.table.join(
 		function() --Action
 			awful.spawn("amixer set Master toggle")
 		end,
-		{ description = "mute/unmute", group = "Multimedia" }
+		{ description = "mute/unmute output", group = "Multimedia" }
+	),
+	--Mute/Unmute microphone
+	awful.key(
+		{}, --Modifier
+		"XF86AudioMicMute", --Key
+		function() --Action
+			awful.spawn("amixer set Capture toggle")
+		end,
+		{ description = "mute/unmute microphone", group = "Multimedia" }
+	),
+	--Play/pause
+	awful.key(
+		{}, --Modifier
+		"XF86AudioPlay", --Key
+		function() --Action
+			awful.spawn("playerctl play-pause")
+		end,
+		{ description = "Play/pause", group = "Multimedia" }
+	),
+	--Play next song
+	awful.key(
+		{}, --Modifier
+		"XF86AudioNext", --Key
+		function() --Action
+			awful.spawn("playerctl next")
+		end,
+		{ description = "Play next song", group = "Multimedia" }
+	),
+	--Play previous song
+	awful.key(
+		{}, --Modifier
+		"XF86AudioPrev", --Key
+		function() --Action
+			awful.spawn("playerctl previous")
+		end,
+		{ description = "Play previous song", group = "Multimedia" }
 	),
 	--Brightness Down
 	awful.key(
