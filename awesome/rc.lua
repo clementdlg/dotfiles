@@ -65,7 +65,7 @@ obsidian = "flatpak run md.obsidian.Obsidian"
 discord = "flatpak run com.discordapp.Discord"
 files = "thunar"
 browser = "firefox"
-txteditor = "terminator -e nvim"
+txteditor = terminal .. " -e nvim"
 settings = "xfce4-settings-manager"
 
 tag_icons = {}
@@ -422,6 +422,10 @@ globalkeys = gears.table.join(
 		awful.spawn(settings)
 	end, { description = "open a settings", group = "launcher" }),
 
+	--Print screen
+	awful.key({}, "Print", function()
+		awful.spawn("flameshot gui")
+	end, { description = "Print screen", group = "Multimedia" }),
 	--Restart Awesome
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
@@ -466,11 +470,12 @@ globalkeys = gears.table.join(
 		end
 	end, { description = "restore minimized", group = "client" }),
 
-	-- Prompt
-	awful.key({ modkey }, "r", function()
-		awful.screen.focused().mypromptbox:run()
-	end, { description = "run prompt", group = "launcher" })
+	-- -- Prompt
+	-- awful.key({ modkey }, "r", function()
+	-- 	awful.screen.focused().mypromptbox:run()
+	-- end, { description = "run prompt", group = "launcher" }),
 
+	--}),
 	--awful.key({ modkey }, "x", function()
 	--	awful.prompt.run({
 	--		prompt = "Run Lua code: ",
@@ -483,6 +488,27 @@ globalkeys = gears.table.join(
 	--awful.key({ modkey }, "p", function()
 	--	menubar.show()
 	--end, { description = "show the menubar", group = "launcher" })
+
+	--Volume Up
+	awful.key({}, "XF86AudioRaiseVolume", function()
+		awful.spawn("amixer set Master 5%+")
+	end, { description = "raise volume", group = "Multimedia" }),
+	--Volume Down
+	awful.key({}, "XF86AudioLowerVolume", function()
+		awful.spawn("amixer set Master 5%-")
+	end, { description = "lower volume", group = "Multimedia" }),
+	--Mute/Unmute sound
+	awful.key({}, "XF86AudioMute", function()
+		awful.spawn("amixer set Master toggle")
+	end, { description = "mute/unmute", group = "Multimedia" }),
+	--Brightness Down
+	awful.key({}, "XF86MonBrightnessDown", function()
+		awful.spawn("light -U 5")
+	end, { description = "brightness down", group = "Multimedia" }),
+	--Brightness Up
+	awful.key({}, "XF86MonBrightnessUp", function()
+		awful.spawn("light -A 5")
+	end, { description = "brightness up", group = "Multimedia" })
 )
 
 clientkeys = gears.table.join(
