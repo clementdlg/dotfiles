@@ -11,5 +11,5 @@
 .flat:checked,
 .toggle:checked {
   background-color: #0a0a0a;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #94b6ff;
 }
