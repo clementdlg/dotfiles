@@ -671,7 +671,7 @@ globalkeys = gears.table.join(
 			awful.spawn("flameshot gui")
 		end,
 		{ description = "Print screen", group = "Multimedia" }
-	)
+	),
 
 	-- -- Prompt
 	-- awful.key({ modkey }, "r", function()
@@ -697,7 +697,6 @@ globalkeys = gears.table.join(
 	|	MULTIMEDIA BINDINGS   |
 	|						  |
 	-------------------------]]
-	--[[
 	--Volume Up
 	awful.key(
 		{}, --Modifier
@@ -779,13 +778,11 @@ globalkeys = gears.table.join(
 		end,
 		{ description = "brightness up", group = "Multimedia" }
 	),
-	--]]
 	--[[----------------------
 	|					     |
 	|	SUPER KEY BINDINGS   |
 	|					     |
 	------------------------]]
-	--[[
 	--Display settings
 	awful.key(
 		{ "Mod4" }, --Modifier
@@ -804,7 +801,6 @@ globalkeys = gears.table.join(
 		end,
 		{ description = "lock screen", group = "Multimedia" }
 	)
-	--]]
 )
 
 clientkeys = gears.table.join(
