@@ -49,13 +49,17 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("~/.config/awesome/theme/theme.lua")
 
---###################################
--- my applications
+-- Launch at startup
+os.execute("picom -b")
 
+--[[------------
+|				|
+|	MY APPS		|
+|				|
+---------------]]
 launcher = "rofi -show drun"
 terminal = "alacritty"
 browser = "firefox"
@@ -76,17 +80,17 @@ tag_icons[4] = "󰭻 "
 tag_icons[5] = "󰝰 "
 tag_icons[6] = "󰝚 "
 
--- Launch at startup
-os.execute("picom -b")
-
 -- Modkey
 modkey = "Mod1"
 
 -- Windows gaps
 beautiful.useless_gap = 6
 
---###################################
--- my layouts
+--[[---------------
+|			      |
+|	MY LAYOUTS    |
+|			      |
+-----------------]]
 
 awful.layout.layouts = {
 	awful.layout.suit.tile,
@@ -94,42 +98,42 @@ awful.layout.layouts = {
 	awful.layout.suit.spiral.dwindle,
 	awful.layout.suit.floating,
 }
--- }}}
 
 -- {{{ Menu
----- Create a launcher widget and a main menu
---myawesomemenu = {
---	{
---		"hotkeys",
---		function()
---			hotkeys_popup.show_help(nil, awful.screen.focused())
---		end,
---	},
---	{ "manual", terminal .. " -e man awesome" },
---	{ "edit config", editor_cmd .. " " .. awesome.conffile },
---	{ "restart", awesome.restart },
---	{
---		"quit",
---		function()
---			awesome.quit()
---		end,
---	},
---}
---
---mymainmenu = awful.menu({
---	items = {
---		{ "awesome", myawesomemenu, beautiful.awesome_icon },
---		{ "Terminal", terminal },
---		{ "Firefox", browser },
---	},
---})
+-- Create a launcher widget and a main menu
+myawesomemenu = {
+	{
+		"hotkeys",
+		function()
+			hotkeys_popup.show_help(nil, awful.screen.focused())
+		end,
+	},
+	{ "manual", terminal .. " -e man awesome" },
+	{ "edit config", editor_cmd .. " " .. awesome.conffile },
+	{ "restart", awesome.restart },
+	{
+		"quit",
+		function()
+			awesome.quit()
+		end,
+	},
+}
+
+mymainmenu = awful.menu({
+	items = {
+		{ "awesome", myawesomemenu, beautiful.awesome_icon },
+		{ "Terminal", terminal },
+		{ "Firefox", browser },
+	},
+})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -311,6 +315,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
+			mylauncher,
 			layout = wibox.layout.fixed.horizontal,
 			s.mytaglist,
 		},
@@ -464,10 +469,10 @@ globalkeys = gears.table.join(
 	awful.key(
 		{
 			modkey, -- Modifier
-			"Mod4",
-		}, -- Key
-		"x", --Action
-		awesome.quit,
+			"Control",
+		},
+		"x", -- Key
+		awesome.quit, --Action
 		{ description = "quit awesome", group = "awesome" }
 	),
 
@@ -772,6 +777,29 @@ globalkeys = gears.table.join(
 			awful.spawn("light -A 5")
 		end,
 		{ description = "brightness up", group = "Multimedia" }
+	),
+	--[[----------------------
+	|					     |
+	|	SUPER KEY BINDINGS   |
+	|					     |
+	------------------------]]
+	--Display settings
+	awful.key(
+		{ "Mod4" }, --Modifier
+		"p", --Key
+		function() --Action
+			awful.spawn("arandr")
+		end,
+		{ description = "display settings", group = "Multimedia" }
+	),
+	--lock screen
+	awful.key(
+		{ "Mod4" }, --Modifier
+		"l", --Key
+		function() --Action
+			awful.spawn("i3lock")
+		end,
+		{ description = "lock screen", group = "Multimedia" }
 	)
 )
 
@@ -938,15 +966,10 @@ awful.rules.rules = {
 
 	--#########################################################
 	-- Window Rules
-	--the names needs to match the following line : awful.tag({ "󰈹", "", "", "󰭻", "󰝰", " " }, s, awful.layout.layouts[1])
-	-- Spawn files on Workspace 3
-	-- Spawn Obsidian on Workspace 3
 	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
 	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag_icons[4] } },
 	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = tag_icons[5] } },
-
-	-- Spawn Settings on Workspace 6
-	{ rule = { class = "settings" }, properties = { screen = 1, tag = " ", floating = false } },
+	{ rule = { class = "settings" }, properties = { screen = 1, tag = tag_icons[6], floating = false } },
 }
 -- }}}
 
@@ -1014,6 +1037,3 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
--- }}}
---
---
