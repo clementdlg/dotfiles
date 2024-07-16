@@ -9,6 +9,8 @@
 !nvim/**
 !alacritty/**
 !awesome/**
+!awesome-standalone/
+!awesome-standalone/**
 !picom/
 !picom/**
 !terminator/**
