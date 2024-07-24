@@ -2,6 +2,8 @@
 *
 
 # allow specific files
+!.gitignore
+
 !vim/
 !vim/**
 
@@ -26,7 +28,7 @@
 !flameshot/
 !flameshot/**
 
-!bash/bashrc
+!bash/.bashrc
 
 !i3/
 !i3/**
