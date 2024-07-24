@@ -73,12 +73,12 @@ txteditor = terminal .. " -e nvim"
 settings = "xfce4-settings-manager"
 
 tag_icons = {}
-tag_icons[1] = " 󰈹 "
-tag_icons[2] = "  "
-tag_icons[3] = "  "
-tag_icons[4] = " 󰭻 "
-tag_icons[5] = " 󰝰 "
-tag_icons[6] = " 󰝚 "
+tag_icons[1] = "󰈹 "
+tag_icons[2] = " "
+tag_icons[3] = " "
+tag_icons[4] = "󰭻 "
+tag_icons[5] = "󰝰 "
+tag_icons[6] = "󰝚 "
 
 -- Modkey
 modkey = "Mod1"
@@ -118,16 +118,6 @@ myawesomemenu = {
 		end,
 	},
 }
-
-mymainmenu = awful.menu({
-	items = {
-		{ "awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "Terminal", terminal },
-		{ "Firefox", browser },
-	},
-})
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -240,6 +230,19 @@ awful.screen.connect_for_each_screen(function(s)
 		stops = { { 1, "#94b6ff" }, { 0, "#000000" } },
 	})
 
+	local gradient_urgent = gears.color.create_pattern({
+		type = "linear",
+		from = { 1, 15 },
+		to = { 1, 28 },
+		stops = { { 1, "#b294f2" }, { 0, "#22283c" } },
+	})
+
+	local function rounded(radius)
+		return function(cr, width, height)
+			gears.shape.rounded_rect(cr, width, height, radius)
+		end
+	end
+
 	s.mytaglist = awful.widget.taglist({
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
@@ -247,12 +250,14 @@ awful.screen.connect_for_each_screen(function(s)
 		style = {
 			fg_focus = "#FFFFFF",
 			bg_focus = gradient_focus,
+
 			fg_occupied = "#FFFFFF",
-			-- fg_occupied = "#d6dfff",
-			-- fg_empty = "#d6dfff",
 			fg_empty = "#FFFFFF",
 			bg_occupied = gradient_bg,
 			bg_empty = gradient_bg,
+
+			bg_urgent = gradient_urgent,
+			shape = rounded(50),
 		},
 		layout = {
 			layout = wibox.layout.fixed.horizontal,
@@ -266,10 +271,8 @@ awful.screen.connect_for_each_screen(function(s)
 					},
 					layout = wibox.layout.fixed.horizontal,
 				},
-				left = 18,
-				right = 10,
-				top = 3,
-				bottom = 3,
+				left = 16,
+				right = 8,
 				widget = wibox.container.margin,
 			},
 			id = "background_role",
@@ -300,40 +303,79 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
+		style = {
+			bg_focus = gradient_focus,
+			fg_focus = "#FFFFFF",
+
+			bg_normal = gradient_bg,
+			fg_normal = "#FFFFFF",
+			bg_urgent = gradient_urgent,
+			shape = rounded(4),
+		},
+		widget_template = {
+			{
+				{
+					{
+						{
+							id = "icon_role",
+							widget = wibox.widget.imagebox,
+						},
+						widget = wibox.container.margin,
+					},
+					{
+						id = "text_role",
+						widget = wibox.widget.textbox,
+					},
+					layout = wibox.layout.fixed.horizontal,
+					spacing = 10,
+				},
+				left = 10,
+				right = 10,
+				widget = wibox.container.margin,
+			},
+			id = "background_role",
+			widget = wibox.container.background,
+			forced_width = 200,
+		},
 	})
 
+	--[[---------
+	|			|
+	|	WIBOX	|
+	|			|
+	-----------]]
 	-- Create the wibox
+	s.mywibox = awful.wibar({
+		position = "top",
+		screen = s,
+		visible = true,
+		height = 28,
+	})
 
-	-- s.mywibox = awful.wibar({
-	-- 	position = "top",
-	-- 	screen = s,
-	-- 	visible = false,
-	-- 	height = 28,
-	-- })
-
+	-- wibox background color
+	s.mywibox.bg = gradient_bg
 	-- Add widgets to the wibox
-	-- s.mywibox:setup({
-	-- 	layout = wibox.layout.align.horizontal,
-	-- 	{ -- Left widgets
-	-- 		mylauncher,
-	-- 		layout = wibox.layout.fixed.horizontal,
-	-- 		s.mytaglist,
-	-- 	},
-	-- 	s.mytasklist, -- Middle widget
-	-- 	{ -- Right widgets
-	-- 		layout = wibox.layout.fixed.horizontal,
-	-- 		wibox.widget.systray(),
-	-- 		mytextclock,
-	-- 		s.mylayoutbox,
-	-- 	},
-	-- })
+	s.mywibox:setup({
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+			layout = wibox.layout.fixed.horizontal,
+			wibox.container.margin(s.mytaglist, 6, 6, 0, 0),
+			wibox.container.constraint(s.mytasklist, "max", (s.geometry.width - 650)),
+		},
+		nil, --removed the center section
+		{ -- Right widgets
+			layout = wibox.layout.fixed.horizontal,
+			wibox.widget.systray(),
+			mytextclock,
+			s.mylayoutbox,
+		},
+	})
 end)
 -- }}}
 
 -- {{{ Mouse bindings
 --root.buttons(gears.table.join(
 --	--awful.button({}, 3, function()
---	--mymainmenu:toggle()
 --	--end),
 --	awful.button({}, 4, awful.tag.viewnext),
 --	awful.button({}, 5, awful.tag.viewprev)
@@ -671,7 +713,7 @@ globalkeys = gears.table.join(
 			awful.spawn("flameshot gui")
 		end,
 		{ description = "Print screen", group = "Multimedia" }
-	)
+	),
 
 	-- -- Prompt
 	-- awful.key({ modkey }, "r", function()
@@ -697,7 +739,6 @@ globalkeys = gears.table.join(
 	|	MULTIMEDIA BINDINGS   |
 	|						  |
 	-------------------------]]
-	--[[
 	--Volume Up
 	awful.key(
 		{}, --Modifier
@@ -779,13 +820,11 @@ globalkeys = gears.table.join(
 		end,
 		{ description = "brightness up", group = "Multimedia" }
 	),
-	--]]
 	--[[----------------------
 	|					     |
 	|	SUPER KEY BINDINGS   |
 	|					     |
 	------------------------]]
-	--[[
 	--Display settings
 	awful.key(
 		{ "Mod4" }, --Modifier
@@ -804,7 +843,6 @@ globalkeys = gears.table.join(
 		end,
 		{ description = "lock screen", group = "Multimedia" }
 	)
-	--]]
 )
 
 clientkeys = gears.table.join(
