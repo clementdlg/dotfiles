@@ -1,25 +1,48 @@
-# Ignore everything
+# ignore everything
 *
 
-!.gitignore
-# Don't ignore specific directories
+# allow specific files
+!vim/
 !vim/**
+
+!nvim/
+!nvim/**
+
+!alacritty/
+!alacritty/**
+
+!terminator/
+!terminator/**
+
+!awesome/
+!awesome/**
+
+!awesome-xf/
+!awesome-xf/**
+
+!awesome-aw/
+!awesome-aw/**
+
+!flameshot/
+!flameshot/**
+
+!bash/bashrc
+
 !i3/
 !i3/**
-!nvim/**
-!alacritty/**
-!awesome/**
-!awesome-standalone/
-!awesome-standalone/**
+
 !picom/
 !picom/**
-!terminator/**
-!bash/**
-!gtk-3.0/**
+
+!rofi/
 !rofi/**
-!vimrc_merged
+
+# removed soon
+!gtk-3.0/
+!gtk-3.0/**
+
 !xfce-panel.tar.bz2
 
-# Ignore specific files inside of unignored specific dirs
-vim/.netrwhist
+# ignore specific files
 nvim/lazy-lock.json
+vim/.netrwhist
