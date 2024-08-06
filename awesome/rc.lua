@@ -84,7 +84,7 @@ tag_icons[6] = " 󰝚 "
 modkey = "Mod1"
 
 -- Windows gaps
-beautiful.useless_gap = 6
+beautiful.useless_gap = 8
 
 --[[---------------
 |			      |
@@ -949,6 +949,7 @@ awful.rules.rules = {
 				"Wpa_gui",
 				"veromix",
 				"xtightvncviewer",
+				"Galculator",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
