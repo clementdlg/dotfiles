@@ -623,16 +623,6 @@ globalkeys = gears.table.join(
 		{ description = "open a terminal", group = "launcher" }
 	),
 
-	--Terminal
-	awful.key(
-		{ modkey }, --Modifier
-		"t", --Key
-		function() --Action
-			awful.spawn(terminal)
-		end,
-		{ description = "open a terminal", group = "launcher" }
-	),
-
 	--Rofi
 	awful.key(
 		{ modkey }, --Modifier
@@ -666,7 +656,7 @@ globalkeys = gears.table.join(
 	--File explorer
 	awful.key(
 		{ modkey }, --Modifier
-		"è", --Key
+		"t", --Key
 		function() --Action
 			awful.spawn(files)
 		end,
