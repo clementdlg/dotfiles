@@ -13,7 +13,6 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -94,18 +93,11 @@ beautiful.useless_gap = 8
 |			      |
 -----------------]]
 
-awful.layout.layouts = {
-	awful.layout.suit.tile,
-	awful.layout.suit.tile.bottom,
-	awful.layout.suit.spiral.dwindle,
-	awful.layout.suit.floating,
-}
+awful.layout.layouts = require("main.layouts")
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
--- {{{ Wibar
--- Create a textclock widget
+-- date & time widget
 mytextclock = wibox.widget.textclock()
 
 -- Create a wibox for each screen and add it
@@ -168,621 +160,190 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-	-- Wallpaper
-	set_wallpaper(s)
+-- Wallpaper
+set_wallpaper(s)
 
-	-- Each screen has its own tag table.
-	awful.tag(tag_icons, s, awful.layout.layouts[1])
-	-- Create a promptbox for each screen
-	s.mypromptbox = awful.widget.prompt()
-	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
-	-- We need one layoutbox per screen.
-	s.mylayoutbox = awful.widget.layoutbox(s)
-	s.mylayoutbox:buttons(gears.table.join(
-		awful.button({}, 1, function()
-			awful.layout.inc(1)
-		end),
-		awful.button({}, 3, function()
-			awful.layout.inc(-1)
-		end),
-		awful.button({}, 4, function()
-			awful.layout.inc(1)
-		end),
-		awful.button({}, 5, function()
-			awful.layout.inc(-1)
-		end)
-	))
-	local gradient_bg = gears.color.create_pattern({
-		type = "linear",
-		from = { 50, -50 },
-		to = { 50, 50 },
-		stops = { { 0, "#343d5e" }, { 1, "#161924" } },
-	})
+-- Each screen has its own tag table.
+awful.tag(tag_icons, s, awful.layout.layouts[1])
+-- Create a promptbox for each screen
+s.mypromptbox = awful.widget.prompt()
+-- Create an imagebox widget which will contain an icon indicating which layout we're using.
+-- We need one layoutbox per screen.
+s.mylayoutbox = awful.widget.layoutbox(s)
+s.mylayoutbox:buttons(gears.table.join(
+    awful.button({}, 1, function()
+        awful.layout.inc(1)
+    end),
+    awful.button({}, 3, function()
+        awful.layout.inc(-1)
+    end),
+    awful.button({}, 4, function()
+        awful.layout.inc(1)
+    end),
+    awful.button({}, 5, function()
+        awful.layout.inc(-1)
+    end)
+))
+local gradient_bg = gears.color.create_pattern({
+    type = "linear",
+    from = { 50, -50 },
+    to = { 50, 50 },
+    stops = { { 0, "#343d5e" }, { 1, "#161924" } },
+})
 
-	local gradient_focus = gears.color.create_pattern({
-		type = "linear",
-		from = { 1, 16 },
-		to = { 1, 28 },
-		stops = { { 1, "#94b6ff" }, { 0, "#11121a" } },
-	})
+local gradient_focus = gears.color.create_pattern({
+    type = "linear",
+    from = { 1, 16 },
+    to = { 1, 28 },
+    stops = { { 1, "#94b6ff" }, { 0, "#11121a" } },
+})
 
-	local gradient_urgent = gears.color.create_pattern({
-		type = "linear",
-		from = { 1, 15 },
-		to = { 1, 28 },
-		stops = { { 1, "#b294f2" }, { 0, "#22283c" } },
-	})
+local gradient_urgent = gears.color.create_pattern({
+    type = "linear",
+    from = { 1, 15 },
+    to = { 1, 28 },
+    stops = { { 1, "#b294f2" }, { 0, "#22283c" } },
+})
 
-	local function rounded(radius)
-		return function(cr, width, height)
-			gears.shape.rounded_rect(cr, width, height, radius)
-		end
-	end
+local function rounded(radius)
+    return function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, radius)
+    end
+end
 
-	s.mytaglist = awful.widget.taglist({
-		screen = s,
-		filter = awful.widget.taglist.filter.all,
-		buttons = taglist_buttons,
-		style = {
-			fg_focus = "#FFFFFF",
-			bg_focus = gradient_focus,
+s.mytaglist = awful.widget.taglist({
+    screen = s,
+    filter = awful.widget.taglist.filter.all,
+    buttons = taglist_buttons,
+    style = {
+        fg_focus = "#FFFFFF",
+        bg_focus = gradient_focus,
 
-			fg_occupied = "#FFFFFF",
-			fg_empty = "#FFFFFF",
-			bg_occupied = gradient_bg,
-			bg_empty = gradient_bg,
+        fg_occupied = "#FFFFFF",
+        fg_empty = "#FFFFFF",
+        bg_occupied = gradient_bg,
+        bg_empty = gradient_bg,
 
-			bg_urgent = gradient_urgent,
-			shape = rounded(50),
-			font = "DejaVuSansM Nerd Font Propo 16",
-		},
-		layout = {
-			layout = wibox.layout.fixed.horizontal,
-		},
-		widget_template = {
-			{
-				{
-					{
-						id = "text_role",
-						widget = wibox.widget.textbox,
-					},
-					layout = wibox.layout.fixed.horizontal,
-				},
-				left = 13,
-				right = 13,
-				widget = wibox.container.margin,
-			},
-			id = "background_role",
-			widget = wibox.container.background,
+        bg_urgent = gradient_urgent,
+        shape = rounded(50),
+        font = "DejaVuSansM Nerd Font Propo 16",
+    },
+    layout = {
+        layout = wibox.layout.fixed.horizontal,
+    },
+    widget_template = {
+        {
+            {
+                {
+                    id = "text_role",
+                    widget = wibox.widget.textbox,
+                },
+                layout = wibox.layout.fixed.horizontal,
+            },
+            left = 13,
+            right = 13,
+            widget = wibox.container.margin,
+        },
+        id = "background_role",
+        widget = wibox.container.background,
 
-			create_callback = function(self, t)
-				self:connect_signal("mouse::enter", function()
-					self.backup = self.bg
-					if not t.selected then
-						self.bg = "#3f4263"
-					end
-				end)
-				self:connect_signal("mouse::leave", function()
-					-- if self.backup then
-					if t.selected then
-						self.bg = gradient_focus
-					else
-						self.bg = self.backup
-					end
-					-- end
-				end)
-			end,
-		},
-	})
+        create_callback = function(self, t)
+            self:connect_signal("mouse::enter", function()
+                self.backup = self.bg
+                if not t.selected then
+                    self.bg = "#3f4263"
+                end
+            end)
+            self:connect_signal("mouse::leave", function()
+                -- if self.backup then
+                if t.selected then
+                    self.bg = gradient_focus
+                else
+                    self.bg = self.backup
+                end
+                -- end
+            end)
+        end,
+    },
+})
 
-	-- Create a tasklist widget
-	s.mytasklist = awful.widget.tasklist({
-		screen = s,
-		filter = awful.widget.tasklist.filter.currenttags,
-		buttons = tasklist_buttons,
-		style = {
-			bg_focus = gradient_focus,
-			fg_focus = "#FFFFFF",
+-- Create a tasklist widget
+s.mytasklist = awful.widget.tasklist({
+    screen = s,
+    filter = awful.widget.tasklist.filter.currenttags,
+    buttons = tasklist_buttons,
+    style = {
+        bg_focus = gradient_focus,
+        fg_focus = "#FFFFFF",
 
-			bg_normal = gradient_bg,
-			fg_normal = "#FFFFFF",
-			bg_urgent = gradient_urgent,
-			shape = rounded(4),
-		},
-		widget_template = {
-			{
-				{
-					{
-						{
-							id = "icon_role",
-							widget = wibox.widget.imagebox,
-						},
-						widget = wibox.container.margin,
-					},
-					{
-						id = "text_role",
-						widget = wibox.widget.textbox,
-					},
-					layout = wibox.layout.fixed.horizontal,
-					spacing = 10,
-				},
-				left = 10,
-				right = 10,
-				widget = wibox.container.margin,
-			},
-			id = "background_role",
-			widget = wibox.container.background,
-			forced_width = 200,
-		},
-	})
+        bg_normal = gradient_bg,
+        fg_normal = "#FFFFFF",
+        bg_urgent = gradient_urgent,
+        shape = rounded(4),
+    },
+    widget_template = {
+        {
+            {
+                {
+                    {
+                        id = "icon_role",
+                        widget = wibox.widget.imagebox,
+                    },
+                    widget = wibox.container.margin,
+                },
+                {
+                    id = "text_role",
+                    widget = wibox.widget.textbox,
+                },
+                layout = wibox.layout.fixed.horizontal,
+                spacing = 10,
+            },
+            left = 10,
+            right = 10,
+            widget = wibox.container.margin,
+        },
+        id = "background_role",
+        widget = wibox.container.background,
+        forced_width = 200,
+    },
+})
 
-	--[[---------
-	|			|
-	|	WIBOX	|
-	|			|
-	-----------]]
-	-- Create the wibox
-	s.mywibox = awful.wibar({
-		position = "top",
-		screen = s,
-		visible = true,
-		height = 28,
-	})
+--[[---------
+|			|
+|	WIBOX	|
+|			|
+-----------]]
+-- Create the wibox
+s.mywibox = awful.wibar({
+    position = "top",
+    screen = s,
+    visible = true,
+    height = 28,
+})
 
-	-- wibox background color
-	s.mywibox.bg = gradient_bg
-	-- Add widgets to the wibox
-	s.mywibox:setup({
-		layout = wibox.layout.align.horizontal,
-		{ -- Left widgets
-			layout = wibox.layout.fixed.horizontal,
-			wibox.container.margin(s.mytaglist, 6, 6, 0, 0),
-			wibox.container.constraint(s.mytasklist, "max", (s.geometry.width - 650)),
-		},
-		nil, --removed the center section
-		{ -- Right widgets
-			layout = wibox.layout.fixed.horizontal,
-			wibox.widget.systray(),
-			mytextclock,
-			s.mylayoutbox,
-		},
-	})
+-- wibox background color
+s.mywibox.bg = gradient_bg
+-- Add widgets to the wibox
+s.mywibox:setup({
+    layout = wibox.layout.align.horizontal,
+    { -- Left widgets
+        layout = wibox.layout.fixed.horizontal,
+        wibox.container.margin(s.mytaglist, 6, 6, 0, 0),
+        wibox.container.constraint(s.mytasklist, "max", (s.geometry.width - 650)),
+    },
+    nil, --removed the center section
+    { -- Right widgets
+        layout = wibox.layout.fixed.horizontal,
+        wibox.widget.systray(),
+        mytextclock,
+        s.mylayoutbox,
+    },
+})
 end)
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
-	--[[--------------------
-	|					   |
-	|	WINDOW BINDINGS    |
-	|					   |
-	----------------------]]
-	--show help
-	awful.key(
-		{ modkey }, -- Modifier
-		"ù", -- Key
-		hotkeys_popup.show_help, --Action
-		{ description = "show help", group = "awesome" }
-	),
-	--view previous
-	awful.key(
-		{ modkey }, -- Modifier
-		"Left", -- Key
-		awful.tag.viewprev, --Action
-		{ description = "view previous", group = "tag" }
-	),
-	--view next
-	awful.key(
-		{ modkey }, -- Modifier
-		"Right", -- Key
-		awful.tag.viewnext, --Action
-		{ description = "view next", group = "tag" }
-	),
-	--go back
-	awful.key(
-		{ modkey }, -- Modifier
-		"Escape", -- Key
-		awful.tag.history.restore, --Action
-		{ description = "go back", group = "tag" }
-	),
-
-	--focus next by index
-	awful.key(
-		{ modkey }, --Modifier
-		"j", --Key
-		function() --Action
-			awful.client.focus.byidx(1)
-		end,
-		{ description = "focus next by index", group = "client" }
-	),
-	--focus previous by index
-	awful.key(
-		{ modkey }, --Modifier
-		"k", --Key
-		function() --Action
-			awful.client.focus.byidx(-1)
-		end,
-		{ description = "focus previous by index", group = "client" }
-	),
-	--
-	awful.key(
-		{
-			modkey, --Modiswap with next client by indexfier
-			"Shift",
-		}, --Key
-		"j",
-		function() --Action
-			awful.client.swap.byidx(1)
-		end,
-		{ description = "swap with next client by index", group = "client" }
-	),
-	awful.key(
-		{
-			modkey, --Modifier
-			"Shift",
-		}, --Key
-		"k",
-		function() --Action
-			awful.client.swap.byidx(-1)
-		end,
-		{ description = "swap with previous client by index", group = "client" }
-	),
-
-	awful.key(
-		{
-			modkey, --Modifier
-			"Control",
-		}, --Key
-		"j",
-		function() --Action
-			awful.screen.focus_relative(1)
-		end,
-		{ description = "focus the next screen", group = "screen" }
-	),
-	awful.key(
-		{
-			modkey, --Modifier
-			"Control",
-		}, --Key
-		"k",
-		function() --Action
-			awful.screen.focus_relative(-1)
-		end,
-		{ description = "focus the previous screen", group = "screen" }
-	),
-	--jump to urgent client
-	awful.key(
-		{ modkey }, -- Modifier
-		"u", -- Key
-		awful.client.urgent.jumpto, --Action
-		{ description = "jump to urgent client", group = "client" }
-	),
-	awful.key({ modkey }, "Tab", function()
-		awful.client.focus.history.previous()
-		if client.focus then
-			client.focus:raise()
-		end
-	end, { description = "go back", group = "client" }),
-
-	--Restart Awesome
-	awful.key(
-		{
-			modkey, -- Modifier
-			"Control",
-		}, -- Key
-		"r", --Action
-		awesome.restart,
-		{ description = "reload awesome", group = "awesome" }
-	),
-
-	--Quit Awesome
-	awful.key(
-		{
-			modkey, -- Modifier
-			"Control",
-		},
-		"x", -- Key
-		awesome.quit, --Action
-		{ description = "quit awesome", group = "awesome" }
-	),
-
-	--Resize window
-	awful.key(
-		{ modkey }, --Modifier
-		"l", --Key
-		function() --Action
-			awful.tag.incmwfact(0.035)
-		end,
-		{ description = "increase master width factor", group = "layout" }
-	),
-	awful.key(
-		{ modkey }, --Modifier
-		"h", --Key
-		function() --Action
-			awful.tag.incmwfact(-0.035)
-		end,
-		{ description = "decrease master width factor", group = "layout" }
-	),
-
-	--Change layout
-	awful.key(
-		{
-			modkey, --Modifier
-			"Shift",
-		}, --Key
-		"h",
-		function() --Action
-			awful.tag.incnmaster(1, nil, true)
-		end,
-		{ description = "increase the number of master clients", group = "layout" }
-	),
-	awful.key(
-		{
-			modkey, --Modifier
-			"Shift",
-		}, --Key
-		"l",
-		function() --Action
-			awful.tag.incnmaster(-1, nil, true)
-		end,
-		{ description = "decrease the number of master clients", group = "layout" }
-	),
-
-	awful.key(
-		{
-			modkey, --Modifier
-			"Control",
-		}, --Key
-		"h",
-		function() --Action
-			awful.tag.incncol(1, nil, true)
-		end,
-		{ description = "increase the number of columns", group = "layout" }
-	),
-	awful.key(
-		{
-			modkey, --Modifier
-			"Control",
-		}, --Key
-		"l",
-		function() --Action
-			awful.tag.incncol(-1, nil, true)
-		end,
-		{ description = "decrease the number of columns", group = "layout" }
-	),
-
-	awful.key(
-		{ modkey }, --Modifier
-		"space", --Key
-		function() --Action
-			awful.layout.inc(1)
-		end,
-		{ description = "select next", group = "layout" }
-	),
-	awful.key(
-		{
-			modkey, --Modifier
-			"Shift",
-		}, --Key
-		"space",
-		function() --Action
-			awful.layout.inc(-1)
-		end,
-		{ description = "select previous", group = "layout" }
-	),
-
-	awful.key({ modkey, "Control" }, "n", function()
-		local c = awful.client.restore()
-		-- Focus restored client
-		if c then
-			c:emit_signal("request::activate", "key.unminimize", { raise = true })
-		end
-	end, { description = "restore minimized", group = "client" }),
-	--[[-----------------
-	|					|
-	|	APP BINDINGS	|
-	|					|
-	-------------------]]
-	--Terminal
-	awful.key(
-		{ modkey }, --Modifier
-		"Return", --Key
-		function() --Action
-			awful.spawn(terminal)
-		end,
-		{ description = "open a terminal", group = "launcher" }
-	),
-
-	--Rofi
-	awful.key(
-		{ modkey }, --Modifier
-		"r", --Key
-		function() --Action
-			awful.spawn(launcher)
-		end,
-		{ description = "rofi", group = "launcher" }
-	),
-
-	--Obsidian
-	awful.key(
-		{ modkey }, --Modifier
-		"o", --Key
-		function() --Action
-			awful.spawn(obsidian)
-		end,
-		{ description = "open Obsidian", group = "launcher" }
-	),
-
-	--Discord
-	awful.key(
-		{ modkey }, --Modifier
-		"c", --Key
-		function() --Action
-			awful.spawn(discord)
-		end,
-		{ description = "open Discord", group = "launcher" }
-	),
-
-	--File explorer
-	awful.key(
-		{ modkey }, --Modifier
-		"t", --Key
-		function() --Action
-			awful.spawn(files)
-		end,
-		{ description = "open file explorer", group = "launcher" }
-	),
-
-	--Browser
-	awful.key(
-		{ modkey }, --Modifier
-		"b", --Key
-		function() --Action
-			awful.spawn(browser)
-		end,
-		{ description = "open browser", group = "launcher" }
-	),
-
-	--Vim
-	awful.key(
-		{ modkey }, --Modifier
-		"v", --Key
-		function() --Action
-			awful.spawn(txteditor)
-		end,
-		{ description = "open txteditor", group = "launcher" }
-	),
-
-	--Settings
-	awful.key(
-		{ modkey }, --Modifier
-		"p", --Key
-		function() --Action
-			awful.spawn(settings)
-		end,
-		{ description = "open a settings", group = "launcher" }
-	),
-
-	--Print screen
-	awful.key(
-		{}, --Modifier
-		"Print", --Key
-		function() --Action
-			awful.spawn("flameshot gui")
-		end,
-		{ description = "Print screen", group = "Multimedia" }
-	),
-
-	--[[-----------------------
-	|						  |
-	|	MULTIMEDIA BINDINGS   |
-	|						  |
-	-------------------------]]
-	--Volume Up
-	awful.key(
-		{}, --Modifier
-		"XF86AudioRaiseVolume", --Key
-		function() --Action
-			awful.spawn("amixer set Master 5%+")
-		end,
-		{ description = "raise volume", group = "Multimedia" }
-	),
-	--Volume Down
-	awful.key(
-		{}, --Modifier
-		"XF86AudioLowerVolume", --Key
-		function() --Action
-			awful.spawn("amixer set Master 5%-")
-		end,
-		{ description = "lower volume", group = "Multimedia" }
-	),
-	--Mute/Unmute sound
-	awful.key(
-		{}, --Modifier
-		"XF86AudioMute", --Key
-		function() --Action
-			awful.spawn("amixer set Master toggle")
-		end,
-		{ description = "mute/unmute output", group = "Multimedia" }
-	),
-	--Mute/Unmute microphone
-	awful.key(
-		{}, --Modifier
-		"XF86AudioMicMute", --Key
-		function() --Action
-			awful.spawn("amixer set Capture toggle")
-		end,
-		{ description = "mute/unmute microphone", group = "Multimedia" }
-	),
-	--Play/pause
-	awful.key(
-		{}, --Modifier
-		"XF86AudioPlay", --Key
-		function() --Action
-			awful.spawn("playerctl play-pause")
-		end,
-		{ description = "Play/pause", group = "Multimedia" }
-	),
-	--Play next song
-	awful.key(
-		{}, --Modifier
-		"XF86AudioNext", --Key
-		function() --Action
-			awful.spawn("playerctl next")
-		end,
-		{ description = "Play next song", group = "Multimedia" }
-	),
-	--Play previous song
-	awful.key(
-		{}, --Modifier
-		"XF86AudioPrev", --Key
-		function() --Action
-			awful.spawn("playerctl previous")
-		end,
-		{ description = "Play previous song", group = "Multimedia" }
-	),
-	--Brightness Down
-	awful.key(
-		{}, --Modifier
-		"XF86MonBrightnessDown", --Key
-		function() --Action
-			awful.spawn("light -U 5")
-		end,
-		{ description = "brightness down", group = "Multimedia" }
-	),
-	--Brightness Up
-	awful.key(
-		{}, --Modifier
-		"XF86MonBrightnessUp", --Key
-		function() --Action
-			awful.spawn("light -A 5")
-		end,
-		{ description = "brightness up", group = "Multimedia" }
-	),
-	--[[----------------------
-	|					     |
-	|	SUPER KEY BINDINGS   |
-	|					     |
-	------------------------]]
-	--Display settings
-	awful.key(
-		{ "Mod4" }, --Modifier
-		"p", --Key
-		function() --Action
-			awful.spawn("arandr")
-		end,
-		{ description = "display settings", group = "Multimedia" }
-	),
-	--lock screen
-	awful.key(
-		{ "Mod4" }, --Modifier
-		"l", --Key
-		function() --Action
-			awful.spawn("i3lock")
-		end,
-		{ description = "lock screen", group = "Multimedia" }
-	)
-)
+globalkeys = require("main.globalkeys")
 
 clientkeys = gears.table.join(
 	awful.key({ modkey }, "f", function(c)
