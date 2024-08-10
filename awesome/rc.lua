@@ -78,7 +78,8 @@ tag_icons[2] = ""
 tag_icons[3] = "󱞁"
 tag_icons[4] = "󰭻"
 tag_icons[5] = "󰝰"
-tag_icons[6] = "󰝚"
+tag_icons[6] = ""
+tag_icons[8] = "󰝚"
 tag_icons[7] = ""
 
 -- Modkey
@@ -222,9 +223,9 @@ awful.screen.connect_for_each_screen(function(s)
 
 	local gradient_focus = gears.color.create_pattern({
 		type = "linear",
-		from = { 1, 15 },
+		from = { 1, 16 },
 		to = { 1, 28 },
-		stops = { { 1, "#94b6ff" }, { 0, "#000000" } },
+		stops = { { 1, "#94b6ff" }, { 0, "#11121a" } },
 	})
 
 	local gradient_urgent = gears.color.create_pattern({
@@ -255,7 +256,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 			bg_urgent = gradient_urgent,
 			shape = rounded(50),
-			font = "DejaVuSansM Nerd Font Propo 15",
+			font = "DejaVuSansM Nerd Font Propo 16",
 		},
 		layout = {
 			layout = wibox.layout.fixed.horizontal,
