@@ -66,13 +66,12 @@ awful.spawn.with_shell("flatpak run md.obsidian.Obsidian")
 ---------------]]
 launcher = "rofi -show drun"
 terminal = "alacritty"
-browser = "firefox"
+browser = "com.brave.Browser"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 obsidian = "flatpak run md.obsidian.Obsidian"
 discord = "flatpak run com.discordapp.Discord"
 files = "thunar"
-browser = "firefox"
 txteditor = terminal .. " -e nvim"
 settings = "xfce4-settings-manager"
 

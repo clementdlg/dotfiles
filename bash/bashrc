@@ -123,5 +123,7 @@ alias vawesome='vim ~/.config/awesome/rc.lua'
 alias nvimrc='nvim ~/.config/nvim/init.lua'
 alias vimrc='vi ~/.config/vim/vimrc'
 alias st='git status'
-alias 2a='cd ~/Desktop/2e-annee/ && ls'
+alias wk='cd ~/Desktop/2e-annee/ && ls'
 alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
+alias make="./make.sh"
+alias make-run="./make.sh && ./hashdog"
