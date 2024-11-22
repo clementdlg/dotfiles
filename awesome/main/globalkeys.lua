@@ -276,7 +276,7 @@ return gears.table.join(
 		{ modkey }, --Modifier
 		"b", --Key
 		function() --Action
-			awful.spawn(browser)
+			awful.spawn("flatpak run com.brave.Browser")
 		end,
 		{ description = "open browser", group = "launcher" }
 	),
