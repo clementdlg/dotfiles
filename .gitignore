@@ -47,6 +47,7 @@
 !systemd/**
 
 !autostart/awesome.desktop
+!autostart/picom.desktop
 
 # ignore specific files
 nvim/lazy-lock.json
