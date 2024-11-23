@@ -275,7 +275,11 @@ awful.rules.rules = {
 				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
 			},
 		},
-		properties = { floating = true },
+		properties = {
+			floating = true, -- Ensure the window is floating
+			placement = awful.placement.centered, -- Use awful.placement.centered
+			screen = awful.screen.focused(), -- Specify the focused screen
+		},
 	},
 
 	-- Add titlebars to normal clients and dialogs
