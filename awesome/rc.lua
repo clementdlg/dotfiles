@@ -262,6 +262,9 @@ awful.rules.rules = {
 				"veromix",
 				"xtightvncviewer",
 				"Galculator",
+				"virt-manager",
+				"Wrapper-2.0",
+				"Xfce-polkit",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
