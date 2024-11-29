@@ -112,18 +112,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias ll='ls -altr'
-alias shutdown='sudo shutdown now'
-alias neofetch='fastfetch'
-alias vim='nvim'
-alias docker='sudo docker'
-
-#Conf file
-alias vawesome='vim ~/.config/awesome/rc.lua'
-alias nvimrc='nvim ~/.config/nvim/init.lua'
-alias vimrc='vi ~/.config/vim/vimrc'
-alias st='git status'
-alias wk='cd ~/Desktop/2e-annee/ && ls'
-alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
-alias make="./make.sh"
-alias make-run="./make.sh && ./hashdog"
+source .config/bash/.env

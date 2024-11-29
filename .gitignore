@@ -52,5 +52,6 @@
 # ignore specific files
 nvim/lazy-lock.json
 vim/.netrwhist
+bash/.env
 
 xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml

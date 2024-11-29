@@ -1,0 +1,25 @@
+# Standard aliases
+alias ll="ls -altr"
+alias ip="ip -c"
+alias shutdown="sudo shutdown"
+alias docker="sudo docker"
+alias neofetch="fastfetch"
+alias vim="nvim"
+
+# Conf file
+alias vawesome="vim ~/.config/awesome/rc.lua"
+alias nvimrc="nvim ~/.config/nvim/init.lua"
+alias vimrc="vi ~/.config/vim/vimrc"
+
+# Speed
+alias st="git status"
+alias wk="cd ~/Desktop/2e-annee/ && ls"
+alias wgd="sudo wg-quick down"
+alias wgu="sudo wg-quick up"
+
+# Fun
+alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
+alias btc="echo 'Price of Bitcoin : $(curl -s 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd' | jq '.bitcoin.usd')'$"
+
+# Other
+export EDITOR=nvim

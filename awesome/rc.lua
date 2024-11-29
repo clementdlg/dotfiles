@@ -263,6 +263,7 @@ awful.rules.rules = {
 				"xtightvncviewer",
 				"Galculator",
 				"virt-manager",
+				"zenity",
 				"Wrapper-2.0",
 				"Xfce-polkit",
 			},
