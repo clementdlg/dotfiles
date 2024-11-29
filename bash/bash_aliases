@@ -19,7 +19,6 @@ alias wgu="sudo wg-quick up"
 
 # Fun
 alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
-alias btc="echo 'Price of Bitcoin : $(curl -s 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd' | jq '.bitcoin.usd')'$"
 
 # Other
 export EDITOR=nvim
