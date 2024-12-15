@@ -99,8 +99,6 @@ beautiful.useless_gap = 7
 
 awful.layout.layouts = {
 	awful.layout.suit.tile,
-	awful.layout.suit.tile.bottom,
-	awful.layout.suit.spiral.dwindle,
 	awful.layout.suit.floating,
 }
 
@@ -304,6 +302,7 @@ awful.rules.rules = {
 	{ rule = { class = "Signal" }, properties = { screen = 1, tag = tag_icons[7] } },
 
 	{ rule = { class = "easyeffects" }, properties = { screen = 1, tag = tag_icons[8] } },
+	{ rule = { class = "Bitwarden" }, properties = { screen = 1, tag = tag_icons[8] } },
 
 	-- show bluetooth connection window under the tray
 	{
