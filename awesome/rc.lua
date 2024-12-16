@@ -148,12 +148,12 @@ clientkeys = gears.table.join(
 
 	awful.key({ modkey }, "n", function(c)
 		c.minimized = true
-	end, { description = "minimize", group = "client" }),
+	end, { description = "minimize", group = "client" })
 
-	awful.key({ modkey }, "m", function(c)
-		c.maximized = not c.maximized
-		c:raise()
-	end, { description = "(un)maximize", group = "client" })
+	-- awful.key({ modkey }, "m", function(c)
+	-- 	c.maximized = not c.maximized
+	-- 	c:raise()
+	-- end, { description = "(un)maximize", group = "client" })
 )
 
 local max_workspace = 9

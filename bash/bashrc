@@ -1,6 +1,3 @@
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -99,5 +96,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source ~/.config/bash/.env
+
+# Exports
 export PATH=$PATH:$HOME/scripts
+export EDITOR=nvim
+
+# Source
+source ~/.config/bash/.env
+
+# Eval
+eval "$(fzf --bash)"
