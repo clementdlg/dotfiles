@@ -14,35 +14,132 @@ alias vimrc="vi ~/.config/vim/vimrc"
 # # Speed
 alias st="git status"
 alias gdh="git diff HEAD"
-alias wk="cd ~/Desktop/2e-annee/ && ls"
 alias wgd="sudo wg-quick down"
 alias wgu="sudo wg-quick up"
 
 # Fun
 alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
+alias nano="vim"
 
-# Functions
+# FZF
+wk() {
+	prefix="$HOME/Desktop/2e-annee"
+	cd $prefix
+	all_dirs=$(find * -maxdepth 1 -type d -not -path '*/.git*')
+	dir=$(printf "%s\n" "$all_dirs" | fzf --reverse --height 35%)
+
+	if [[ -d "$dir" ]]; then
+		cd $dir
+		ls
+	else
+		cd - &>/dev/null
+	fi
+}
+rc() {
+	prefix="$HOME/.config"
+	cd $prefix
+	all_dirs=$(find * -type f -not -path '*/.git*' -not -name "*.png")
+	dir=$(printf "%s\n" "$all_dirs" | fzf --reverse --height 35%)
+
+	if [[ -f "$dir" ]]; then
+		vim "$dir"
+	else
+		cd - &>/dev/null
+	fi
+}
+sc() {
+	prefix="$HOME/scripts"
+	cd $prefix
+	all_dirs=$(find * -name "*.sh" -not -path '*/.git*')
+	dir=$(printf "%s\n" "$all_dirs" | fzf --reverse --height 35%)
+
+	if [[ -f "$dir" ]]; then
+		vim $dir
+	else
+		cd - &>/dev/null
+	fi
+}
+
+gh() {
+	prefix="$HOME/github"
+	cd $prefix
+	all_dirs=$(find * -maxdepth 3 -not -path '*/.git*')
+	dir=$(printf "%s\n" "$all_dirs" | fzf --reverse --height 35%)
+
+	if [[ -d "$dir" ]]; then
+		cd "$dir"
+		ls
+	elif [[ -f "$dir" ]]; then
+		vim "$dir"
+	else
+		cd - &>/dev/null
+	fi
+}
+# better git log
+gitgraph() {
+	hash=$(git log \
+		--color=always \
+		--reverse \
+		--oneline \
+		--graph \
+		--all \
+		--format="%C(auto)%h %C(green)%cr %C(reset)%s" \
+		--reverse |\
+	fzf --no-multi \
+		--ansi)
+
+	git show --color=always $(echo $hash | grep -o '[a-f0-9]\{7\}')
+
+}
+gitlog() {
+	git log \
+		--color=always \
+		--reverse \
+		--oneline \
+		--all \
+		--format="%C(auto)%h %C(reset)%s" \
+		--reverse |\
+	fzf --no-multi \
+		--ansi \
+		--preview="git show --color=always \$(echo {} | awk '{ print \$1 }')"
+}
+
+# change terminal font
 termfont() { 
+	if [[ $# -eq 1 ]]; then
 		sed -i -E "s/size = .{2}.0/size = $1.0/" ~/.config/alacritty/alacritty.toml
+	fi
 }
 
+# display number of lines of code
 lines() {
-	find -not -path './git/*' -name "*.$1" -exec wc -l {} \; | awk '{print "\033[1;36m" $1 "\033[0m", $2}'
-	find -not -path './git/*' -name "*.c" -exec wc --lines {} --total=only  \; |  awk '{sum += $1} END {print "\033[1;36m" sum " \033[1;37mSum" }'
+	# if no arguments, exit
+	if [[ -z $1 ]]; then
+		echo "Error: You must pass the file extension as argument"
+		echo "Example : 'lines php'"
+		return
+	fi
+
+	# find all files with matching extension
+	files=$(find -not -path './.git/*' -name "*.$1" 2>/dev/null)
+
+	# if no files, exit
+	if [[ -z "$files" ]]; then
+		echo "0 total"
+		return
+	else
+		wc="$(wc -l $files)"
+		pretty=$(echo "$wc" | sed 's|\./||' )
+		echo "$pretty" | awk '{print "\033[1;36m" $1"\033[0m", $2}'
+	fi
 }
-
-# ls using eaz
-
-# Exports
-export EDITOR=nvim
-
 
 # Basic color support
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    
-    alias ip='ip -c'
-    alias grep='grep --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+
+	alias ip='ip -c'
+	alias grep='grep --color=auto'
 
 	# replace ls with eza if exists
 	which eza &>/dev/null
@@ -50,21 +147,21 @@ if [ -x /usr/bin/dircolors ]; then
 		ls() {
 			# ls
 			if [[ $# -eq 0 ]]; then
-				eza --color=always --icons --width 55
+				eza --color=always --icons
 
 			# ls -a
-			elif [[ "$1" == "-a" ]]; then
-				eza --color=always --icons --all ${@:2}
+		elif [[ "$1" == "-a" ]]; then
+			eza --color=always --icons --all ${@:2}
 
 			# ls -l
-			elif [[ "$1" == "-l" ]]; then
-				eza --color=always --icons --long ${@:2}
-			
-			elif [[ "$1" == "-la" || "$1" == "-al" ]]; then
-				eza --color=always --icons --long --all ${@:2}
-			
-			else
-				command ls --color=always "$@"
+		elif [[ "$1" == "-l" ]]; then
+			eza --color=always --icons --long ${@:2}
+
+		elif [[ "$1" == "-la" || "$1" == "-al" ]]; then
+			eza --color=always --icons --long --all ${@:2}
+
+		else
+			command ls --color=always "$@"
 			fi
 
 		}
@@ -78,7 +175,4 @@ if [ -x /usr/bin/dircolors ]; then
 		alias cat="bat -pp --theme OneHalfDark"
 	fi
 
-
-
 fi
-
