@@ -15,7 +15,7 @@
       <property name="background-style" type="uint" value="1"/>
       <property name="enable-struts" type="bool" value="true"/>
       <property name="enter-opacity" type="uint" value="100"/>
-      <property name="icon-size" type="uint" value="19"/>
+      <property name="icon-size" type="uint" value="21"/>
       <property name="leave-opacity" type="uint" value="100"/>
       <property name="length" type="double" value="100"/>
       <property name="length-adjust" type="bool" value="true"/>
