@@ -31,14 +31,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
@@ -54,13 +50,14 @@ fi
 
 if [ "$color_prompt" = yes ]; then
 
-    if [[ -z $DISTROBOX_ENTER_PATH ]]; then
-        id=$(ip route get 8.8.8.8 | awk '{print $7}');
+    if [[ -z $TMUX ]]; then
+	id=$(~/scripts/get_private_ip.sh);
+	PS1='\[\e[38;5;63;1m\][\[\e[0;38;5;216m\]\u\[\e[38;5;63;1m\]@\[\e[0;38;5;216m\]$id\[\e[38;5;63;1m\]]–(\[\e[0;97m\]\W\[\e[38;5;63;1m\])\[\e[0;97m\]\$\[\e[97m\] \[\e[0m\]'
 	
     else
-	id=$(cat /etc/os-release | grep '^ID=' | cut -f2 -d=)-box
+	# PS1='\[\e[38;5;63;1m\] \[\e[0m\]'
+	PS1='\[\e[38;5;153;1m\] \[\e[0m\]'
     fi
-         PS1='\[\e[38;5;63;1m\][\[\e[0;38;5;216m\]\u\[\e[38;5;63;1m\]@\[\e[0;38;5;216m\]$id\[\e[38;5;63;1m\]]–(\[\e[0;97m\]\W\[\e[38;5;63;1m\])\[\e[0;97m\]\$\[\e[97m\] \[\e[0m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -85,6 +82,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -102,7 +103,8 @@ export PATH=$PATH:$HOME/scripts
 export EDITOR=nvim
 
 # Source
-source ~/.config/bash/.env
+# source ~/.config/bash/.env
 
 # Eval
 eval "$(fzf --bash)"
+setxkbmap -option caps:ctrl_modifier

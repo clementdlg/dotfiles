@@ -99,6 +99,7 @@ beautiful.useless_gap = 7
 
 awful.layout.layouts = {
 	awful.layout.suit.tile,
+	awful.layout.suit.tile.bottom,
 	awful.layout.suit.floating,
 }
 
