@@ -1,0 +1,106 @@
+
+
+# change terminal font
+termfont() { 
+	if [[ $# -eq 1 ]]; then
+		sed -i -E "s/size = .{2}.0/size = $1.0/" ~/.config/alacritty/alacritty.toml
+	fi
+}
+
+# display number of lines of code
+lines() {
+	# if no arguments, exit
+	if [[ -z $1 ]]; then
+		echo "Error: You must pass the file extension as argument"
+		echo "Example : 'lines php'"
+		return
+	fi
+
+	# find all files with matching extension
+	files=$(find -not -path './.git/*' -name "*.$1" 2>/dev/null)
+
+	# if no files, exit
+	if [[ -z "$files" ]]; then
+		echo "0 total"
+		return
+	else
+		wc="$(wc -l $files)"
+		pretty=$(echo "$wc" | sed 's|\./||' )
+		echo "$pretty" | awk '{print "\033[1;36m" $1"\033[0m", $2}'
+	fi
+}
+
+# exit if fzf isn't installed
+which fzf &>/dev/null
+if [[ $? -ne 0 ]]; then
+	exit 0
+fi
+# work directories
+wk() {
+	prefix="$HOME/Desktop/2e-annee"
+	cdz "$prefix"
+}
+
+# github
+gh() {
+	prefix="$HOME/github"
+	cdz "$prefix"
+}
+
+viz() {
+	dir1="$HOME/scripts" 
+	dir2="$HOME/.config"
+
+	list=$(find "$dir1" "$dir2" -maxdepth 4 -type f -not -path '*/.git*')
+	edit=$(printf "%s\n" "$list" | sed 's|/home/krem/||')
+	select=$(printf "%s\n" $edit | fzf --reverse --height 40%)
+
+	if [[ -f "$HOME/$select" ]]; then
+		$EDITOR $HOME/$select
+	fi
+	echo $EDITOR $HOME/$select
+}
+cdz() {
+	if [[ ! -d "$1" ]]; then
+		return
+	fi
+
+	list=$(find "$1" -maxdepth 2 -type d -not -path '*/.git*')
+	edit=$(printf "%s\n" "$list" | sed 's|/home/krem/||')
+	select=$(printf "%s\n" "$edit" | fzf --reverse --height 40%)
+
+	if [[ -d "$HOME/$select" ]]; then
+		id=$(($RANDOM % 100))
+		name=$(basename $select)
+		[[ -d $HOME/$select ]] && echo "true"
+		tmux new-session -c "$HOME/$select" -s "$name-$id"
+	fi
+}
+# better git log
+gitgraph() {
+	hash=$(git log \
+		--color=always \
+		--reverse \
+		--oneline \
+		--graph \
+		--all \
+		--format="%C(auto)%h %C(green)%cr %C(reset)%s" \
+		--reverse |\
+	fzf --no-multi \
+		--ansi)
+
+	git show --color=always $(echo $hash | grep -o '[a-f0-9]\{7\}')
+
+}
+gitlog() {
+	git log \
+		--color=always \
+		--reverse \
+		--oneline \
+		--all \
+		--format="%C(auto)%h %C(reset)%s" \
+		--reverse |\
+	fzf --no-multi \
+		--ansi \
+		--preview="git show --color=always \$(echo {} | awk '{ print \$1 }')"
+}
