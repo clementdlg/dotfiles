@@ -49,6 +49,9 @@
 !autostart/awesome.desktop
 !autostart/picom.desktop
 
+!tmux/
+!tmux/**
+
 # ignore specific files
 nvim/lazy-lock.json
 vim/.netrwhist

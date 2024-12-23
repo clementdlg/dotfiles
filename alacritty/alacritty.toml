@@ -33,3 +33,5 @@ style = "Regular"
 #[[font.fallback]]
 #family = "Noto Color Emoji"
 
+[env]
+TERM = "xterm-256color"
