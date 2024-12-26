@@ -106,5 +106,23 @@ export EDITOR=nvim
 # source ~/.config/bash/.env
 
 # Eval
-eval "$(fzf --bash)"
+eval "$(zoxide init bash)"
 setxkbmap -option caps:ctrl_modifier
+
+# jump into tmux once
+which tmux &>/dev/null
+if [[ $? -eq 0 && -z $TMUX ]]; then
+
+    tmux list-sessions &>/dev/null
+    session="$?"
+    clients=$(tmux list-clients)
+
+    if [[ $session -eq 0 ]]; then
+	if [[ -z $clients ]]; then
+	    tmux attach
+	fi
+    else
+	tmux new-session
+    fi
+fi
+

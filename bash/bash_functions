@@ -1,5 +1,3 @@
-
-
 # change terminal font
 termfont() { 
 	if [[ $# -eq 1 ]]; then
@@ -72,8 +70,7 @@ cdz() {
 	if [[ -d "$HOME/$select" ]]; then
 		id=$(($RANDOM % 100))
 		name=$(basename $select)
-		[[ -d $HOME/$select ]] && echo "true"
-		tmux new-session -c "$HOME/$select" -s "$name-$id"
+		cd "$HOME/$select"
 	fi
 }
 # better git log
@@ -103,4 +100,15 @@ gitlog() {
 	fzf --no-multi \
 		--ansi \
 		--preview="git show --color=always \$(echo {} | awk '{ print \$1 }')"
+}
+
+wgz() {
+    path="/etc/wireguard"
+    confs=$(sudo ls "$path")
+    select=$(printf "%s\n" "$confs" |\
+            sed 's/.conf//' |\
+            fzf --no-multi \
+                --reverse \
+                --height 35%)
+    sudo wg-quick up $select
 }
