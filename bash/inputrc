@@ -1,0 +1,6 @@
+set completion-ignore-case on
+set colored-stats On
+set colored-completion-prefix On
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
