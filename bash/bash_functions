@@ -94,7 +94,6 @@ gitlog() {
 		--color=always \
 		--reverse \
 		--oneline \
-		--all \
 		--format="%C(auto)%h %C(reset)%s" \
 		--reverse |\
 	fzf --no-multi \
