@@ -15,7 +15,7 @@ alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
 
 # # Speed
 alias st="git status"
-alias gdiff="git diff HEAD"
+alias gd="git diff HEAD"
 alias wgd="sudo wg-quick down"
 alias wgu="sudo wg-quick up"
 

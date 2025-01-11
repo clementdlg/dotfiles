@@ -250,6 +250,15 @@ return gears.table.join(
 		end,
 		{ description = "rofi", group = "launcher" }
 	),
+	--Open Vm Remmina
+	awful.key(
+		{ "Mod4" }, --Modifier
+		"v", --Key
+		function() --Action
+			awful.spawn(os.getenv("HOME") .. "/scripts/open-vm-remmina.sh")
+		end,
+		{ description = "open vm", group = "launcher" }
+	),
 
 	--Obsidian
 	awful.key(
@@ -301,15 +310,6 @@ return gears.table.join(
 		{ description = "open a settings", group = "launcher" }
 	),
 
-	--Print screen
-	awful.key(
-		{}, --Modifier
-		"Print", --Key
-		function() --Action
-			awful.spawn("flameshot gui")
-		end,
-		{ description = "Print screen", group = "Multimedia" }
-	),
 	awful.key(
 		{ modkey }, --Modifier
 		"s", --Key
@@ -327,16 +327,6 @@ return gears.table.join(
 			awful.spawn("flatpak run com.bitwarden.desktop")
 		end,
 		{ description = "password manager", group = "Multimedia" }
-	),
-
-	-- Brave
-	awful.key(
-		{ modkey }, --Modifier
-		"z", --Key
-		function() --Action
-			awful.spawn("flatpak run com.brave.Browser")
-		end,
-		{ description = "Brave brower", group = "Multimedia" }
 	),
 
 	-- EasyEffects

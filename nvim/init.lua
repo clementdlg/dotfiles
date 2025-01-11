@@ -3,6 +3,9 @@
 #    SETTINGS    #
 #                #
 ]]
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+
 -- basics
 vim.opt.ignorecase = true --Case Insensitive search
 vim.opt.incsearch = true --Incremental Search
@@ -50,6 +53,7 @@ vim.opt.autoread = true
 vim.opt.swapfile = false
 
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 
 --keystroke sequence timeout
@@ -116,7 +120,7 @@ require("lazy").setup({
 	-- NOTE : Insert plugins here
 
 	-- Detect tabstop and shiftwidth automatically
-	"tpope/vim-sleuth",
+	-- "tpope/vim-sleuth",
 
 	-- "gc" to comment visual regions/lines
 	{ "numToStr/Comment.nvim", opts = {} },

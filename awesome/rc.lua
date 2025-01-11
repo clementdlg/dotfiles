@@ -98,7 +98,7 @@ beautiful.useless_gap = 7
 -----------------]]
 
 awful.layout.layouts = {
-	awful.layout.suit.tile,
+	awful.layout.suit.tile.right,
 	awful.layout.suit.tile.bottom,
 	awful.layout.suit.floating,
 }
@@ -246,7 +246,6 @@ awful.rules.rules = {
 	{
 		rule_any = {
 			instance = {
-				"DTA", -- Firefox addon DownThemAll.
 				"copyq", -- Includes session name in class.
 				"pinentry",
 			},
@@ -263,7 +262,6 @@ awful.rules.rules = {
 				"Galculator",
 				"virt-manager",
 				"zenity",
-				"Wrapper-2.0",
 				"Xfce-polkit",
 			},
 

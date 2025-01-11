@@ -2,7 +2,7 @@ configuration {
   display-drun: "Applications:";
   display-window: "Windows:";
   drun-display-format: "{icon} {name}";
-  font: "DejaVuSansM Nerd Font Propo 16";
+  font: "DejaVuSansM Nerd Font Propo 18";
   modi: "window,run,drun";
   show-icons: true;
   icon-theme: "Papirus";
@@ -70,5 +70,6 @@ prompt {
 }
 
 window {
-  transparency: "real";
+	width: 20%;
 }
+element-icon { size: 2.2ch ; }
