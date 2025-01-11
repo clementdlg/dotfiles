@@ -101,13 +101,17 @@ fi
 # Exports
 export PATH=$PATH:$HOME/scripts
 export EDITOR=nvim
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # Source
 # source ~/.config/bash/.env
 
+# remap caps-lock to control
+setxkbmap -option caps:ctrl_modifier
+
 # Eval
 eval "$(zoxide init bash)"
-setxkbmap -option caps:ctrl_modifier
+eval "$(fzf --bash)"
 
 # jump into tmux once
 which tmux &>/dev/null
