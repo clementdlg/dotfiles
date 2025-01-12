@@ -55,7 +55,7 @@ beautiful.init("~/.config/awesome/theme/theme.lua")
 
 -- Launch at startup
 -- apps
--- awful.spawn.with_shell("picom -b")
+awful.spawn.with_shell("picom -b")
 awful.spawn.with_shell("xfce4-panel &")
 awful.spawn.with_shell("flatpak run md.obsidian.Obsidian")
 
@@ -245,24 +245,13 @@ awful.rules.rules = {
 	-- Floating clients.
 	{
 		rule_any = {
-			instance = {
-				"copyq", -- Includes session name in class.
-				"pinentry",
-			},
 			class = {
-				"Arandr",
 				"Gpick",
-				"Kruler",
-				"MessageWin", -- kalarm.
-				"Sxiv",
 				"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
 				"Wpa_gui",
 				"veromix",
 				"xtightvncviewer",
-				"Galculator",
-				"virt-manager",
 				"zenity",
-				"Xfce-polkit",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -273,24 +262,24 @@ awful.rules.rules = {
 			role = {
 				"AlarmWindow", -- Thunderbird's calendar.
 				"ConfigManager", -- Thunderbird's about:config.
-				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+				-- "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
 			},
-		},
-		properties = {
-			floating = true, -- Ensure the window is floating
-			placement = awful.placement.centered, -- Use awful.placement.centered
-			screen = awful.screen.focused(), -- Specify the focused screen
+			properties = {
+				floating = true,
+				placement = awful.placement.centered,
+				ontop = true,
+			},
 		},
 	},
 
 	-- Add titlebars to normal clients and dialogs
-	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
+	-- { rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
 	--#########################################################
 	-- Window Rules
 	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
 
-	{ rule = { class = "Virt-manager" }, properties = { screen = 1, tag = tag_icons[4] } },
+	{ rule = { name = "Virtual machines - .*" }, properties = { screen = 1, tag = tag_icons[4] } },
 
 	{ rule = { class = "papers" }, properties = { screen = 1, tag = tag_icons[5] } },
 	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[5] } },
@@ -302,6 +291,32 @@ awful.rules.rules = {
 
 	{ rule = { class = "easyeffects" }, properties = { screen = 1, tag = tag_icons[8] } },
 	{ rule = { class = "Bitwarden" }, properties = { screen = 1, tag = tag_icons[8] } },
+
+	{
+		rule = { class = "Virt-viewer", name = "Choose a virtual machine" },
+		properties = {
+			floating = true,
+			placement = awful.placement.centered,
+			ontop = true,
+		},
+	},
+	{
+		rule_any = {
+			class = {
+				"Galculator",
+				"Wrapper-2.0",
+				"Virt-manager",
+			},
+			name = {
+				"Authentication required",
+			},
+		},
+		properties = {
+			floating = true,
+			placement = awful.placement.centered,
+			ontop = true,
+		},
+	},
 
 	-- show bluetooth connection window under the tray
 	{
@@ -390,3 +405,25 @@ client.connect_signal("unfocus", function(c)
 		c:kill()
 	end
 end)
+
+local naughty = require("naughty")
+local beautiful = require("beautiful")
+
+-- Set the background color to #1c1c2e
+beautiful.notification_bg = "#1c1c2e"
+
+-- Set the foreground (text) color to white
+beautiful.notification_fg = "#FFFFFF"
+
+-- Set font size to 20px for the text inside the notification
+beautiful.notification_font = "Sans 16"
+
+-- Optional: Add border if you want to define one
+beautiful.notification_border_color = "#FFFFFF" -- White border
+
+-- Create a sample notification to test the configuration
+naughty.notify({
+	title = "Sample Notification",
+	text = "This is a test notification with custom settings.",
+	timeout = 5,
+})
