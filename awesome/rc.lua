@@ -281,7 +281,7 @@ awful.rules.rules = {
 
 	{ rule = { name = "Virtual machines - .*" }, properties = { screen = 1, tag = tag_icons[4] } },
 
-	{ rule = { class = "papers" }, properties = { screen = 1, tag = tag_icons[5] } },
+	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[5] } },
 	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[5] } },
 
 	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = tag_icons[6] } },

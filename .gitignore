@@ -28,9 +28,6 @@
 !terminator/
 !terminator/**
 
-!flameshot/
-!flameshot/**
-
 !bash/
 !bash/**
 
@@ -58,3 +55,5 @@ vim/.netrwhist
 bash/.env
 
 xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
+xfce4/xfconf/xfce-perchannel-xml/displays.xml
+xfce4/xfconf/xfce-perchannel-xml/thunar.xml
