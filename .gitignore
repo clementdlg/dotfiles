@@ -4,8 +4,11 @@
 # allow specific files
 !.gitignore
 
-!xfce/
-!xfce/**
+!xfce/scripts/layout.bin
+!xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
+!xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+!xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
+!xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 
 !awesome/
 !awesome/**
@@ -25,9 +28,6 @@
 !alacritty/
 !alacritty/**
 
-!terminator/
-!terminator/**
-
 !bash/
 !bash/**
 
@@ -40,8 +40,8 @@
 !rofi/
 !rofi/**
 
-!systemd/
-!systemd/**
+!systemd/user/
+!systemd/user/**
 
 !autostart/awesome.desktop
 !autostart/picom.desktop
@@ -53,7 +53,3 @@
 nvim/lazy-lock.json
 vim/.netrwhist
 bash/.env
-
-xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
-xfce4/xfconf/xfce-perchannel-xml/displays.xml
-xfce4/xfconf/xfce-perchannel-xml/thunar.xml
