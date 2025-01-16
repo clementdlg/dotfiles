@@ -7,23 +7,26 @@
     <property name="dark-mode" type="bool" value="true"/>
     <property name="panel-1" type="empty">
       <property name="background-rgba" type="array">
-        <value type="double" value="0.10980392156862746"/>
-        <value type="double" value="0.10980392156862746"/>
-        <value type="double" value="0.1803921568627451"/>
-        <value type="double" value="1"/>
+        <value type="double" value="0.15294117647058825"/>
+        <value type="double" value="0.15294117647058825"/>
+        <value type="double" value="0.25098039215686274"/>
+        <value type="double" value="0.70000000000000007"/>
       </property>
       <property name="background-style" type="uint" value="1"/>
       <property name="enable-struts" type="bool" value="true"/>
       <property name="enter-opacity" type="uint" value="100"/>
-      <property name="icon-size" type="uint" value="21"/>
+      <property name="icon-size" type="uint" value="20"/>
       <property name="leave-opacity" type="uint" value="100"/>
-      <property name="length" type="double" value="100"/>
-      <property name="length-adjust" type="bool" value="true"/>
+      <property name="length" type="double" value="98.4375"/>
+      <property name="length-adjust" type="bool" value="false"/>
       <property name="mode" type="uint" value="0"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="17"/>
+        <value type="int" value="16"/>
         <value type="int" value="4"/>
+        <value type="int" value="18"/>
         <value type="int" value="1"/>
+        <value type="int" value="2"/>
+        <value type="int" value="3"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
         <value type="int" value="8"/>
@@ -33,9 +36,9 @@
         <value type="int" value="13"/>
         <value type="int" value="15"/>
         <value type="int" value="14"/>
-        <value type="int" value="3"/>
+        <value type="int" value="17"/>
       </property>
-      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="position" type="string" value="p=9;x=959;y=16"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="size" type="uint" value="32"/>
       <property name="nrows" type="uint" value="1"/>
@@ -57,6 +60,7 @@
     </property>
     <property name="plugin-17" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
+      <property name="expand" type="bool" value="false"/>
     </property>
     <property name="plugin-3" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
@@ -76,16 +80,18 @@
         <value type="string" value="dnfdragora-updater"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="remmina-icon"/>
+        <value type="string" value="chrome_status_icon_1"/>
         <value type="string" value="blueman"/>
         <value type="string" value="dnfdragora-updater"/>
       </property>
       <property name="known-legacy-items" type="array">
-        <value type="string" value="blueman"/>
       </property>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="show-notifications" type="bool" value="true"/>
+      <property name="known-players" type="string" value="Brave;org.mozilla.firefox"/>
     </property>
     <property name="plugin-9" type="string" value="power-manager-plugin"/>
     <property name="plugin-1" type="string" value="tasklist">
@@ -101,6 +107,16 @@
       <property name="update-period" type="int" value="750"/>
       <property name="enable-single-row" type="bool" value="true"/>
       <property name="font" type="string" value="DejaVu Sans Mono Bold 14"/>
+    </property>
+    <property name="plugin-2" type="string" value="separator">
+      <property name="expand" type="bool" value="false"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-16" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-18" type="string" value="separator">
+      <property name="style" type="uint" value="2"/>
     </property>
   </property>
 </channel>
