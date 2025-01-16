@@ -34,10 +34,6 @@ endfunction
 
 " display concise mode
 " called in SmallStatusline()
-function! ConciseMode()
-    call ColorModes()
-    return toupper(mode())
-endfunction
 
 function! FullStatusline()
     set statusline=%#Mode#\ %{VerboseMode()}\       " Mode names
@@ -47,11 +43,6 @@ function! FullStatusline()
     set statusline+=%#Cursor1#\ %l:%c\            " Line and column numbers
 endfunction
 
-function! SmallStatusline()
-    set statusline=%#Mode#\ %{ConciseMode()}\       " Mode names
-    set statusline+=%#Path#\ %F\                    " Full file path
-    set statusline+=%=%#Cursor1#\ %l:%c\            " Line and column numbers
-endfunction
 
 call FullStatusline()
 
@@ -75,22 +66,5 @@ function! Git()
     else
         return ' git:' . strpart(head[0], 16)
     endif 
-endfunction
-
-function! StatuslineSize()
-    let wins = getwininfo()
-    let min_width = 9999
-
-    for win in wins
-        if win.width < min_width
-            let min_width = win.width
-        endif
-    endfor
-
-    if min_width <= 75
-        call SmallStatusline()
-    else
-        call FullStatusline()
-    endif
 endfunction
 
