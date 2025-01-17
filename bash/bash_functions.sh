@@ -1,16 +1,22 @@
-# refresh tmux
-which tmux &>/dev/null
-if [[ $? -eq 0 ]]; then
-	cd() {
-		builtin cd "$@" && tmux refresh-client -S
+# change terminal font
+termconf="~/.config/alacritty/alacritty.toml"
+if [[ -f $termconf ]]; then
+	termfont() { 
+
+		# their must be only 1 arg
+		if [[ $# -ne 1 ]]; then
+			echo "termfont error : Invalid number of arguments. Expected 1, got '$#'"
+			return
+		fi
+
+		# the argument must be between 10 and 99
+		if [[ ! "$1" =~ ^[1-9][0-9]$ ]]; then
+			echo "termfont error : Invalid font size. Expected a number betwen 10 and 99, got $1"
+		fi
+
+		sed -i -E "s/size = .{2}.0/size = $1.0/" ~/.config/alacritty/alacritty.toml
 	}
 fi
-# change terminal font
-termfont() { 
-	if [[ $# -eq 1 ]]; then
-		sed -i -E "s/size = .{2}.0/size = $1.0/" ~/.config/alacritty/alacritty.toml
-	fi
-}
 
 # display number of lines of code
 lines() {
@@ -35,7 +41,29 @@ lines() {
 	fi
 }
 
-# exit if fzf isn't installed
+#######################
+###		TMUX		###
+#######################
+
+# refresh tmux topbar
+if [[ -n "$TMUX" ]]; then
+	cd() {
+		builtin cd "$@" && tmux refresh-client -S
+	}
+
+	z=$(which zoxide)
+	if [[ -n "$z" ]]; then
+
+		z() {
+			__zoxide_z "$@" && tmux refresh-client -S
+		}
+	fi
+fi
+
+###################
+###		FZF		###
+###################
+
 which fzf &>/dev/null
 if [[ $? -ne 0 ]]; then
 	return
