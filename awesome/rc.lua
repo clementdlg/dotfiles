@@ -55,7 +55,7 @@ beautiful.init("~/.config/awesome/theme/theme.lua")
 
 -- Launch at startup
 -- apps
-awful.spawn.with_shell("picom -b")
+-- awful.spawn.with_shell("picom -b")
 awful.spawn.with_shell("xfce4-panel &")
 awful.spawn.with_shell("flatpak run md.obsidian.Obsidian")
 
@@ -406,9 +406,6 @@ client.connect_signal("unfocus", function(c)
 	end
 end)
 
-local naughty = require("naughty")
-local beautiful = require("beautiful")
-
 -- Set the background color to #1c1c2e
 beautiful.notification_bg = "#1c1c2e"
 
@@ -420,10 +417,3 @@ beautiful.notification_font = "Sans 16"
 
 -- Optional: Add border if you want to define one
 beautiful.notification_border_color = "#FFFFFF" -- White border
-
--- Create a sample notification to test the configuration
-naughty.notify({
-	title = "Sample Notification",
-	text = "This is a test notification with custom settings.",
-	timeout = 5,
-})
