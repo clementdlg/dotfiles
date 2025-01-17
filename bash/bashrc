@@ -50,7 +50,7 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*|linux)
+xterm|rxvt*|linux)
 	# [user@hostname](dir)$ 
     # PS1='[\[\e[92m\]\u\[\e[0m\]@\[\e[92m\]\h\[\e[0m\]](\[\e[96m\]\W\[\e[0m\])\$ '
 	PS1='[\[\e[96m\]\u\[\e[0m\]@\[\e[96m\]\h\[\e[0m\]](\[\e[97m\]\W\[\e[0m\])\[\e[97m\]\$\[\e[0m\] '
@@ -108,14 +108,11 @@ if [[ -d "$bashfiles" ]]; then
 
 	if [[ -f "$bashfiles"/bash_aliases ]]; then
 		source "$bashfiles"/bash_aliases
-		echo "sources bash_aliases"
 	fi
 	if [[ -f "$bashfiles"/bash_functions.sh ]]; then
 		source "$bashfiles"/bash_functions.sh
-		echo "sources bash_functions.sh"
 	fi
 	if [[ -f "$bashfiles"/bash_tmux.sh ]]; then
 		source "$bashfiles"/bash_tmux.sh tmuxMain
-		echo "sources bash_tmux.sh tmuxMain"
 	fi
 fi

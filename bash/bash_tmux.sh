@@ -12,30 +12,27 @@ function tmuxMain() {
 	if [[ -n $TMUX ]]; then
 		# inside of tmux
 		refreshClient
-		echo "enable tmux client refresh"
 
 		setTmuxPrompt
-		echo "set tmux prompt"
 	else
 		# not inside of tmux
 		openSession
-		echo "opened session"
 	fi
 
 	unset -f tmuxMain # forget the function
 }
 
 function openSession() {
-	tmux list-sessions &>/dev/null
+	silent tmux list-sessions
 	local session="$?"
 	local clients=$(tmux list-clients)
 
 	if [[ $session -eq 0 ]]; then # if their is a session
 		if [[ -z $clients ]]; then # but no clients attached
-			tmux attach
+			silent tmux attach
 		fi
 	else
-		tmux new-session # this is no session
+		silent tmux new-session # this is no session
 	fi
 	unset -f openSession # forget the function
 }
@@ -46,7 +43,7 @@ function refreshClient() {
 	}
 
 	# if zoxide is in use, tmux is refreshed as well
-	which zoxide &>/dev/null
+	silent which zoxide
 	if [[ $? -eq 0 ]]; then
 		z() {
 			__zoxide_z "$@" && tmux refresh-client -S
@@ -59,8 +56,6 @@ function setTmuxPrompt() {
 	PS1='\[\e[38;5;153;1m\] \[\e[0m\]'
 	unset -f setTmuxPrompt # forget the function
 }
-
-#=============
 
 function tmuxStatus() {
 	# format
@@ -100,9 +95,11 @@ function tmuxStatus() {
 	unset -f tmuxStatus # forget the function
 }
 
-# function runner
-# if [[ "$#" -eq 3 ]]; then # 3 args max
+function silent() {
+	"$@" &>/dev/null
+}
 
+# runner
 if [[ -n "$@" ]]; then # their must be at least 1 arg
 	if [[ "$1" == "tmuxMain" ]]; then
 		tmuxMain
