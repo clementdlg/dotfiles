@@ -1,15 +1,15 @@
 # Standard aliases
-alias ll="ls -altr"
-alias ip="ip -c"
-alias shutdown="sudo shutdown"
+alias ll="ls -al"
 alias docker="sudo docker"
 alias neofetch="fastfetch"
-alias vim="nvim"
+alias sl="ls"
+alias vim="$EDITOR"
+alias nano="$EDITOR"
 
 # Conf file
-alias vawesome="vim ~/.config/awesome/rc.lua"
-alias nvimrc="nvim ~/.config/nvim/init.lua"
-alias vimrc="vi ~/.config/vim/vimrc"
+alias vawesome="$EDITOR ~/.config/awesome/rc.lua"
+alias nvimrc="$EDITOR ~/.config/nvim/init.lua"
+alias vimrc="$EDITOR ~/.config/vim/vimrc"
 
 alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
 
@@ -19,44 +19,20 @@ alias gd="git diff HEAD"
 alias wgd="sudo wg-quick down"
 alias wgu="sudo wg-quick up"
 
-# goofy
-alias nano="vim"
-alias sl="ls"
-
-# FZF
 # Basic color support
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
 	alias ip='ip -c'
 	alias grep='grep --color=auto'
+	alias ls="ls --color=always"
 
-	# replace ls with eza if exists
+	# eza aliases
 	which eza &>/dev/null
 	if [[ $? -eq 0 ]]; then
-		ls() {
-			# ls
-			if [[ $# -eq 0 ]]; then
-				eza --color=always --icons
-
-			# ls -a
-		elif [[ "$1" == "-a" ]]; then
-			eza --color=always --icons --all ${@:2}
-
-			# ls -l
-		elif [[ "$1" == "-l" ]]; then
-			eza --color=always --icons --long ${@:2}
-
-		elif [[ "$1" == "-la" || "$1" == "-al" ]]; then
-			eza --color=always --icons --long --all ${@:2}
-
-		else
-			command ls --color=always "$@"
-			fi
-
-		}
-	else
-		alias ls="ls --color=always"
+		alias l="eza --color=always --icons"
+		alias la="eza --color=always --icons --all"
+		alias ll="eza --color=always --icons --all --long"
 	fi
 
 	# replace cat with bat

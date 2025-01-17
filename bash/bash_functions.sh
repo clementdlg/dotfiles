@@ -1,20 +1,22 @@
 # change terminal font
-termconf="~/.config/alacritty/alacritty.toml"
-if [[ -f $termconf ]]; then
+termconf="$HOME/.config/alacritty/alacritty.toml"
+if [[ -f "$termconf" ]]; then
 	termfont() { 
 
 		# their must be only 1 arg
 		if [[ $# -ne 1 ]]; then
-			echo "termfont error : Invalid number of arguments. Expected 1, got '$#'"
+			echo "termfont error : Invalid number of arguments. Expected 1, got $#"
 			return
 		fi
 
 		# the argument must be between 10 and 99
 		if [[ ! "$1" =~ ^[1-9][0-9]$ ]]; then
 			echo "termfont error : Invalid font size. Expected a number betwen 10 and 99, got $1"
+			return
 		fi
 
-		sed -i -E "s/size = .{2}.0/size = $1.0/" ~/.config/alacritty/alacritty.toml
+		# perform the edit
+		sed -i -E "s/size = [0-9.]+/size = $1.0/" "$termconf"
 	}
 fi
 
@@ -41,25 +43,6 @@ lines() {
 	fi
 }
 
-#######################
-###		TMUX		###
-#######################
-
-# refresh tmux topbar
-if [[ -n "$TMUX" ]]; then
-	cd() {
-		builtin cd "$@" && tmux refresh-client -S
-	}
-
-	z=$(which zoxide)
-	if [[ -n "$z" ]]; then
-
-		z() {
-			__zoxide_z "$@" && tmux refresh-client -S
-		}
-	fi
-fi
-
 ###################
 ###		FZF		###
 ###################
@@ -68,31 +51,30 @@ which fzf &>/dev/null
 if [[ $? -ne 0 ]]; then
 	return
 fi
+
 # work directories
 wk() {
 	prefix="$HOME/Desktop/2e-annee"
 	cdz "$prefix"
 }
 
-# github
-gh() {
-	prefix="$HOME/github"
-	cdz "$prefix"
-}
-
 viz() {
 	dir1="$HOME/scripts" 
 	dir2="$HOME/.config"
+	dir3="$HOME/github"
 
-	list=$(find "$dir1" "$dir2" -maxdepth 4 -type f -not -path '*/.git*')
+	list=$(find "$dir1" "$dir2" "$dir3" -maxdepth 4 -type f -not -path '*/.git*')
 	edit=$(printf "%s\n" "$list" | sed 's|/home/krem/||')
 	select=$(printf "%s\n" $edit | fzf --reverse --height 40%)
 
 	if [[ -f "$HOME/$select" ]]; then
 		$EDITOR $HOME/$select
+		return
 	fi
-	echo $EDITOR $HOME/$select
+	echo "viz error : Non existant file"
+
 }
+
 cdz() {
 	if [[ ! -d "$1" ]]; then
 		return
@@ -103,11 +85,10 @@ cdz() {
 	select=$(printf "%s\n" "$edit" | fzf --reverse --height 40%)
 
 	if [[ -d "$HOME/$select" ]]; then
-		id=$(($RANDOM % 100))
-		name=$(basename $select)
 		cd "$HOME/$select"
 	fi
 }
+
 # better git log
 gitgraph() {
 	hash=$(git log \

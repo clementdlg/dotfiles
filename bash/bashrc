@@ -4,16 +4,14 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+# don't put duplicate lines
+HISTCONTROL=ignoredups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=1000 # max history size per session
+HISTFILESIZE=10000 # max history file size
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -25,11 +23,6 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
 
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -49,25 +42,18 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-
-    if [[ -z $TMUX ]]; then
 	id=$(~/scripts/get_private_ip.sh);
 	PS1='\[\e[38;5;63;1m\][\[\e[0;38;5;216m\]\u\[\e[38;5;63;1m\]@\[\e[0;38;5;216m\]$id\[\e[38;5;63;1m\]]–(\[\e[0;97m\]\W\[\e[38;5;63;1m\])\[\e[0;97m\]\$\[\e[97m\] \[\e[0m\]'
-	
-    else
-	# PS1='\[\e[38;5;63;1m\] \[\e[0m\]'
-	PS1='\[\e[38;5;153;1m\] \[\e[0m\]'
-    fi
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-unset color_prompt force_color_prompt
+# unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+xterm*|rxvt*|linux)
+	# [user@hostname](dir)$ 
+    # PS1='[\[\e[92m\]\u\[\e[0m\]@\[\e[92m\]\h\[\e[0m\]](\[\e[96m\]\W\[\e[0m\])\$ '
+	PS1='[\[\e[96m\]\u\[\e[0m\]@\[\e[96m\]\h\[\e[0m\]](\[\e[97m\]\W\[\e[0m\])\[\e[97m\]\$\[\e[0m\] '
     ;;
 *)
     ;;
@@ -77,14 +63,6 @@ esac
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -98,35 +76,46 @@ if ! shopt -oq posix; then
 fi
 
 
-# Exports
+###############################
+####		EXPORTS 		###
+###############################
+
 export PATH=$PATH:$HOME/scripts
-export EDITOR=nvim
 export LIBVIRT_DEFAULT_URI="qemu:///system"
+export PROMPT_COMMAND='history -a; history -n'
+
+if which nvim &>/dev/null; then
+	export EDITOR=nvim
+elif which vim &>/dev/null; then
+	export EDITOR=vim
+elif which vi &>/dev/null; then
+	export EDITOR=vi
+fi
 
 # Source
 # source ~/.config/bash/.env
-
-# remap caps-lock to control
-setxkbmap -option caps:ctrl_modifier
 
 # Eval
 eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
 
-# jump into tmux once
-which tmux &>/dev/null
-if [[ $? -eq 0 && -z $TMUX ]]; then
+# remap caps-lock to control
+setxkbmap -option caps:ctrl_modifier
 
-    tmux list-sessions &>/dev/null
-    session="$?"
-    clients=$(tmux list-clients)
+# source aliases and functions at the end
+bashfiles="$HOME/.config/bash"
+if [[ -d "$bashfiles" ]]; then
 
-    if [[ $session -eq 0 ]]; then
-	if [[ -z $clients ]]; then
-	    tmux attach
+	if [[ -f "$bashfiles"/bash_aliases ]]; then
+		source "$bashfiles"/bash_aliases
+		echo "sources bash_aliases"
 	fi
-    else
-	tmux new-session
-    fi
+	if [[ -f "$bashfiles"/bash_functions.sh ]]; then
+		source "$bashfiles"/bash_functions.sh
+		echo "sources bash_functions.sh"
+	fi
+	if [[ -f "$bashfiles"/bash_tmux.sh ]]; then
+		source "$bashfiles"/bash_tmux.sh tmuxMain
+		echo "sources bash_tmux.sh tmuxMain"
+	fi
 fi
-
