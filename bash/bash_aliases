@@ -1,3 +1,5 @@
+#!/bin/env bash
+
 # Standard aliases
 alias ll="ls -al"
 alias docker="sudo docker"
@@ -11,13 +13,15 @@ alias vawesome="$EDITOR ~/.config/awesome/rc.lua"
 alias nvimrc="$EDITOR ~/.config/nvim/init.lua"
 alias vimrc="$EDITOR ~/.config/vim/vimrc"
 
-alias distro="cat /etc/os-release | grep -i 'pretty' | cut -d= -f2"
-
-# # Speed
+# Speed
 alias st="git status"
 alias gd="git diff HEAD"
-alias wgd="sudo wg-quick down"
-alias wgu="sudo wg-quick up"
+alias wgd="/bin/sudo wg-quick down"
+alias wgu="/bin/sudo wg-quick up"
+
+if [[ -f "$HOME/scripts/quick-wireguard" ]]; then
+	alias wireg="/bin/sudo /home/krem/scripts/quick-wireguard"
+fi
 
 # Basic color support
 if [ -x /usr/bin/dircolors ]; then
@@ -28,17 +32,20 @@ if [ -x /usr/bin/dircolors ]; then
 	alias ls="ls --color=always"
 
 	# eza aliases
-	which eza &>/dev/null
-	if [[ $? -eq 0 ]]; then
+	if which eza &>/dev/null; then
 		alias l="eza --color=always --icons"
 		alias la="eza --color=always --icons --all"
 		alias ll="eza --color=always --icons --all --long"
 	fi
 
 	# replace cat with bat
-	which bat &>/dev/null
-	if [[ $? -eq 0 ]]; then
+	if which bat &>/dev/null; then
 		alias cat="bat -pp --theme OneHalfDark"
 	fi
-
 fi
+
+# wrappers functions
+function noerr() { "$@" 2>/dev/null; }
+function silent() { "$@" &>/dev/null; }
+function sbg() { "$@" &>/dev/null & }
+function wk() { $HOME/scripts/utils/cdz "$HOME/Desktop/2e-annee" ;}

@@ -1,4 +1,8 @@
 #!/bin/bash
 export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-source ~/.config/.env
 
+function sourceFile() {
+	[[ ! -f "$1" ]] && return # $1 must be a valid file
+	source "$1"
+}
+sourceFile "$HOME/.config/.env"
