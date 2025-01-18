@@ -43,8 +43,7 @@ function refreshClient() {
 	}
 
 	# if zoxide is in use, tmux is refreshed as well
-	silent which zoxide
-	if [[ $? -eq 0 ]]; then
+	if silent which zoxide; then
 		z() {
 			__zoxide_z "$@" && tmux refresh-client -S
 		}
@@ -75,31 +74,19 @@ function tmuxStatus() {
 	local sess=" $2"
 	local sess="$s$sess$e"
 
-	# wireguard
-	local wga=$(wg show 2>&1)
-	local res="$?"
-	if [[ -n $wga && $res -ne 127 ]]; then
-		local wg="󰞉 wireguard"
-		local wg="$s$wg$e"
-	fi
-
-	# hostname
-	local host="$s󰇄 $(hostname)$e"
-
-	# hostname
-	local user="$s $(whoami)$e"
-
+	local user="$s $(whoami)$e" # usename
+	local host="$s󰇄 $(hostname)$e" # hostname
+	
 	# output
-	echo "$colo$wg$git$user$host$sess"
-
+	echo "$colo$git$user$host$sess"
 	unset -f tmuxStatus # forget the function
 }
+
 
 function silent() {
 	"$@" &>/dev/null
 }
 
-# runner
 if [[ -n "$@" ]]; then # their must be at least 1 arg
 	if [[ "$1" == "tmuxMain" ]]; then
 		tmuxMain
