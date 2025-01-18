@@ -11,8 +11,6 @@ function tmuxMain() {
 	# check if inside of tmux
 	if [[ -n $TMUX ]]; then
 		# inside of tmux
-		refreshClient
-
 		setTmuxPrompt
 	else
 		# not inside of tmux
@@ -37,61 +35,13 @@ function openSession() {
 	unset -f openSession # forget the function
 }
 
-function refreshClient() {
-	cd() { # each use of 'cd' refreshed the topbar
-		builtin cd "$@" && tmux refresh-client -S
-	}
-
-	# if zoxide is in use, tmux is refreshed as well
-	if silent which zoxide; then
-		z() {
-			__zoxide_z "$@" && tmux refresh-client -S
-		}
-	fi
-	unset -f refreshClient # forget the function
-}
-
 function setTmuxPrompt() {
 	PS1='\[\e[38;5;153;1m\] \[\e[0m\]'
 	unset -f setTmuxPrompt # forget the function
 }
 
-function tmuxStatus() {
-	# format
-	local colo="#[bg=#94b6ff]#[fg=#1c1c2e]"
-	local s=""
-	local e=""
-
-	# git branch
-	git -C "$1" rev-parse --is-inside-work-tree &> /dev/null
-	if [[ $? -eq 0 ]]; then
-		local branch=$(git -C "$1"  rev-parse --abbrev-ref HEAD)
-		local git=" $branch"
-		local git="$s$git$e"
-	fi
-
-	# directory
-	local sess=" $2"
-	local sess="$s$sess$e"
-
-	local user="$s $(whoami)$e" # usename
-	local host="$s󰇄 $(hostname)$e" # hostname
-	
-	# output
-	echo "$colo$git$user$host$sess"
-	unset -f tmuxStatus # forget the function
-}
-
-
 function silent() {
 	"$@" &>/dev/null
 }
 
-if [[ -n "$@" ]]; then # their must be at least 1 arg
-	if [[ "$1" == "tmuxMain" ]]; then
-		tmuxMain
-	fi
-	if [[ "$1" == "tmuxStatus" && $# -eq 3 ]]; then
-		"$@"
-	fi
-fi
+tmuxMain
