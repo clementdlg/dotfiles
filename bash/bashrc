@@ -87,10 +87,11 @@ elif which vi &>/dev/null; then
 fi
 
 function addToPath() {
-	[[ ! -d "$1" ]] && return	# dir must exist
-	[[ $PATH == *"$1"* ]] && return	# dir must not already be in path
+	[[ ! -d "$1" ]] && return 1	# dir must exist
+	[[ $PATH == *"$1"* ]] && return 1	# dir must not already be in path
 
 	export PATH=$PATH:$1
+	return 0
 }
 addToPath "$HOME/scripts"
 addToPath "$HOME/scripts/utils"
@@ -110,6 +111,14 @@ function sourceFile() {
 sourceFile "$HOME/.config/bash/bash_tmux.sh"
 sourceFile "$HOME/.config/bash/bash_aliases"
 
+if which fzf &>/dev/null; then
+	# trying to source the lightweight file
+	sourceFile "$HOME/.config/bash/fzf_history.sh"
+	if [[ $? -ne 0 ]]; then # else, running the whole script
+		eval "$(fzf --bash)"
+	fi
+fi
+
 unset -f sourceFile
 
 ### EVAL ###
@@ -117,11 +126,8 @@ if which zoxide &>/dev/null; then
 	eval "$(zoxide init bash)"
 fi
 
-if which fzf &>/dev/null; then
-	eval "$(fzf --bash)"
-fi
-
 # remap capslock to ctrl
 if [[ $XDG_SESSION_TYPE == "x11" ]]; then
 	setxkbmap -option caps:ctrl_modifier
 fi
+# bind -x '"\C-r": "tac ~/.bash_history | fzf --reverse --height 40%"'
