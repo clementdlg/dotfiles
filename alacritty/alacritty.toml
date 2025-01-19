@@ -1,5 +1,6 @@
 [window]
-opacity = 0.97
+opacity = 0.93
+padding = { x = 5, y = 0 }
 
 [colors.primary]
 background = "0x222436"
@@ -29,9 +30,6 @@ style = "Italic"
 [font.normal]
 family = "DejaVuSansM Nerd Font Propo"
 style = "Regular"
-
-#[[font.fallback]]
-#family = "Noto Color Emoji"
 
 [env]
 TERM = "xterm-256color"
