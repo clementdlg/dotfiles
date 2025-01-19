@@ -11,7 +11,7 @@ set hidden				            " Switch between buffers
 set mouse=a				            " Mouse support
 set backspace=indent,eol,start 		" Make backspace more powerful
 set noshowmode                      " Do not show mode
-set path+=**
+" set path+=**
 
 " display
 set number				            " Line numbers
