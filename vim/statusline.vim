@@ -2,24 +2,27 @@
 "-----------
 " static status colors
 set laststatus=2                                " Always display the status line
-highlight Git    guifg=#a6aed3   guibg=#292d45
-highlight Path   guifg=#c0caf5   guibg=#3f4766
-highlight File   guifg=#a6aed3   guibg=#292d45
+highlight Path   guifg=#c0caf5   guibg=#3f4766 ctermbg=59 ctermfg=15
+highlight Git    guifg=#a6aed3   guibg=#292d45 ctermbg=238 ctermfg=15
+highlight File   guifg=#a7aed3   guibg=#292d45 ctermbg=238 ctermfg=15
 
 " define the color for the current mode
 function! ColorModes()
     let currentMode = mode()
     let hlMode   = "highlight Mode    gui=bold cterm=bold guifg=black guibg="
     let hlCursor = "highlight Cursor1 gui=bold cterm=bold guifg=black guibg="
+    let cterm    = " ctermfg=16 ctermbg="
+
     " possible modes
     let modes = ['n', 'i', 'R', 'V', 'v', "\<C-v>", 'c', 't']
     " colors to apply
     let colors = ['#7aa2f7', '#9ece6a', '#f7768e', '#bb9af7', '#bb9af7',  '#bb9af7', '#e0ac60', '#1abc9c']
+    let termcolors = ['111', '155', '167', '141', '141',  '141', '214', '72']
     
     for i in range(0, 7)
         if currentMode ==# modes[i]
-            execute hlMode . colors[i]
-            execute hlCursor . colors[i]
+            execute hlMode . colors[i] . cterm . termcolors[i]
+            execute hlCursor . colors[i] . cterm . termcolors[i]
             return i
         endif
     endfor
