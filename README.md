@@ -1,21 +1,15 @@
-# KREM's dotfiles
-## Vim automated setup
-- This configuration is :
-    - without external plugins
-    - without external dependencies
-    - only 200 lignes of simple code
-- This allow to setup a minimal yet powerful environement for project wide editing and navigation
-- You are provided with 2 automated methods to have Vim setup for you
+# Server Config Files
+## Description
+- this branch hosts the dotfiles for server administration tools
 
-### 1- Total independance
-- This setup only creates a .vimrc and you are good to go
-```
-wget -O ~/.vimrc https://raw.githubusercontent.com/0xKrem/dotfiles/master/vimrc_merged
-```
+## Scope
+- the tools should be CLI/TUI only
+- the tools should make sense on a production server (e.g. : no neofetch)
+- these configs should not override defaults, only extend them where it make sense
+- external plugins are not used for security reasons
+- these configs are geared towards ssh + terminal-emulator but should still be usable in the console
 
-### 2- Independance + Bonus
-- This setup create a `.vim/`, come with an external theme and an 'undo.d' directory to enable the support of persistant undo
-```
-wget -q -O- https://raw.githubusercontent.com/0xKrem/scripts/master/vim_install.sh | sudo bash
-```
-
+## Tools
+- bash
+- vim
+- tmux
