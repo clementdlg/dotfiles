@@ -305,10 +305,13 @@ awful.rules.rules = {
 			class = {
 				"Galculator",
 				"Wrapper-2.0",
-				"Virt-manager",
+				-- "Virt-manager",
 			},
 			name = {
-				"Authentication required",
+				"Authentication required", -- polkit
+				"Locate ISO media volume", -- virt-manager
+				"New VM", -- virt-manager
+				"Add a New Storage Pool", -- virt-manager
 			},
 		},
 		properties = {
