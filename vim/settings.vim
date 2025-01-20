@@ -20,7 +20,7 @@ set signcolumn=no                  " Add a column before line number
 
 " graphics
 syntax on                           " Syntax highlighting
-set background=dark                 " Black background
+" set background=dark                 " Black background
 set lazyredraw				        " Do not redraw screen everytime
 
 " file specific
@@ -34,10 +34,8 @@ set fileencoding=utf-8              " Local encoding
 set formatoptions+=ro               " Add comment header auto
 
 " indent settings
-set expandtab               		" Convert tabs to spaces
 set tabstop=4               		" Number of spaces tabs count for
 set shiftwidth=4            		" Number of spaces to use for autoindent
-set softtabstop=4           		" Number of spaces for tab key
 set autoindent              		" Copy indent from current line when starting a new line
 set smartindent             		" Smart autoindenting for C-like programs
 
@@ -51,10 +49,7 @@ let g:netrw_liststyle = 3           " File view
 " let g:netrw_browse_split = 4        " Open file in previous window
 let g:netrw_winsize = 30            " Width of netrw
 
-" colors for the current line
-highlight CursorLineNr guifg=#ff9e64 cterm=bold ctermfg=15" color of the current line number
-
 " colors for split
 set fillchars=vert:┃
-highlight VertSplit gui=bold guifg=#3f4766 cterm=bold ctermfg=cyan
-
+hi VertSplit gui=bold guifg=#3f4766 cterm=bold ctermfg=cyan
+hi CursorLineNr cterm=bold			" Line number in bold

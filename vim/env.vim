@@ -23,8 +23,8 @@ function! TruecolorMode()
     set mouse=a         " enable mouse support
     set relativenumber  " relative line numbers
 
-    if ThemeExists("sorbet-custom")
-        colorscheme sorbet-custom
+    if ThemeExists("sorbet-night")
+        colorscheme sorbet-night
     elseif ThemeExists("sorbet")
         colorscheme sorbet
     else
@@ -38,14 +38,19 @@ function! TerminalMode()
     set mouse=a         " enable mouse support
     set relativenumber  " relative line numbers
 
-    colorscheme slate
+    if ThemeExists("sorbet-night")
+        colorscheme sorbet-night
+    else
+        colorscheme slate
+    endif
+
 endfunction
 
 function! ConsoleMode()
     set notermguicolors " disable 24bit color support
     set mouse=          " disable mouse support
     set norelativenumber " no relative line numbers
-    colorscheme default 
+    colorscheme elflord
 endfunction
 
 function! ThemeExists(theme)

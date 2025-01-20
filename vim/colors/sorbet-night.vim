@@ -1,4 +1,4 @@
-" Name:         sorbet-custom
+" Name:         sorbet-night
 " Description:  A shallow grave, a monument to the ruined age.
 " Author:       Maxence Weynans <neutaaaaan@gmail.com>
 " Maintainer:   Maxence Weynans <neutaaaaan@gmail.com>
@@ -11,7 +11,7 @@
 set background=dark
 
 hi clear
-let g:colors_name = 'sorbet-custom'
+let g:colors_name = 'sorbet-night'
 
 let s:t_Co = exists('&t_Co') && !has('gui_running') ? (&t_Co ?? 0) : -1
 
@@ -56,27 +56,27 @@ hi Conceal guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
 hi CurSearch guifg=#ff5fff guibg=#000000 gui=reverse cterm=reverse
 hi Cursor guifg=NONE guibg=NONE gui=reverse ctermfg=NONE ctermbg=NONE cterm=reverse
 hi CursorColumn guifg=NONE guibg=#363841 gui=NONE cterm=NONE
-hi CursorLine guifg=NONE guibg=#363841 gui=NONE cterm=NONE
-hi CursorLineNr guifg=#ff9e64 cterm=bold ctermfg=15
+hi CursorLine guifg=NONE guibg=#282E43 gui=bold cterm=bold
+hi CursorLineNr guifg=#ff9e64 gui=bold cterm=bold
 hi DiffAdd guifg=#00af5f guibg=#000000 gui=reverse cterm=reverse
 hi DiffChange guifg=#87afff guibg=#000000 gui=reverse cterm=reverse
 hi DiffDelete guifg=#d7005f guibg=#000000 gui=reverse cterm=reverse
 hi DiffText guifg=#ff87ff guibg=#000000 gui=reverse cterm=reverse
-hi Directory guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
-hi EndOfBuffer guifg=#5f5f87 guibg=NONE gui=NONE cterm=NONE
+hi Directory guifg=#7BA2F6 guibg=NONE gui=NONE cterm=NONE
+hi EndOfBuffer guifg=#565F89 guibg=NONE gui=NONE cterm=NONE
 hi FoldColumn guifg=#8787af guibg=NONE gui=NONE cterm=NONE
-hi Folded guifg=#5f5f87 guibg=#161821 gui=NONE cterm=NONE
-hi IncSearch guifg=#ffaf00 guibg=#000000 gui=reverse cterm=reverse
-hi LineNr guifg=#5f5f87 guibg=NONE gui=NONE cterm=NONE
+hi Folded guifg=#565F89 guibg=#161821 gui=NONE cterm=NONE
+hi IncSearch guifg=#3C59A0 guibg=#C1CAF4 gui=reverse cterm=reverse
+hi LineNr guifg=#565F89 guibg=NONE gui=NONE cterm=NONE
 hi MatchParen guifg=#ff00af guibg=NONE gui=bold cterm=bold
 hi ModeMsg guifg=#C1CAF4 guibg=NONE gui=bold cterm=bold
 hi MoreMsg guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
 hi NonText guifg=#707070 guibg=NONE gui=NONE cterm=NONE
-hi Pmenu guifg=#000000 guibg=#a6a8b1 gui=NONE cterm=NONE
-hi PmenuExtra guifg=#000000 guibg=#a6a8b1 gui=NONE cterm=NONE
-hi PmenuKind guifg=#000000 guibg=#a6a8b1 gui=bold cterm=bold
-hi PmenuSbar guifg=#707070 guibg=#5f5f87 gui=NONE cterm=NONE
-hi PmenuSel guifg=#000000 guibg=#d7d7ff gui=NONE cterm=NONE
+hi Pmenu guifg=#C1CAF4 guibg=#17161F gui=NONE cterm=NONE
+hi PmenuExtra guifg=#000000 guibg=#17161F gui=NONE cterm=NONE
+hi PmenuKind guifg=#000000 guibg=#17161F gui=bold cterm=bold
+hi PmenuSbar guifg=#707070 guibg=#565F89 gui=NONE cterm=NONE
+hi PmenuSel guifg=#C1CAF4 guibg=#343A55 gui=NONE cterm=NONE
 hi PmenuExtraSel guifg=#000000 guibg=#d7d7ff gui=NONE cterm=NONE
 hi PmenuKindSel guifg=#000000 guibg=#d7d7ff gui=bold cterm=bold
 hi PmenuThumb guifg=#C1CAF4 guibg=#d7d7ff gui=NONE cterm=NONE
@@ -84,23 +84,23 @@ hi Question guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
 hi QuickFixLine guifg=#ff5fff guibg=#000000 gui=reverse cterm=reverse
 hi Search guifg=#00afff guibg=#000000 gui=reverse cterm=reverse
 hi SignColumn guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
-hi SpecialKey guifg=#5f5f87 guibg=NONE gui=bold cterm=bold
+hi SpecialKey guifg=#565F89 guibg=NONE gui=bold cterm=bold
 hi SpellBad guifg=#FE9F64 guibg=NONE guisp=#FE9F64 gui=undercurl cterm=underline
 hi SpellCap guifg=#9D7CD8 guibg=NONE guisp=#9D7CD8 gui=undercurl cterm=underline
 hi SpellLocal guifg=#af87d7 guibg=NONE guisp=#af87d7 gui=undercurl cterm=underline
 hi SpellRare guifg=#2AC3DE guibg=NONE guisp=#2AC3DE gui=undercurl cterm=underline
-hi StatusLine guifg=#000000 guibg=#d7d7ff gui=bold cterm=bold
+hi StatusLine guifg=#C1CAF4 guibg=#1c1c2e gui=NONE cterm=NONE
 hi StatusLineNC guifg=#8787af guibg=#000000 gui=reverse cterm=reverse
 hi TabLine guifg=#8787af guibg=#000000 gui=reverse cterm=reverse
 hi TabLineFill guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
 hi TabLineSel guifg=#000000 guibg=#d7d7ff gui=bold cterm=bold
 hi Title guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
-hi VertSplit guifg=#5f5f87 guibg=NONE gui=NONE cterm=NONE
-hi Visual guifg=#ffaf00 guibg=#000000 gui=reverse cterm=reverse
+hi VertSplit guifg=#565F89 guibg=NONE gui=NONE cterm=NONE
+hi Visual guifg=#283457 guibg=#C1CAF4 gui=reverse cterm=reverse
 hi VisualNOS guifg=NONE guibg=#363841 gui=NONE cterm=NONE
 hi WarningMsg guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
-hi WildMenu guifg=#d7d7ff guibg=#161821 gui=bold cterm=bold
-hi Comment guifg=#5F5F87 guibg=NONE gui=NONE cterm=NONE
+hi WildMenu guifg=#17161F guibg=#C1CAF4 gui=bold cterm=bold
+hi Comment guifg=#565F89 guibg=NONE gui=NONE cterm=NONE
 hi Constant guifg=#FE9F64 guibg=NONE gui=NONE cterm=NONE
 hi Error guifg=#ff5f5f guibg=#000000 gui=bold,reverse cterm=bold,reverse
 hi Identifier guifg=#72DACB guibg=NONE gui=NONE cterm=NONE
@@ -406,7 +406,7 @@ endif
 " Color: guibg         #161821           233               black
 " Color: statusline    #d7d7ff           189               white
 " Color: statuslineNC  #8787af           103               grey
-" Color: darkuipurple  #5f5f87           60                grey
+" Color: darkuipurple  #565F89           60                grey
 " Color: dark0         #000000           16                black
 " Color: dark1         #FE9F64           167               darkred
 " Color: dark2         #72DACB           113               darkgreen
@@ -432,12 +432,12 @@ endif
 " Color: uiteal        #5fd7af           79                green
 " Color: uiblue        #00afff           39                blue
 " Color: uipurple      #af00ff           129               darkmagenta
-" Color: uiamber       #ffaf00           214               darkyellow
+" Color: uiamber       #283457           214               darkyellow
 " Color: uiblack       #363841           237               darkgrey
 " Color: yasogrey      #262831           235               black
 " Color: linenrblack   #585858           240               darkgrey
 " Color: uicursearch   #ff5fff           207               magenta
-" Color: invisigrey    #a6a8b1           248               darkgrey
+" Color: invisigrey    #17161F           248               darkgrey
 " Color: errorred      #ff5f5f           203               red
 " Term colors: dark0 dark1 dark2 dark3 dark4 dark5 dark6 dark7
 " Term colors: dark8 dark9 dark10 dark11 dark12 dark13 dark14 dark15

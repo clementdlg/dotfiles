@@ -9,12 +9,10 @@ source ~/.config/vim/mappings.vim
 
 
 
-
 "AUTOCOMMADS
 "-----------
 " toggle cursorline when entering/leaving insert mode
 autocmd InsertEnter,InsertLeave * set cursorline!
-
 
 " add the buffers from :ls to the quickfix list
 " function! BufferList()
