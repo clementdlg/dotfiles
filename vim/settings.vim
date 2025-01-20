@@ -1,20 +1,17 @@
 " OPTIONS
 "--------
 "basics
-set nocompatible			        " Vi compatibility
 set ignorecase                      " Ignore case search
 set incsearch                       " Incremental search
 set cursorline				        " Highlight current line
 set scrolloff=10			        " Keep cursor centered
 set clipboard=                      " Do not use system clipboard
 set hidden				            " Switch between buffers
-set mouse=nv				            " Mouse support
 set backspace=indent,eol,start 		" Make backspace more powerful
 set noshowmode                      " Do not show mode
 
 " display
 set number				            " Line numbers
-set relativenumber			        " Relative line number
 set wildmenu				        " List completion for commands
 set showcmd				            " Display command keystrokes
 set wrap                            " Wrap lines that are too long
@@ -23,19 +20,8 @@ set signcolumn=no                  " Add a column before line number
 
 " graphics
 syntax on                           " Syntax highlighting
-set notermguicolors			        " no 24bit color support
 set background=dark                 " Black background
 set lazyredraw				        " Do not redraw screen everytime
-                                    " Setting up theme with fallback
-try                                 " Try to apply foreign theme
-    colorscheme sorbet
-catch
-   colorscheme koehler               " Fallback on builtin theme
-endtry
-
-highlight CursorLineNr guifg=#ff9e64 cterm=bold ctermfg=15" color of the current line number
-set fillchars=vert:┃
-highlight VertSplit gui=bold guifg=#3f4766 cterm=bold ctermfg=cyan
 
 " file specific
 set autoread				        " Read file changes (outside of vim)
@@ -58,8 +44,17 @@ set smartindent             		" Smart autoindenting for C-like programs
 " persistant undo
 set undofile                        " Enable persistent undo
 set undodir=~/.vim/undo.d           " Set undo directory
+
 " netrw
 let g:netrw_banner = 0              " Remove banner
 let g:netrw_liststyle = 3           " File view
-let g:netrw_browse_split = 4        " Open file in previous window
+" let g:netrw_browse_split = 4        " Open file in previous window
 let g:netrw_winsize = 30            " Width of netrw
+
+" colors for the current line
+highlight CursorLineNr guifg=#ff9e64 cterm=bold ctermfg=15" color of the current line number
+
+" colors for split
+set fillchars=vert:┃
+highlight VertSplit gui=bold guifg=#3f4766 cterm=bold ctermfg=cyan
+
