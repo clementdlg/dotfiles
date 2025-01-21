@@ -16,7 +16,7 @@ set wildmenu				        " List completion for commands
 set showcmd				            " Display command keystrokes
 set wrap                            " Wrap lines that are too long
 set linebreak                       " Wrap lines without cutting words
-set signcolumn=no                  " Add a column before line number
+set signcolumn=yes                  " Add a column before line number
 
 " graphics
 syntax on                           " Syntax highlighting
