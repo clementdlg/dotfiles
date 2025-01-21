@@ -68,7 +68,7 @@ hi FoldColumn guifg=#8787af guibg=NONE gui=NONE cterm=NONE
 hi Folded guifg=#565F89 guibg=#161821 gui=NONE cterm=NONE
 hi IncSearch guifg=#3C59A0 guibg=#C1CAF4 gui=reverse cterm=reverse
 hi LineNr guifg=#565F89 guibg=NONE gui=NONE cterm=NONE
-hi MatchParen guifg=#ff00af guibg=NONE gui=bold cterm=bold
+hi MatchParen guifg=#222436 guibg=#ff9e64 gui=reverse cterm=NONE "()
 hi ModeMsg guifg=#C1CAF4 guibg=NONE gui=bold cterm=bold
 hi MoreMsg guifg=#C1CAF4 guibg=NONE gui=NONE cterm=NONE
 hi NonText guifg=#707070 guibg=NONE gui=NONE cterm=NONE
@@ -137,7 +137,7 @@ if s:t_Co >= 256
   hi Folded ctermfg=60 ctermbg=233 cterm=NONE
   hi IncSearch ctermfg=209 ctermbg=16 cterm=reverse
   hi LineNr ctermfg=60 ctermbg=NONE cterm=NONE
-  hi MatchParen ctermfg=111 ctermbg=NONE cterm=reverse "()
+  hi MatchParen ctermfg=235 ctermbg=209 cterm=reverse "()
   hi ModeMsg ctermfg=253 ctermbg=NONE cterm=bold
   hi MoreMsg ctermfg=253 ctermbg=NONE cterm=NONE
   hi NonText ctermfg=242 ctermbg=NONE cterm=NONE
@@ -176,10 +176,10 @@ if s:t_Co >= 256
   hi Ignore ctermfg=253 ctermbg=NONE cterm=NONE
   hi PreProc ctermfg=209 ctermbg=NONE cterm=NONE
   hi Special ctermfg=75 ctermbg=NONE cterm=NONE
-  hi Statement ctermfg=98 ctermbg=NONE cterm=NONE
+  hi Statement ctermfg=141 ctermbg=NONE cterm=NONE
   hi String ctermfg=113 ctermbg=NONE cterm=NONE
   hi Todo ctermfg=79 ctermbg=NONE cterm=bold,reverse
-  hi Type ctermfg=98 ctermbg=NONE cterm=NONE
+  hi Type ctermfg=141 ctermbg=NONE cterm=NONE
   hi Underlined ctermfg=253 ctermbg=NONE cterm=underline
   hi CursorIM ctermfg=16 ctermbg=154 cterm=NONE
   hi ToolbarLine ctermfg=NONE ctermbg=16 cterm=NONE
