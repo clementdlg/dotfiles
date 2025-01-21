@@ -19,3 +19,6 @@ nnoremap <C-d>                  <C-d>zz
 
 " scripting
 nnoremap <leader>x              :!chmod +x %
+
+" toggle cursorline when entering/leaving insert mode
+autocmd InsertEnter,InsertLeave * set cursorline!
