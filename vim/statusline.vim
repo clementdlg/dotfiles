@@ -2,9 +2,9 @@
 "-----------
 " static status colors
 set laststatus=2                                " Always display the status line
-highlight Path   guifg=#c0caf5   guibg=#39415D ctermbg=59 ctermfg=15
-highlight Git    guifg=#a6aed3   guibg=#292d45 ctermbg=238 ctermfg=15
-highlight File   guifg=#a7aed3   guibg=#292d45 ctermbg=238 ctermfg=15
+highlight Path   guifg=#c0caf5   guibg=#39415D ctermbg=60 ctermfg=15
+highlight Git    guifg=#a6aed3   guibg=#292d45 ctermbg=242 ctermfg=15
+highlight File   guifg=#a7aed3   guibg=#292d45 ctermbg=242 ctermfg=15
 
 " define the color for the current mode
 function! ColorModes()

@@ -53,4 +53,3 @@ let g:netrw_winsize = 30            " Width of netrw
 set fillchars=vert:┃
 hi VertSplit gui=bold guifg=#3f4766 cterm=bold ctermfg=cyan
 hi CursorLineNr cterm=bold			" Line number in bold
-hi Normal guibg=NONE
