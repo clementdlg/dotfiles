@@ -55,7 +55,7 @@ unset color_prompt force_color_prompt
 case "$TERM" in
 xterm|rxvt*|linux)
 	# [user@hostname](dir)$ 
-	PS1='[\[\e[96m\]\u\[\e[0m\]@\[\e[96m\]\h\[\e[0m\]](\[\e[97m\]\W\[\e[0m\])\[\e[97m\]\$\[\e[0m\] '
+	PS1='\[\e[0m\][\[\e[38;5;43;1m\]\u\[\e[0m\]@\[\e[38;5;43;1m\]\h\[\e[0m\]](\[\e[97m\]\W\[\e[0m\])\[\e[97m\]\$ '
     ;;
 *)
     ;;
@@ -130,4 +130,3 @@ fi
 if [[ $XDG_SESSION_TYPE == "x11" ]]; then
 	setxkbmap -option caps:ctrl_modifier
 fi
-# bind -x '"\C-r": "tac ~/.bash_history | fzf --reverse --height 40%"'

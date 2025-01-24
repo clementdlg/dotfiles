@@ -19,8 +19,8 @@ alias gd="git diff HEAD"
 alias wgd="/bin/sudo wg-quick down"
 alias wgu="/bin/sudo wg-quick up"
 
-if [[ -f "$HOME/scripts/quick-wireguard" ]]; then
-	alias wireg="/bin/sudo /home/krem/scripts/quick-wireguard"
+if [[ -f "$HOME/scripts/utils/quick-wg" ]]; then
+	alias wireg="/bin/sudo /home/krem/scripts/utils/quick-wg"
 fi
 
 # Basic color support
@@ -48,4 +48,4 @@ fi
 function noerr() { "$@" 2>/dev/null; }
 function silent() { "$@" &>/dev/null; }
 function sbg() { "$@" &>/dev/null & }
-function wk() { $HOME/scripts/utils/cdz "$HOME/Desktop/2e-annee" ;}
+function wk() { source $HOME/scripts/utils/cdz "$HOME/Desktop/2e-annee" ;}
