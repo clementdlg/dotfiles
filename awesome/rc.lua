@@ -279,7 +279,7 @@ awful.rules.rules = {
 	-- Window Rules
 	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
 
-	{ rule = { name = "Virtual machines - .*" }, properties = { screen = 1, tag = tag_icons[4] } },
+	{ rule = { class = "Virt-manager" }, properties = { screen = 1, tag = tag_icons[4] } },
 
 	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[5] } },
 	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[5] } },
@@ -293,19 +293,10 @@ awful.rules.rules = {
 	{ rule = { class = "Bitwarden" }, properties = { screen = 1, tag = tag_icons[8] } },
 
 	{
-		rule = { class = "Virt-viewer", name = "Choose a virtual machine" },
-		properties = {
-			floating = true,
-			placement = awful.placement.centered,
-			ontop = true,
-		},
-	},
-	{
 		rule_any = {
 			class = {
 				"Galculator",
 				"Wrapper-2.0",
-				-- "Virt-manager",
 			},
 			name = {
 				"Authentication required", -- polkit
