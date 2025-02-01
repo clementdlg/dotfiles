@@ -95,6 +95,7 @@ function addToPath() {
 }
 addToPath "$HOME/scripts"
 addToPath "$HOME/scripts/utils"
+addToPath "$HOME/.local/bin"
 
 unset -f addToPath
 

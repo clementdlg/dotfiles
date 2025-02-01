@@ -18,6 +18,10 @@ alias st="git status"
 alias gd="git diff HEAD"
 alias wgd="/bin/sudo wg-quick down"
 alias wgu="/bin/sudo wg-quick up"
+alias dockerrm="docker ps -a | awk '{ print \$1 }' | tail -n+2 | xargs -I {} sudo docker rm -f {}"
+
+# other
+alias kernel="echo \$(curl -s https://kernel.org/ | grep -A1 '<td>mainline:</td>' | tail -1 | sed 's/[a-z<>\/ ]//g')"
 
 if [[ -f "$HOME/scripts/utils/quick-wg" ]]; then
 	alias wireg="/bin/sudo /home/krem/scripts/utils/quick-wg"
