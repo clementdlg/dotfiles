@@ -78,18 +78,19 @@ settings = "xfce4-settings-manager"
 tag_icons = {}
 tag_icons[1] = "󰖟"
 tag_icons[2] = ""
-tag_icons[3] = "󱞁"
+tag_icons[3] = "󱓷"
 tag_icons[4] = "󰍹"
-tag_icons[5] = "󱓷"
-tag_icons[6] = "󰝰"
-tag_icons[7] = "󰭻"
-tag_icons[8] = "󰝚"
+-- tag_icons[5] = "󱓷"
+tag_icons[5] = "󰝰"
+tag_icons[6] = "󰭻"
+tag_icons[7] = "󰝚"
 
 -- Modkey
 modkey = "Mod1"
+gap_size = 7
 
 -- Windows gaps
-beautiful.useless_gap = 7
+beautiful.useless_gap = gap_size
 
 --[[---------------
 |			      |
@@ -110,22 +111,35 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", funcs.set_wallpaper)
 
+-- awful.screen.connect_for_each_screen(function(s)
+-- 	-- Wallpaper
+-- 	funcs.set_wallpaper(s)
+--
+-- 	-- Each screen has its own tag table.
+-- 	awful.tag(tag_icons, s, awful.layout.layouts[1])
+-- end)
+
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	funcs.set_wallpaper(s)
 
-	-- Each screen has its own tag table.
-	awful.tag(tag_icons, s, awful.layout.layouts[1])
+	if s.index == 1 then
+		-- First screen: Assign the full tag table
+		awful.tag(tag_icons, s, awful.layout.layouts[1])
+	else
+		-- Other screens: Assign only one tag
+		awful.tag({ "󰐮" }, s, awful.layout.suit.floating)
+	end
 end)
 
 -- {{{ Key bindings
 globalkeys = require("main.globalkeys")
 
 clientkeys = gears.table.join(
-	awful.key({ modkey }, "f", function(c)
-		c.fullscreen = not c.fullscreen
-		c:raise()
-	end, { description = "toggle fullscreen", group = "client" }),
+	-- awful.key({ modkey }, "f", function(c)
+	-- 	c.fullscreen = not c.fullscreen
+	-- 	c:raise()
+	-- end, { description = "toggle fullscreen", group = "client" }),
 	awful.key({ modkey, "Shift" }, "q", function(c)
 		c:kill()
 	end, { description = "close", group = "client" }),
@@ -135,13 +149,15 @@ clientkeys = gears.table.join(
 		awful.client.floating.toggle,
 		{ description = "toggle floating", group = "client" }
 	),
-	awful.key({ modkey, "Control" }, "Return", function(c)
-		c:swap(awful.client.getmaster())
-	end, { description = "move to master", group = "client" }),
+	-- awful.key({ modkey, "Control" }, "Return", function(c)
+	-- 	c:swap(awful.client.getmaster()
+	-- end, { description = "move to master", group = "client" }),
 
-	--awful.key({ modkey }, "o", function(c)
-	--c:move_to_screen()
-	--end, { description = "move to screen", group = "client" }),
+	awful.key({ modkey, "Shift" }, "o", function()
+		if client.focus then
+			client.focus:move_to_screen()
+		end
+	end, { description = "move focused client to the next screen", group = "client" }),
 
 	--awful.key({ modkey }, "t", function(c)
 	--c.ontop = not c.ontop
@@ -149,16 +165,16 @@ clientkeys = gears.table.join(
 
 	awful.key({ modkey }, "n", function(c)
 		c.minimized = true
-	end, { description = "minimize", group = "client" })
+	end, { description = "minimize", group = "client" }),
 
-	-- awful.key({ modkey }, "m", function(c)
-	-- 	c.maximized = not c.maximized
-	-- 	c:raise()
-	-- end, { description = "(un)maximize", group = "client" })
+	awful.key({ modkey }, "m", function(c)
+		c.maximized = not c.maximized
+		c:raise()
+	end, { description = "(un)maximize", group = "client" })
 )
 
-local max_workspace = 9
-local tag_keys = { "&", "é", '"', "'", "(", "-", "è", "_" }
+local max_workspace = 7
+local tag_keys = { "&", "é", '"', "'", "(", "-", "è", "_", "ç", "à" }
 for i = 1, max_workspace do
 	globalkeys = gears.table.join(
 		globalkeys,
@@ -279,18 +295,19 @@ awful.rules.rules = {
 	-- Window Rules
 	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
 
+	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[3] } },
+	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[3] } },
+
 	{ rule = { class = "Virt-manager" }, properties = { screen = 1, tag = tag_icons[4] } },
 
-	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[5] } },
-	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[5] } },
+	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = tag_icons[5] } },
 
-	{ rule = { class = "Thunar" }, properties = { screen = 1, tag = tag_icons[6] } },
+	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag_icons[6] } },
+	{ rule = { class = "Signal" }, properties = { screen = 1, tag = tag_icons[6] } },
 
-	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag_icons[7] } },
-	{ rule = { class = "Signal" }, properties = { screen = 1, tag = tag_icons[7] } },
-
-	{ rule = { class = "easyeffects" }, properties = { screen = 1, tag = tag_icons[8] } },
-	{ rule = { class = "Bitwarden" }, properties = { screen = 1, tag = tag_icons[8] } },
+	{ rule = { class = "easyeffects" }, properties = { screen = 1, tag = tag_icons[7] } },
+	{ rule = { class = "Bitwarden" }, properties = { screen = 1, tag = tag_icons[7] } },
+	{ rule = { class = "org.mozilla.firefox" }, properties = { screen = 1, tag = tag_icons[7] } },
 
 	{
 		rule_any = {
@@ -411,3 +428,30 @@ beautiful.notification_font = "Sans 16"
 
 -- Optional: Add border if you want to define one
 beautiful.notification_border_color = "#FFFFFF" -- White border
+
+-- solve window border bug
+client.connect_signal("property::size", function(c)
+	if not c.maximized and not client.fullscreen and client.class ~= "Xfce4-panel" then
+		c.border_width = beautiful.border_width
+	end
+end)
+
+-- minimize all other windows when maximizing a window
+client.connect_signal("property::size", function(c)
+	local function toggle_minimize(action)
+		for _, other_client in ipairs(c.screen.selected_tag:clients()) do
+			if other_client ~= c and other_client.class ~= "Xfce4-panel" then
+				other_client.minimized = action
+				other_client.maximized = false
+			end
+		end
+	end
+
+	if c.maximized then
+		-- Minimize all other clients
+		toggle_minimize(true)
+	else
+		-- Restore all other clients
+		toggle_minimize(false)
+	end
+end)
