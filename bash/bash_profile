@@ -5,4 +5,45 @@ function sourceFile() {
 	[[ ! -f "$1" ]] && return # $1 must be a valid file
 	source "$1"
 }
+
 sourceFile "$HOME/.config/.env"
+
+function ajustTermFont() {
+	# dependencies
+	if ! which xrandr &>/dev/null; then
+		log "ajustTermfont error : unmet dependency 'xrandr'"
+		log "----"
+		return
+	fi
+
+	termfontPath="$HOME/scripts/utils/termfont"
+
+	if [[ ! -f $termfontPath  ]]; then
+		log "ajustTermfont error : unmet dependency 'termfont'"
+		log "----"
+		return
+	fi
+
+	# debug
+	monitors=$(xrandr --listmonitors)
+	log "$monitors"
+	log "----"
+
+	local res=$(xrandr --listmonitors | tail -n +2 | awk '{ print $3 }' | cut -f1 -d/)
+
+	if [[ "$res" -eq 1920 ]]; then
+		log "ajustTermfont : termfont is set to 18"
+		log "----"
+		$termfontPath 18
+	else
+		log "ajustTermfont : termfont is set to 21"
+		log "----"
+		$termfontPath 21
+	fi
+}
+
+log() {
+	echo "$1" >> /tmp/bash.log
+}
+
+ajustTermFont
