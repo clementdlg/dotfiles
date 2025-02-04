@@ -38,7 +38,7 @@ function ajustTermFont() {
 	else
 		log "ajustTermfont : termfont is set to 21"
 		log "----"
-		$termfontPath 21
+		$termfontPath 20
 	fi
 }
 
