@@ -168,8 +168,10 @@ clientkeys = gears.table.join(
 	end, { description = "minimize", group = "client" }),
 
 	awful.key({ modkey }, "m", function(c)
-		c.maximized = not c.maximized
-		c:raise()
+		if c.class ~= "Xfce4-panel" then
+			c.maximized = not c.maximized
+			c:raise()
+		end
 	end, { description = "(un)maximize", group = "client" })
 )
 
@@ -295,7 +297,7 @@ awful.rules.rules = {
 	-- Window Rules
 	{ rule = { class = "obsidian" }, properties = { screen = 1, tag = tag_icons[3] } },
 
-	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[3] } },
+	{ rule = { class = "Atril" }, properties = { screen = 1, tag = tag_icons[4] } },
 	{ rule = { class = "com.github.johnfactotum.Foliate" }, properties = { screen = 1, tag = tag_icons[3] } },
 
 	{ rule = { class = "Virt-manager" }, properties = { screen = 1, tag = tag_icons[4] } },
@@ -342,7 +344,7 @@ awful.rules.rules = {
 	},
 
 	-- xfce panel no borders
-	{ rule = { class = "Xfce4-panel" }, properties = { border_width = 0 } },
+	{ rule = { class = "Xfce4-panel" }, properties = { border_width = 0, focusable = false, below = true } },
 }
 -- }}}
 
@@ -431,7 +433,7 @@ beautiful.notification_border_color = "#FFFFFF" -- White border
 
 -- solve window border bug
 client.connect_signal("property::size", function(c)
-	if not c.maximized and not client.fullscreen and client.class ~= "Xfce4-panel" then
+	if not c.maximized and not c.fullscreen and client.class ~= "Xfce4-panel" then
 		c.border_width = beautiful.border_width
 	end
 end)
