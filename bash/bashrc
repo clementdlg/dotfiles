@@ -128,6 +128,9 @@ if which zoxide &>/dev/null; then
 fi
 
 # remap capslock to ctrl
-if [[ $XDG_SESSION_TYPE == "x11" ]]; then
+if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
 	setxkbmap -option caps:ctrl_modifier
 fi
+
+bind "TAB:menu-complete"
+bind "set show-all-if-ambiguous on"

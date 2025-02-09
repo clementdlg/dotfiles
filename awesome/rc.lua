@@ -122,14 +122,7 @@ screen.connect_signal("property::geometry", funcs.set_wallpaper)
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	funcs.set_wallpaper(s)
-
-	if s.index == 1 then
-		-- First screen: Assign the full tag table
-		awful.tag(tag_icons, s, awful.layout.layouts[1])
-	else
-		-- Other screens: Assign only one tag
-		awful.tag({ "󰐮" }, s, awful.layout.suit.floating)
-	end
+	awful.tag(tag_icons, s, awful.layout.layouts[1])
 end)
 
 -- {{{ Key bindings

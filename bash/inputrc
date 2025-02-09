@@ -1,6 +1,11 @@
+# ignore case for completion
 set completion-ignore-case on
+
+# colors
 set colored-stats On
 set colored-completion-prefix On
 
+# complete the current command using ctrl + up/down
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+

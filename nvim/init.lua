@@ -366,10 +366,11 @@ require("lazy").setup({
 `:help lspconfig-all` for a list of all the pre-configured LSPs
 ]]
 			local servers = {
+				docker_compose_language_service = {},
+				dockerls = {},
 				bashls = {},
 				html = {},
 				ts_ls = {},
-				asm_lsp = {},
 				pylsp = {},
 				clangd = {},
 				-- gopls = {},
