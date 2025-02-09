@@ -160,12 +160,31 @@ clientkeys = gears.table.join(
 		c.minimized = true
 	end, { description = "minimize", group = "client" }),
 
-	awful.key({ modkey }, "m", function(c)
-		if c.class ~= "Xfce4-panel" then
-			c.maximized = not c.maximized
-			c:raise()
+	awful.key({ modkey }, "m", function()
+		local tag = awful.screen.focused().selected_tag
+		if not tag then
+			return
 		end
-	end, { description = "(un)maximize", group = "client" })
+
+		-- Get all clients on the current tag
+		local clients = tag:clients()
+
+		-- Check if at least one window is maximized
+		local has_maximized = false
+		for _, c in ipairs(clients) do
+			if c.maximized then
+				has_maximized = true
+				break
+			end
+		end
+
+		-- Toggle maximize state based on the current state
+		for _, c in ipairs(clients) do
+			if client.class ~= "Xfce4-panel" then
+				c.maximized = not has_maximized
+			end
+		end
+	end, { description = "toggle maximize for all windows on tag", group = "client" })
 )
 
 local max_workspace = 7
@@ -431,22 +450,21 @@ client.connect_signal("property::size", function(c)
 	end
 end)
 
--- minimize all other windows when maximizing a window
-client.connect_signal("property::size", function(c)
-	local function toggle_minimize(action)
-		for _, other_client in ipairs(c.screen.selected_tag:clients()) do
-			if other_client ~= c and other_client.class ~= "Xfce4-panel" then
-				other_client.minimized = action
-				other_client.maximized = false
-			end
-		end
+-- enforce maximizing
+client.connect_signal("manage", function(c)
+	local tag = c.first_tag -- Get the tag where the window appears
+	if not tag then
+		return
 	end
 
-	if c.maximized then
-		-- Minimize all other clients
-		toggle_minimize(true)
-	else
-		-- Restore all other clients
-		toggle_minimize(false)
+	-- Get all clients on the tag
+	local clients = tag:clients()
+
+	-- Check if at least one window is maximized
+	for _, cl in ipairs(clients) do
+		if cl ~= c and cl.maximized and client.class ~= "Xfce4-panel" then
+			c.maximized = true
+			break
+		end
 	end
 end)
