@@ -16,34 +16,32 @@ function tmuxMain() {
 }
 
 function openSession() {
-	sessionCount=$(tmux list-sessions | wc -l)
-
-	# echo "session $sessionCount"
-	# if [[ "$sessionCount" -lt 1 || "$sessionCount" -gt 3 ]]; then
-	# 	echo "session count must be from 1 to 3"
-	# 	return 0
-	# fi
+	sessionCount=$(noerr tmux list-sessions | wc -l)
 
 	# getCurrentSession
-	current=$(getCurrentSession)
+	current=$(getUnattachedSession)
 
-	if [[ -z "$current" ]]; then
-		if [[ "$sessionCount" -lt 3 ]]; then
-			tmux new-session
-			return 0
-		else
-			echo "debug: max number of session created"
-			return
-		fi
+	if [[ ! -z "$current" ]]; then
+		# echo "debug : CURRENT = '$current'"
+		noerr tmux attach-session -t "$current"
+		return 0
 	fi
-	echo "debug : CURRENT = '$current'"
-	tmux attach-session -t "$current"
+
+	if [[ "$sessionCount" -lt "$TMUX_MAX_SESSION" ]]; then
+		lastAttached=$(noerr tmux list-clients | tail -1 | awk '{ print $2 }')
+		lastDir=$(noerr tmux display-message -t "$lastAttached" -p '#{pane_current_path}')
+		noerr tmux new-session -c "$lastDir"
+		return 0
+	else
+		# echo "debug: max number of session created"
+		return
+	fi
 
 	return 0
 }
 
-function getCurrentSession() {
-	tmux list-sessions | while IFS= read -r line; do
+function getUnattachedSession() {
+	noerr tmux list-sessions | while IFS= read -r line; do
 		# echo "debug : LINE = $line"
 		nf=$(printf "%s" "$line" | awk '{ print $NF }' 2>/dev/null)
 		# echo "debug : NF = '$nf'"
@@ -57,9 +55,12 @@ function getCurrentSession() {
 }
 
 silent() { "$@" &>/dev/null ;}
+noerr() { "$@" 2>/dev/null ;}
 
 tmuxMain
 # forget the functions
 unset -f tmuxMain
 unset -f openSession
 unset -f silent
+unset -f getCurrentSession
+
