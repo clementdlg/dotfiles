@@ -18,6 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 local funcs = require("main.screen")
+local widetile = require("main.tile")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -87,13 +88,13 @@ tag_icons[7] = "󰝚"
 
 -- Modkey
 modkey = "Mod1"
-gap_size = 7
+gap_size = 5
 
 -- Windows gaps
 beautiful.useless_gap = gap_size
 
 --[[---------------
-|			      |
+|			      
 |	MY LAYOUTS    |
 |			      |
 -----------------]]
@@ -102,6 +103,7 @@ awful.layout.layouts = {
 	awful.layout.suit.tile.right,
 	awful.layout.suit.tile.bottom,
 	awful.layout.suit.floating,
+	widetile.right,
 }
 
 -- Menubar configuration
@@ -180,7 +182,7 @@ clientkeys = gears.table.join(
 
 		-- Toggle maximize state based on the current state
 		for _, c in ipairs(clients) do
-			if client.class ~= "Xfce4-panel" then
+			if c.class ~= "Xfce4-panel" then
 				c.maximized = not has_maximized
 			end
 		end
