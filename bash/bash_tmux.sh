@@ -18,11 +18,10 @@ function tmuxMain() {
 function openSession() {
 	sessionCount=$(noerr tmux list-sessions | wc -l)
 
-	# getCurrentSession
-	current=$(getUnattachedSession)
+	# get first unattached session name
+	current=$(noerr tmux list-sessions | grep -v attached | head -1 | cut -d: -f1)
 
 	if [[ ! -z "$current" ]]; then
-		# echo "debug : CURRENT = '$current'"
 		noerr tmux attach-session -t "$current"
 		return 0
 	fi
@@ -32,25 +31,8 @@ function openSession() {
 		lastDir=$(noerr tmux display-message -t "$lastAttached" -p '#{pane_current_path}')
 		noerr tmux new-session -c "$lastDir"
 		return 0
-	else
-		# echo "debug: max number of session created"
-		return
 	fi
 
-	return 0
-}
-
-function getUnattachedSession() {
-	noerr tmux list-sessions | while IFS= read -r line; do
-		# echo "debug : LINE = $line"
-		nf=$(printf "%s" "$line" | awk '{ print $NF }' 2>/dev/null)
-		# echo "debug : NF = '$nf'"
-		if [[ "$nf" != "(attached)" ]]; then
-			current=$(echo "$line" | cut -d: -f1)
-			echo "$current"
-			break
-		fi
-	done
 	return 0
 }
 
