@@ -17,7 +17,7 @@
       <property name="enter-opacity" type="uint" value="100"/>
       <property name="icon-size" type="uint" value="20"/>
       <property name="leave-opacity" type="uint" value="100"/>
-      <property name="length" type="double" value="98.4375"/>
+      <property name="length" type="double" value="98.958333333333329"/>
       <property name="length-adjust" type="bool" value="false"/>
       <property name="mode" type="uint" value="0"/>
       <property name="nrows" type="uint" value="1"/>
@@ -114,6 +114,7 @@
         <value type="string" value="dnfdragora-updater"/>
       </property>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="blueman"/>
       </property>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
