@@ -5,7 +5,7 @@ case $- in
 esac
 
 # don't put duplicate lines
-HISTCONTROL=ignoredups
+HISTCONTROL=erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -133,4 +133,5 @@ if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
 fi
 
 bind "TAB:menu-complete"
-bind "set show-all-if-ambiguous on"
+
+source '/home/krem/.bash_completions/labctl.sh'
