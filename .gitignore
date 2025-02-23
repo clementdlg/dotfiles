@@ -4,20 +4,8 @@
 # allow specific files
 !.gitignore
 
-!xfce/scripts/layout.bin
-!xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-!xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-!xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
-!xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
-
-!awesome/
-!awesome/**
-
 !gtk-3.0/
 !gtk-3.0/**
-
-!lightdm/
-!lightdm/**
 
 !vim/
 !vim/**
@@ -31,20 +19,11 @@
 !bash/
 !bash/**
 
-!i3/
-!i3/**
-
-!picom/
-!picom/**
-
 !rofi/
 !rofi/**
 
 !systemd/user/
 !systemd/user/**
-
-!autostart/awesome.desktop
-!autostart/picom.desktop
 
 !tmux/
 !tmux/**
