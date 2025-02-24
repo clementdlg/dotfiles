@@ -88,7 +88,7 @@ tag_icons[7] = "󰝚"
 
 -- Modkey
 modkey = "Mod1"
-gap_size = 5
+gap_size = 4.5
 
 -- Windows gaps
 beautiful.useless_gap = gap_size
