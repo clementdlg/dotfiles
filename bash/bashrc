@@ -117,7 +117,6 @@ if which fzf &>/dev/null; then
 	fi
 fi
 
-unset -f sourceFile
 
 ### EVAL ###
 if which zoxide &>/dev/null; then
@@ -132,3 +131,4 @@ fi
 bind "TAB:menu-complete"
 
 sourceFile '/home/krem/.bash_completions/labctl.sh'
+unset -f sourceFile
