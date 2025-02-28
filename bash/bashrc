@@ -1,8 +1,5 @@
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+[[ $- != *i* ]] && return
 
 # don't put duplicate lines
 HISTCONTROL=erasedups
@@ -134,4 +131,4 @@ fi
 
 bind "TAB:menu-complete"
 
-source '/home/krem/.bash_completions/labctl.sh'
+sourceFile '/home/krem/.bash_completions/labctl.sh'
