@@ -1,10 +1,10 @@
 [window]
-opacity = 0.90
+opacity = 0.80
 # opacity = 1
-padding = { x = 5, y = 0 }
+padding = { x = 5, y = 5 }
 
 [colors.primary]
-background = "0x1f2033"
+background = "0x232036"
 foreground = "0xFFFFFF"
 
 [colors.bright]
@@ -28,7 +28,7 @@ white = "#787c99"
 yellow = "#e0af68"
 
 [font]
-size = 18.0
+size = 21.0
 
 [font.bold]
 family = "DejaVuSansM Nerd Font Propo"

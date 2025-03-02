@@ -1,35 +1,37 @@
 .flat,
 .toggle {
-  font-family: 'DejaVuSans Nerd Font';
-  font-size: 23px;
-  padding: 0px 10px 0px 6px;
+	font-family: 'DejaVuSans Nerd Font';
+	font-size: 25px;
+	padding: 0px 10px 0px 6px;
 }
 
 .flat:hover,
 .toggle:hover {
-  background-color: #2a3045;
+	background-color: #2a3045;
 }
 
 .flat:checked,
-.toggle:checked {
-  background-color: #11121a;
-  border-bottom: 2px solid #bfd3ff;
-  border-radius: 8px;
+#pager button:checked {
+	background-color: #83a6f2;
+	border-bottom: 2px solid black;
+	border-radius: 6px;
+	color: black;
+	font-weight: 450;
 }
 
 calendar {
-  font-size: 20px;
-  padding: 5px;
-  margin: 5px;
-  color: white;
-  background-color: #1c1c2e;
+	font-size: 20px;
+	padding: 5px;
+	margin: 5px;
+	color: white;
+	background-color: #1c1c2e;
 }
 
 calendar.highlight {
-  color: grey;
+	color: grey;
 }
 
 calendar:selected {
-  background-color: #94b6ff;
-  border-radius: 5px;
+	background-color: #94b6ff;
+	border-radius: 5px;
 }
