@@ -67,9 +67,12 @@ connect() {
 }
 
 connect_hidden() {
-	local ssid=$(echo "" | rofi_cmd "Wi-Fi Name (ssid) :")
-	local password=$(echo "" | rofi_cmd "Wi-Fi Name (ssid) :")
-	nmcli device wifi connect "$ssid" password "$password"
+	local ssid=$(echo "" | rofi_cmd "Wi-Fi SSID :")
+	local password=$(echo "" | rofi_cmd "Wi-Fi Password :")
+	nmcli device wifi rescan
+	nmcli device wifi connect "$ssid" hidden yes password "$password"
+
+	notify "Successfully connected to '$ssid'"
 }
 
 menu_enabled() {
