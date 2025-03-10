@@ -3,7 +3,7 @@ set -xeuo pipefail
 
 SCAN_TIMEOUT=4
 
-theme="theme/main.rasi"
+theme="$HOME/.config/rofi/theme/main.rasi"
 
 rofi_cmd() {
 	local msg="$1"
