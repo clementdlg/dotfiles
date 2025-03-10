@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=󰈀
+Comment=
+Exec=/home/krem/.config/rofi/applets/rofi-wifi.sh
+Icon=
+Path=
+Terminal=false
+StartupNotify=false

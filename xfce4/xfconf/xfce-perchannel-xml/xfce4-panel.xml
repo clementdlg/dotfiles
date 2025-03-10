@@ -31,6 +31,8 @@
         <value type="int" value="3"/>
         <value type="int" value="5"/>
         <value type="int" value="6"/>
+        <value type="int" value="21"/>
+        <value type="int" value="20"/>
         <value type="int" value="8"/>
         <value type="int" value="9"/>
         <value type="int" value="10"/>
@@ -135,6 +137,19 @@
     </property>
     <property name="plugin-19" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-20" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17416345523.desktop"/>
+      </property>
+      <property name="show-label" type="bool" value="true"/>
+    </property>
+    <property name="plugin-21" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="17416347244.desktop"/>
+      </property>
+      <property name="disable-tooltips" type="bool" value="true"/>
+      <property name="show-label" type="bool" value="true"/>
     </property>
   </property>
 </channel>
