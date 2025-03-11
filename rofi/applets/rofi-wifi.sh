@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -xueo pipefail
 
-theme="theme/main.rasi"
+theme="$HOME/.config/rofi/theme/main.rasi"
 
 rofi_cmd() {
 	msg="Menu"
 	[[ ! -e "$1" ]] && msg="$1"
-	rofi show -dmenu -p "Wi-Fi Applet" -theme "${theme}" -mesg "$msg"
+	rofi show -dmenu -i -p "Wi-Fi Applet" -theme "${theme}" -mesg "$msg"
 }
 
 function is_installed() {
@@ -81,8 +81,8 @@ menu_enabled() {
 
 	# menu items
 	local disconnect="󰤭 Disconnect from '$current'"
-	local connect=" Connect to Wi-Fi"
-	local hidden="󰤨 Connect to hidden Wi-Fi"
+	local connect=" Connect to Wi-Fi 󰜴"
+	local hidden="󰤨 Connect to hidden Wi-Fi 󰜴"
 	local disable=" Disable Wi-Fi"
 	local editor="󰘙 Connection Editor"
 

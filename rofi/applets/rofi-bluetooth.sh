@@ -8,7 +8,7 @@ theme="$HOME/.config/rofi/theme/main.rasi"
 rofi_cmd() {
 	local msg="$1"
 	[[ -z "$msg" ]] && msg="Main menu"
-	rofi show -dmenu -p "Bluetooth Applet" -theme "${theme}" -mesg "$msg"
+	rofi show -dmenu -i -p "Bluetooth Applet" -theme "${theme}" -mesg "$msg"
 }
 
 is_installed() {
@@ -96,11 +96,10 @@ connect_device() {
 
 menu_enabled() {
 	# menu items
-	# local disconnect="󰂲 Disconnect '$current'"
-	local connect_menu="󰂱 Connected devices"
-	local paired_menu=" Paired devices"
-	local scan_menu="󰂰 Scan devices"
-	local remove_menu=" Remove devices"
+	local connect_menu="󰂱 Connected devices 󰜴"
+	local paired_menu=" Paired devices 󰜴"
+	local scan_menu="󰂰 Scan devices 󰜴"
+	local remove_menu=" Remove devices 󰜴"
 	local disable=" Disable Bluetooth"
 	local editor="󰘙 Blueman Manager"
 

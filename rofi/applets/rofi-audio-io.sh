@@ -10,19 +10,15 @@ get_title() {
 	if [[ "$play_status" != "Stopped" ]]; then
 		title="$(playerctl metadata --format "{{ title }} - {{ artist }}")"
 	fi
-
-	icon=""
-	[[ "$play_status" == "Paused" ]] && icon=""
-	echo "$icon $title"
 }
 
 rofi_cmd() {
 	title="$(get_title)"
 
 	if [[ -z "$title" ]]; then
-		rofi show -dmenu -p "Audio I/O" -theme "${theme}"
+		rofi show -dmenu -i -p "Audio I/O" -theme "${theme}"
 	else
-		rofi show -dmenu -p "Audio I/O" -theme "${theme}" -mesg "$title"
+		rofi show -dmenu -i -p "Audio I/O" -theme " ${theme}" -mesg "$title"
 	fi
 }
 
@@ -50,11 +46,25 @@ get_sink_description() {
 	echo "${sink:1}"
 }
 
+get_source_description() {
+    local source_name="$1"
+	local source="$(pactl list sources | grep -A1 "Name: $source_name" | sed 1d | cut -f2 -d:)"
+	echo "${source:1}"
+}
+
+
 get_sink_by_description() {
     local description="$1"
 	local sink="$(pactl list sinks | grep -B1 "Description: $description" | sed 2d | cut -f2 -d:)"
 	echo "${sink:1}"
 }
+
+get_source_by_description() {
+    local description="$1"
+	local source="$(pactl list sources | grep -B1 "Description: $description" | sed 2d | cut -f2 -d:)"
+	echo "${source:1}"
+}
+
 
 get_outputs() {
     pactl list sinks short | while read -r line; do
@@ -64,15 +74,44 @@ get_outputs() {
     done
 }
 
+get_inputs() {
+    pactl list sources short | grep -v monitor | while read -r line; do
+        local source_name=$(echo "$line" | awk '{print $2}')
+        local description="$(get_source_description "$source_name")"
+        echo "$description"
+    done
+}
+
+
+input_menu() {
+    local inputs=$(get_inputs)
+    
+    if [ -z "$inputs" ]; then
+        notify "no audio input devices found."
+        exit 0
+    fi
+
+	local choice="$(echo "$inputs" | rofi_cmd "audio inputs" )"
+
+	[[ -z "$choice" ]] && return 0
+
+	local source_name="$(get_source_by_description "$choice")"
+
+    if [ -n "$source_name" ]; then
+        pactl set-default-source "$source_name" 
+        notify "input : $choice"
+    fi
+}
+
 output_menu() {
     local outputs=$(get_outputs)
     
     if [ -z "$outputs" ]; then
-        notify "No audio output devices found."
+        notify "no audio output devices found."
         exit 0
     fi
 
-	local choice="$(echo "$outputs" | rofi_cmd "Audio Outputs" )"
+	local choice="$(echo "$outputs" | rofi_cmd "audio outputs" )"
 
 	[[ -z "$choice" ]] && return 0
 
@@ -80,19 +119,10 @@ output_menu() {
 
     if [ -n "$sink_name" ]; then
         pactl set-default-sink "$sink_name" 
-        notify "Output : $choice"
+        notify "output : $choice"
     fi
 }
 
-are_speakers_muted() {
-	cmd="$(amixer get Master | grep -oE '\[on\]|\[off\]' | sed 1d)"
-
-	if [[ "$cmd" == "[off]" ]]; then
-		return 0
-	else
-		return 1
-	fi
-}
 
 is_muted() {
 	local device="$1"
@@ -113,8 +143,8 @@ main() {
 	is_installed "playerctl"
 	
 	# menu items
-	local outputs="󰓃 Audio Outputs"
-	local inputs=" Audio Inputs"
+	local outputs="󰓃 Audio Outputs 󰜴"
+	local inputs=" Audio Inputs 󰜴"
 
 	local speakers=" Mute Speakers"
 	local mic=" Mute Microphone"
@@ -123,7 +153,7 @@ main() {
 	is_muted "Capture" && mic=" Unmute Microphone"
 
 	local gui_app=" Audio Mixer"
-	local menu="$outputs\n$speakers\n$inputs\n$mic\n"
+	local menu="$outputs\n$inputs\n$speakers\n$mic\n"
 
 	# display rofi menu
 	local choice="$(printf "$menu" | rofi_cmd)"
@@ -131,12 +161,12 @@ main() {
 	case "$choice" in
 		"$outputs")
 			output_menu ;;
-		"$speakers")
-			echo "not implemented" ;;
 		"$inputs")
-			echo "not implemented" ;;
+			input_menu ;;
+		"$speakers")
+			amixer set Master toggle ;;
 		"$mic")
-			echo "not implemented" ;;
+			amixer set Capture toggle ;;
 	esac
 }
 main

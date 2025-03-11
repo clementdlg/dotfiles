@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 rofi_cmd() {
-	rofi show -dmenu -p "Power Menu" -theme "${theme}" -mesg "$uptime"
+	rofi show -dmenu -i -p "Power Menu" -theme "${theme}" -mesg "$uptime"
 }
 
 main() {
-	theme="theme/main.rasi"
+	theme="$HOME/.config/rofi/theme/main.rasi"
 	local lockscreen=" Lock Screen"
 	local logoff=" Log Out"
 	local shutdown=" Power Off"
