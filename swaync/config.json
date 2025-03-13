@@ -48,12 +48,12 @@
 		}
 	},
  "widgets": [
+        "volume",
+        "backlight",
         "dnd",
         "title",
         "notifications",
         "mpris",
-        "volume",
-        "backlight",
         "buttons-grid"
     ],
     "widget-config": {
