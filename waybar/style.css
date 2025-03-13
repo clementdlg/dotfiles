@@ -35,13 +35,7 @@ window#waybar.empty #window {
 	background-color: transparent;
 }
 
-#window {
-	padding: 0 15px;
-	color: rgb(210, 210, 210);
-	background: rgba(35, 32, 54, 0.7);
-	border-radius: 30;
-	box-shadow: inset 0px -4px rgba(131, 166, 242, 0.8);
-}
+/* LEFT SIDE  */
 
 #workspaces button {
 	padding: 0 15px;
@@ -73,14 +67,22 @@ window#waybar.empty #window {
 	background-color: #f7768e;
 }
 
+
+/* CENTER */
+#window {
+	padding: 0 15px;
+	color: rgb(210, 210, 210);
+	background: rgba(35, 32, 54, 0.7);
+	border-radius: 30;
+	box-shadow: inset 0px -4px rgba(131, 166, 242, 0.8);
+}
+
+
+/* RIGHT SIDE */
+
 #mode {
 	background-color: #64727D;
 	box-shadow: inset 0 -3px #ffffff;
-}
-
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-	background-color: #a37799;
 }
 
 #clock,
@@ -110,8 +112,8 @@ window#waybar.empty #window {
 	color: #ffffff;
 	margin: 0 2px;
 	color: #232036;
-	font-size: 20px;
 	/* override for smaller font */
+	font-size: 20px;
 	box-shadow: inset 2px -4px #83a6f2;
 }
 
@@ -121,24 +123,92 @@ window#waybar.empty #window {
 	margin-right: 12px;
 	box-shadow: none;
 	background-color: #f7768e;
+	/* override of override */
 	font-size: 24px;
 	padding: 0 10px;
-	/* override of override */
 }
 
 #custom-swaync {
 	color: #bb9af7;
 	box-shadow: inset 2px -4px #bb9af7;
-	/* color: #83a6f2; */
-	/* box-shadow: inset 2px -4px #83a6f2; */
 }
 
 #clock {
-	/* background-color: #bb9af7; */
-	/* color: #bb9af7; */
-	/* box-shadow: inset 2px -4px #bb9af7; */
 	color: #83a6f2;
 	box-shadow: inset 2px -4px #83a6f2;
+}
+
+#cpu {
+	/* background-color: #83a6f2; */
+	color: #bb9af7;
+	box-shadow: inset 2px -4px #bb9af7;
+}
+
+#memory {
+	/* background-color: #ff9e64; */
+	color: #f78b9e;
+	box-shadow: inset 2px -4px #f78b9e;
+}
+
+#backlight {
+	/* background-color: #90b1b1; */
+	color: #90b1b1;
+}
+
+#network {
+	/* background-color: #73daca; */
+	color: #73daca;
+	box-shadow: inset 2px -4px #73daca;
+}
+
+#network.disconnected {
+	/* background-color: #f53c3c; */
+	color: #f53c3c;
+}
+
+#pulseaudio {
+	/* background-color: #f78b9e; */
+	/* color: #f78b9e; */
+	/* box-shadow: inset 2px -4px #f78b9e; */
+	color: #ff9e64;
+	box-shadow: inset 2px -4px #ff9e64;
+}
+
+#pulseaudio:hover {
+	background-color: #a37799;
+}
+
+/* #pulseaudio.muted { */
+/* 	background-color: #90b1b1; */
+/* 	color: #2a5c45; */
+/* } */
+
+#wireplumber {
+	background-color: #fff0f5;
+	/* color: #000000; */
+}
+
+#wireplumber.muted {
+	background-color: #f53c3c;
+}
+
+#custom-media {
+	background-color: #66cc99;
+	color: #2a5c45;
+	min-width: 100px;
+}
+
+#tray {
+	background-color: #2980b9;
+}
+
+#tray>.passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+	-gtk-icon-effect: highlight;
+	background-color: #eb4d4b;
 }
 
 #battery {
@@ -189,175 +259,82 @@ window#waybar.empty #window {
 	/* color: #000000; */
 }
 
-label:focus {
-	background-color: #000000;
-}
 
-#cpu {
-	/* background-color: #83a6f2; */
-	color: #bb9af7;
-	box-shadow: inset 2px -4px #bb9af7;
-}
-
-#memory {
-	/* background-color: #ff9e64; */
-	color: #f78b9e;
-	box-shadow: inset 2px -4px #f78b9e;
-}
-
-#disk {
-	/* background-color: #964B00; */
-	color: #964B00;
-}
-
-#backlight {
-	/* background-color: #90b1b1; */
-	color: #90b1b1;
-}
-
-#network {
-	/* background-color: #73daca; */
-	color: #73daca;
-	box-shadow: inset 2px -4px #73daca;
-}
-
-#network.disconnected {
-	/* background-color: #f53c3c; */
-	color: #f53c3c;
-}
-
-#pulseaudio {
-	/* background-color: #f78b9e; */
-	/* color: #f78b9e; */
-	/* box-shadow: inset 2px -4px #f78b9e; */
-	color: #ff9e64;
-	box-shadow: inset 2px -4px #ff9e64;
-}
-
-/* #pulseaudio.muted { */
-/* 	background-color: #90b1b1; */
+/* #idle_inhibitor { */
+/* 	background-color: #2d3436; */
+/* } */
+/**/
+/* #idle_inhibitor.activated { */
+/* 	background-color: #ecf0f1; */
+/* 	color: #2d3436; */
+/* } */
+/**/
+/* #mpd { */
+/* 	background-color: #66cc99; */
 /* 	color: #2a5c45; */
 /* } */
-
-#wireplumber {
-	background-color: #fff0f5;
-	/* color: #000000; */
-}
-
-#wireplumber.muted {
-	background-color: #f53c3c;
-}
-
-#custom-media {
-	background-color: #66cc99;
-	color: #2a5c45;
-	min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-	background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-	background-color: #ffa000;
-}
-
-#temperature {
-	background-color: #f0932b;
-}
-
-#temperature.critical {
-	background-color: #eb4d4b;
-}
-
-#tray {
-	background-color: #2980b9;
-}
-
-#tray>.passive {
-	-gtk-icon-effect: dim;
-}
-
-#tray>.needs-attention {
-	-gtk-icon-effect: highlight;
-	background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-	background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-	background-color: #ecf0f1;
-	color: #2d3436;
-}
-
-#mpd {
-	background-color: #66cc99;
-	color: #2a5c45;
-}
-
-#mpd.disconnected {
-	background-color: #f53c3c;
-}
-
-#mpd.stopped {
-	background-color: #90b1b1;
-}
-
-#mpd.paused {
-	background-color: #51a37a;
-}
-
-#language {
-	background: #00b093;
-	color: #740864;
-	padding: 0 5px;
-	margin: 0 5px;
-	min-width: 16px;
-}
-
-#keyboard-state {
-	background: #97e1ad;
-	color: #000000;
-	padding: 0 0px;
-	margin: 0 5px;
-	min-width: 16px;
-}
-
-#keyboard-state>label {
-	padding: 0 5px;
-}
-
-#keyboard-state>label.locked {
-	background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad {
-	background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-	background-color: transparent;
-}
-
-#privacy {
-	padding: 0;
-}
-
-#privacy-item {
-	padding: 0 5px;
-	color: white;
-}
-
-#privacy-item.screenshare {
-	background-color: #cf5700;
-}
-
-#privacy-item.audio-in {
-	background-color: #1ca000;
-}
-
-#privacy-item.audio-out {
-	background-color: #0069d4;
-}
+/**/
+/* #mpd.disconnected { */
+/* 	background-color: #f53c3c; */
+/* } */
+/**/
+/* #mpd.stopped { */
+/* 	background-color: #90b1b1; */
+/* } */
+/**/
+/* #mpd.paused { */
+/* 	background-color: #51a37a; */
+/* } */
+/**/
+/* #language { */
+/* 	background: #00b093; */
+/* 	color: #740864; */
+/* 	padding: 0 5px; */
+/* 	margin: 0 5px; */
+/* 	min-width: 16px; */
+/* } */
+/**/
+/* #keyboard-state { */
+/* 	background: #97e1ad; */
+/* 	color: #000000; */
+/* 	padding: 0 0px; */
+/* 	margin: 0 5px; */
+/* 	min-width: 16px; */
+/* } */
+/**/
+/* #keyboard-state>label { */
+/* 	padding: 0 5px; */
+/* } */
+/**/
+/* #keyboard-state>label.locked { */
+/* 	background: rgba(0, 0, 0, 0.2); */
+/* } */
+/**/
+/* #scratchpad { */
+/* 	background: rgba(0, 0, 0, 0.2); */
+/* } */
+/**/
+/* #scratchpad.empty { */
+/* 	background-color: transparent; */
+/* } */
+/**/
+/* #privacy { */
+/* 	padding: 0; */
+/* } */
+/**/
+/* #privacy-item { */
+/* 	padding: 0 5px; */
+/* 	color: white; */
+/* } */
+/**/
+/* #privacy-item.screenshare { */
+/* 	background-color: #cf5700; */
+/* } */
+/**/
+/* #privacy-item.audio-in { */
+/* 	background-color: #1ca000; */
+/* } */
+/**/
+/* #privacy-item.audio-out { */
+/* 	background-color: #0069d4; */
+/* } */
