@@ -14,7 +14,7 @@
         "custom/media"
     ],
     "modules-center": [
-        "hyprland/window"
+		"hyprland/window"
     ],
     "modules-right": [
         // "mpd",
@@ -26,12 +26,13 @@
         // "sway/language",
         "battery",
         "battery#bat2",
+        "cpu",
         "memory",
         "pulseaudio",
-        "clock",
-        "cpu",
         "network",
         "tray",
+        "clock",
+        "custom/swaync",
         "custom/power"
     ],
     // Modules configuration
@@ -50,8 +51,18 @@
             "7": "󰝚",
             "8": "8",
             "9": "9",
-        }
+        },
+		"persistent-workspaces": {
+             "*": 7,
+       }
     },
+	"hyprland/window": {
+		"format": " {}",
+		"rewrite": {
+			"(.*) — LibreWolf": "󰖟 $1",
+		},
+		"separate-outputs": true
+	},
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -205,6 +216,11 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
+    "custom/swaync": {
+        "format" : "",
+		"tooltip": false,
+        "on-click": "swaync-client -t"
+	},
     "custom/power": {
         "format" : "⏻",
 		"tooltip": false,

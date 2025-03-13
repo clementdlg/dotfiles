@@ -10,6 +10,7 @@ window#waybar {
 	color: rgba(255, 255, 255, 0);
 	transition-property: background-color;
 	transition-duration: .5s;
+	color: #00FF00;
 }
 
 window#waybar.hidden {
@@ -17,7 +18,6 @@ window#waybar.hidden {
 }
 
 button {
-	/* Use box-shadow instead of border so the text isn't offset */
 	box-shadow: inset 0 -3px transparent;
 	/* Avoid rounded borders under each button name */
 	border: none;
@@ -29,13 +29,27 @@ button:hover {
 	/* box-shadow: inset 0 -3px #ffffff; */
 }
 
+
+window#waybar.empty #window {
+	box-shadow: none;
+	background-color: transparent;
+}
+
+#window {
+	padding: 0 15px;
+	color: rgb(210, 210, 210);
+	background: rgba(35, 32, 54, 0.7);
+	border-radius: 30;
+	box-shadow: inset 0px -4px rgba(131, 166, 242, 0.8);
+}
+
 #workspaces button {
 	padding: 0 15px;
 	margin: 0 1px;
 	background-color: #232036;
 	color: #FFFFFF;
 	border-radius: 30px;
-	box-shadow: inset 0px -4px #83a6f2;
+	box-shadow: inset -2px -4px #83a6f2;
 }
 
 #workspaces button.active {
@@ -87,33 +101,49 @@ button:hover {
 #power-profiles-daemon,
 #custom-power,
 #custom-menu,
+#custom-swaync,
 #mpd {
+	background-color: #232036;
+	font-weight: bold;
 	border-radius: 30px;
-	padding: 0 10px;
+	padding: 0 10 0 13px;
 	color: #ffffff;
 	margin: 0 2px;
 	color: #232036;
 	font-size: 20px;
 	/* override for smaller font */
+	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #custom-power,
 #custom-menu {
 	margin-left: 12px;
 	margin-right: 12px;
+	box-shadow: none;
 	background-color: #f7768e;
 	font-size: 24px;
+	padding: 0 10px;
 	/* override of override */
 }
 
+#custom-swaync {
+	color: #bb9af7;
+	box-shadow: inset 2px -4px #bb9af7;
+	/* color: #83a6f2; */
+	/* box-shadow: inset 2px -4px #83a6f2; */
+}
+
 #clock {
-	background-color: #bb9af7;
-	/* color: #000000; */
+	/* background-color: #bb9af7; */
+	/* color: #bb9af7; */
+	/* box-shadow: inset 2px -4px #bb9af7; */
+	color: #83a6f2;
+	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #battery {
-	background-color: #ffffff;
-	/* color: #000000; */
+	/* background-color: #ffffff; */
+	color: #ffffff;
 }
 
 #battery.charging,
@@ -164,35 +194,44 @@ label:focus {
 }
 
 #cpu {
-	background-color: #83a6f2;
-	/* color: #000000; */
+	/* background-color: #83a6f2; */
+	color: #bb9af7;
+	box-shadow: inset 2px -4px #bb9af7;
 }
 
 #memory {
-	background-color: #ff9e64;
-	/* color: #000000; */
+	/* background-color: #ff9e64; */
+	color: #f78b9e;
+	box-shadow: inset 2px -4px #f78b9e;
 }
 
 #disk {
-	background-color: #964B00;
+	/* background-color: #964B00; */
+	color: #964B00;
 }
 
 #backlight {
-	background-color: #90b1b1;
+	/* background-color: #90b1b1; */
+	color: #90b1b1;
 }
 
 #network {
-	background-color: #73daca;
-	/* color: #000000; */
+	/* background-color: #73daca; */
+	color: #73daca;
+	box-shadow: inset 2px -4px #73daca;
 }
 
 #network.disconnected {
-	background-color: #f53c3c;
+	/* background-color: #f53c3c; */
+	color: #f53c3c;
 }
 
 #pulseaudio {
-	background-color: #f78b9e;
-	/* color: #000000; */
+	/* background-color: #f78b9e; */
+	/* color: #f78b9e; */
+	/* box-shadow: inset 2px -4px #f78b9e; */
+	color: #ff9e64;
+	box-shadow: inset 2px -4px #ff9e64;
 }
 
 /* #pulseaudio.muted { */
