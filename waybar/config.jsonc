@@ -19,8 +19,6 @@
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
-        "memory",
-        "cpu",
         // "power-profiles-daemon",
         // "temperature",
         "backlight",
@@ -28,9 +26,11 @@
         // "sway/language",
         "battery",
         "battery#bat2",
+        "memory",
         "pulseaudio",
-        "network",
         "clock",
+        "cpu",
+        "network",
         "tray",
         "custom/power"
     ],
