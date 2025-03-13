@@ -86,17 +86,18 @@ button:hover {
 #custom-power,
 #custom-menu,
 #mpd {
-	border-radius: 15px;
+	border-radius: 30px;
 	padding: 0 10px;
 	color: #ffffff;
 	margin: 0 2px;
-	background-color: #f7768e;
 }
 
 #custom-power,
 #custom-menu {
 	color: black;
-	margin: 0 12px;
+	margin-left: 12px;
+	margin-right: 12px;
+	background-color: #f7768e;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -110,7 +111,7 @@ button:hover {
 /* } */
 
 #clock {
-	background-color: #a6b2ff;
+	background-color: #bb9af7;
 	color: #000000;
 }
 
@@ -167,12 +168,12 @@ label:focus {
 }
 
 #cpu {
-	background-color: #81dbeb;
+	background-color: #83a6f2;
 	color: #000000;
 }
 
 #memory {
-	background-color: #fad993;
+	background-color: #e0af68;
 	color: #000000;
 }
 
@@ -185,7 +186,7 @@ label:focus {
 }
 
 #network {
-	background-color: #92d98f;
+	background-color: #9ece6a;
 	color: #000000;
 }
 
@@ -194,7 +195,7 @@ label:focus {
 }
 
 #pulseaudio {
-	background-color: #eb98a6;
+	background-color: #f78b9e;
 	color: #000000;
 }
 

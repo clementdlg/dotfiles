@@ -50,9 +50,6 @@
             "7": "󰝚",
             "8": "8",
             "9": "9",
-            "urgent": "",
-            "focused": "",
-            "default": ""
         }
     },
     "keyboard-state": {
@@ -189,7 +186,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["a", "", "", ""]
         },
         "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
     },
@@ -198,7 +195,6 @@
         "return-type": "json",
         "max-length": 40,
         "format-icons": {
-            "spotify": "",
             "default": "🎜"
         },
         "escape": true,
