@@ -258,9 +258,16 @@
   background-color: @noti-bg-hover-opaque;
 }
 
+/*                      */
+/* SWAYNC CONTROL PANEL */
+/*                      */
+
 .control-center {
   /* The Control Center which contains the old notifications + widgets */
-  background: @cc-bg;
+  /* background: @cc-bg; */
+  /* background-color: #232036; */
+  border: 1px solid #83a6f2;
+  background: rgba(35, 32, 54, 0.9);
   color: @text-color;
   border-radius: 12px;
 }
@@ -272,7 +279,7 @@
 
 .control-center .control-center-list {
   /* List of notifications */
-  background: transparent;
+  /* background: transparent; */
 }
 
 .control-center .control-center-list .notification {
@@ -308,6 +315,11 @@
   color: @text-color;
   margin: 8px;
   font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #83a6f2;
+  color:  #000000;
+
 }
 
 .widget-title > button {
@@ -315,7 +327,6 @@
   color: @text-color;
   text-shadow: none;
   background: @noti-bg;
-  border: 1px solid @noti-border-color;
   box-shadow: none;
   border-radius: 12px;
 }
