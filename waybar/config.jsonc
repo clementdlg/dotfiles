@@ -57,9 +57,10 @@
        }
     },
 	"hyprland/window": {
-		"format": " {}",
+		"format": "{}",
 		"rewrite": {
-			"(.*) — LibreWolf": "󰖟 $1",
+			"(.*) — LibreWolf": " Librewolf",
+			"Alacritty": " Terminal",
 		},
 		"separate-outputs": true
 	},
