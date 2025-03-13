@@ -173,7 +173,7 @@ label:focus {
 }
 
 #memory {
-	background-color: #e0af68;
+	background-color: #ff9e64;
 	color: #000000;
 }
 
@@ -186,7 +186,7 @@ label:focus {
 }
 
 #network {
-	background-color: #9ece6a;
+	background-color: #73daca;
 	color: #000000;
 }
 
@@ -199,10 +199,10 @@ label:focus {
 	color: #000000;
 }
 
-#pulseaudio.muted {
-	background-color: #90b1b1;
-	color: #2a5c45;
-}
+/* #pulseaudio.muted { */
+/* 	background-color: #90b1b1; */
+/* 	color: #2a5c45; */
+/* } */
 
 #wireplumber {
 	background-color: #fff0f5;

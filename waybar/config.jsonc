@@ -19,9 +19,8 @@
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
-        "cpu",
         "memory",
-        "pulseaudio",
+        "cpu",
         // "power-profiles-daemon",
         // "temperature",
         "backlight",
@@ -29,6 +28,7 @@
         // "sway/language",
         "battery",
         "battery#bat2",
+        "pulseaudio",
         "network",
         "clock",
         "tray",
@@ -110,6 +110,7 @@
     },
     "clock": {
         // "timezone": "America/New_York",
+        "format": "{:%H:%M} 󰥔",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -165,18 +166,20 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"on-click-right": "$HOME/.config/rofi/applets/rofi-wifi.sh"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-alt": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-muted": "󰝟 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -188,7 +191,8 @@
             "car": "",
             "default": ["a", "", "", ""]
         },
-        "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
+        // "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
+		"on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
     },
     "custom/media": {
         "format": "{icon} {text}",
