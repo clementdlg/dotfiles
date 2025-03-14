@@ -1,9 +1,11 @@
 @define-color cc-bg rgba(46, 46, 46, 0.7);
 @define-color noti-border-color rgba(255, 255, 255, 0.15);
-@define-color noti-bg rgba(48, 48, 48, 0.8);
-@define-color noti-bg-opaque rgb(48, 48, 48);
+/* @define-color noti-bg rgba(48, 48, 48, 0.8); */
+@define-color noti-bg rgba(35, 32, 54, 0.9);
+/* @define-color noti-bg-opaque rgb(48, 48, 48); */
+@define-color noti-bg-opaque rgba(35, 32, 54, 0.7);
 @define-color noti-bg-darker rgb(38, 38, 38);
-@define-color noti-bg-hover rgb(56, 56, 56);
+@define-color noti-bg-hover rgba(35, 32, 54, 0.8);
 @define-color noti-bg-hover-opaque rgb(56, 56, 56);
 @define-color noti-bg-focus rgba(68, 68, 68, 0.6);
 @define-color noti-close-bg rgba(255, 255, 255, 0.1);
@@ -316,12 +318,12 @@
 /*** Widgets ***/
 /* Title widget */
 .widget-title {
-	color: #000000;
+	color: #ffffff;
 	margin: 8px;
 	font-size: 1.5rem;
 	padding: 10px;
 	border-radius: 15px;
-	background-color: #83a6f2;
+	background-color: #232036;
 
 	/* background-color: rgba(35, 32, 54, 0.5); */
 	box-shadow: inset 0px -4px rgba(131, 166, 242, 0.6);
@@ -334,14 +336,14 @@
 	background: @noti-bg;
 	box-shadow: none;
 	border-radius: 12px;
-	background: #232036;
-	color: white;
-	border: solid 1px #83a6f2;
+	background: #83a6f2;
+	color: black;
+	border: solid 1px #232036;
+	box-shadow: inset 0px -4px #232036;
 }
 
-.widget-title>button:hover {
-	color: @text-color;
-	font-weight: bold;
+.widget-title>button:active {
+	box-shadow: none;
 }
 
 /* DND widget */
@@ -349,7 +351,7 @@
 	color: @text-color;
 	margin: 6px;
 	font-size: 1.2rem;
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: #232036;
 	padding: 10px;
 	border-radius: 12px;
 }
@@ -357,17 +359,17 @@
 .widget-dnd>switch {
 	font-size: initial;
 	border-radius: 12px;
-	background-color: #83a6f2;
+	background-color: @noti-border-color;
 	border: none;
 	box-shadow: none;
 }
 
 .widget-dnd>switch:checked {
-	background-color: #73daca;
+	background-color: #83a6f2;
 }
 
 .widget-dnd>switch slider {
-	background: #232036;
+	background: @noti-bg-hover;
 	border-radius: 12px;
 	border: none;
 }
@@ -397,12 +399,16 @@
 	/* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75); */
 }
 
-.widget-mpris .widget-mpris-player button:hover {
+.widget-mpris,
+.widget-mpris-player button,
+.widget-mpris-player button:hover {
 	/* The media player buttons (play, pause, next, etc...) */
-	background: @noti-bg-hover;
+	/* background-color: #FFFFFF; */
+	color: #ffffff;
 }
 
 .widget-mpris .widget-mpris-player .widget-mpris-album-art {
+	/* around the small picture */
 	border-radius: 12px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
 }
@@ -483,10 +489,11 @@
 
 /* Volume widget */
 .widget-volume {
-	background-color: @noti-bg;
+	background-color: #232036;
 	padding: 8px;
 	margin: 8px;
 	border-radius: 12px;
+	font-size: 24px;
 }
 
 .widget-volume>box>button {
@@ -503,7 +510,7 @@
 
 /* Backlight widget */
 .widget-backlight {
-	background-color: @noti-bg;
+	background-color: #232036;
 	padding: 8px;
 	margin: 8px;
 	border-radius: 12px;

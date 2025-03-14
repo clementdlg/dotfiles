@@ -53,8 +53,7 @@
         "dnd",
         "title",
         "notifications",
-        "mpris",
-        "buttons-grid"
+        "mpris"
     ],
     "widget-config": {
         "title": {
