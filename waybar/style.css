@@ -44,7 +44,8 @@ window#waybar.empty #window {
 	padding: 0 15px;
 	margin: 0 1px;
 	background-color: #232036;
-	color: #FFFFFF;
+	/* color: #FFFFFF; */
+	color: #e0e6ff;
 	border-radius: 30px;
 	box-shadow: inset -2px -4px #83a6f2;
 }
@@ -56,18 +57,13 @@ window#waybar.empty #window {
 }
 
 
-#workspaces button.active:hover {
-	background: rgba(131, 166, 242, 0.7);
-	/* color: #FFFFFF; */
-}
-
 #workspaces button:hover {
 	/* background: rgba(0, 0, 0, 0.65); */
 	box-shadow: none;
 }
 
 #workspaces button.urgent {
-	background-color: #f7768e;
+	color: #f7768e;
 }
 
 
@@ -150,25 +146,29 @@ window#waybar.empty #window {
 }
 
 #custom-swaync {
-	color: #bb9af7;
-	box-shadow: inset 2px -4px #bb9af7;
+	color: #e0e6ff;
+	box-shadow: inset 2px -4px #83a6f2;
+	/* color: #bb9af7; */
+	/* box-shadow: inset 2px -4px #bb9af7; */
 }
 
 #clock {
-	color: #83a6f2;
+	color: #e0e6ff;
 	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #cpu {
-	/* background-color: #83a6f2; */
-	color: #bb9af7;
-	box-shadow: inset 2px -4px #bb9af7;
+	/* color: #83a6f2; */
+	/* box-shadow: inset 2px -4px #83a6f2; */
+	color: #e0e6ff;
+	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #memory {
-	/* background-color: #ff9e64; */
-	color: #f78b9e;
-	box-shadow: inset 2px -4px #f78b9e;
+	/* color: #f78b9e; */
+	/* box-shadow: inset 2px -4px #f78b9e; */
+	color: #e0e6ff;
+	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #backlight {
@@ -177,9 +177,10 @@ window#waybar.empty #window {
 }
 
 #network {
-	/* background-color: #73daca; */
-	color: #73daca;
-	box-shadow: inset 2px -4px #73daca;
+	color: #e0e6ff;
+	box-shadow: inset 2px -4px #83a6f2;
+	/* color: #ff9e64; */
+	/* box-shadow: inset 2px -4px #ff9e64; */
 }
 
 #network.disconnected {
@@ -188,11 +189,10 @@ window#waybar.empty #window {
 }
 
 #pulseaudio {
-	/* background-color: #f78b9e; */
-	/* color: #f78b9e; */
-	/* box-shadow: inset 2px -4px #f78b9e; */
-	color: #ff9e64;
-	box-shadow: inset 2px -4px #ff9e64;
+	/* color: #ff9e64; */
+	/* box-shadow: inset 2px -4px #ff9e64; */
+	color: #e0e6ff;
+	box-shadow: inset 2px -4px #83a6f2;
 }
 
 #pulseaudio:hover {
