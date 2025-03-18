@@ -2,12 +2,10 @@ configuration {
 	display-drun: "Apps";
 	display-window: "Windows";
 	drun-display-format: "{icon} {name}";
-	font: "DejaVuSansM Nerd Font Propo 18";
+	font: "DejaVuSansM Nerd Font Propo 17";
 	modi: "window,run,drun";
 	show-icons: true;
 	icon-theme: "Papirus";
-	kb-move-char-forward: "Control+f";
-	kb-accept-entry: "Right";
 }
 
 @theme "theme/main.rasi"

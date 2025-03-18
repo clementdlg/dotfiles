@@ -91,7 +91,7 @@ connect_device() {
 	mac="$(get_mac_addr "$device")"
 
 	notify "Attempting to connect to $device"
-	silent bluetoothctl connect "$mac"
+	bluetoothctl connect "$mac"
 }
 
 menu_enabled() {
