@@ -22,7 +22,7 @@ return gears.table.join(
 		{ "Mod4" }, --Modifier
 		"p", --Key
 		function() --Action
-			awful.spawn("xfce4-display-settings -m")
+			awful.spawn("xfce4-display-settings")
 		end,
 		{ description = "display settings", group = "Multimedia" }
 	),
@@ -255,7 +255,7 @@ return gears.table.join(
 		{ "Mod4" }, --Modifier
 		"v", --Key
 		function() --Action
-			awful.spawn(os.getenv("HOME") .. "/scripts/open-vm-remmina.sh")
+			awful.spawn(os.getenv("HOME") .. "/.config/rofi/applets/rofi-vm-applet.sh")
 		end,
 		{ description = "open vm", group = "launcher" }
 	),

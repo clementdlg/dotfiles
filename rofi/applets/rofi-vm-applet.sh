@@ -43,7 +43,7 @@ rofi_cmd() {
 # VM Actions
 start-vm() {
 	local vm="$1"
-	silent virsh start --domain "$vm"
+	silent virsh -c $uri start --domain "$vm"
 	notify-send "VM Applet" "$vm has been started"
 }
 
@@ -54,20 +54,20 @@ open-vm() {
 
 stop-vm() {
 	local vm="$1"
-	silent virsh destroy --domain "$vm" --graceful
+	silent virsh -c $uri destroy --domain "$vm" --graceful
 	notify-send "VM Applet" "$vm has been stopped"
 }
 
 reboot-vm() {
 	local vm="$1"
-	silent virsh reset --domain "$vm"
+	silent virsh -c $uri reset --domain "$vm"
 	notify-send "VM Applet" "$vm has been rebooted"
 }
 
 
 # Core functions
 choose-vm() {
-	local vms="$(virsh list --all  | tail -n +3 | head -n -1 | awk '{ print $2 }')"
+	local vms="$(virsh -c $uri list --all  | tail -n +3 | head -n -1 | awk '{ print $2 }')"
 
 	# display VMs list
 	local choice="$(printf "%s\n" "$vms" | rofi_cmd)"
@@ -78,7 +78,7 @@ choose-vm() {
 		return 1
 	fi
 
-	if ! silent virsh dominfo --domain "$choice"; then
+	if ! silent virsh -c $uri dominfo --domain "$choice"; then
 		notify-send "VM Applet error" "the selected vm does not exist"
 		return 1
 	fi
@@ -89,7 +89,7 @@ choose-vm() {
 get-vm-state() {
 	vm="$1"
 	[[ -z "$vm" ]] && return 1
-	virsh domstate "$vm"
+	virsh -c $uri domstate "$vm"
 }
 
 main() {
