@@ -101,9 +101,9 @@ beautiful.useless_gap = gap_size
 
 awful.layout.layouts = {
 	awful.layout.suit.tile.right,
-	awful.layout.suit.tile.bottom,
 	awful.layout.suit.floating,
-	widetile.right,
+	-- awful.layout.suit.tile.bottom,
+	-- widetile.right,
 }
 
 -- Menubar configuration
@@ -358,7 +358,7 @@ awful.rules.rules = {
 	},
 
 	-- xfce panel no borders
-	{ rule = { class = "Xfce4-panel" }, properties = { border_width = 0, focusable = false, below = true } },
+	{ rule = { class = "Xfce4-panel" }, properties = { border_width = 0, focusable = false, ontop = false } },
 }
 -- }}}
 
@@ -427,11 +427,11 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
-client.connect_signal("unfocus", function(c)
-	if c.class == "Blueman-manager" then
-		c:kill()
-	end
-end)
+-- client.connect_signal("unfocus", function(c)
+-- 	if c.class == "Blueman-manager" then
+-- 		c:kill()
+-- 	end
+-- end)
 
 -- Set the background color to #1c1c2e
 beautiful.notification_bg = "#1c1c2e"
