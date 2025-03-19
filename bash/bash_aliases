@@ -43,6 +43,9 @@ if [ -x /usr/bin/dircolors ]; then
 	alias grep='grep --color=auto'
 	alias ls="ls --color=always"
 
+	alias pacman="pacman --color=always"
+	alias paru="paru --color=always"
+
 	# eza aliases
 	if which eza &>/dev/null; then
 		alias l="eza --color=always --icons"
