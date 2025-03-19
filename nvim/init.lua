@@ -3,6 +3,7 @@
 #    SETTINGS    #
 #                #
 ]]
+-- krems
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 
@@ -87,6 +88,20 @@ vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move focus to the left 
 vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+-- krem's
+vim.keymap.set("n", "<Leader>y", '"+y', { noremap = true, silent = true })
+vim.keymap.set("v", "<Leader>y", '"+y', { noremap = true, silent = true })
+
+-- Paste from system clipboard with <Leader>p
+vim.keymap.set("n", "<Leader>p", '"+p', { noremap = true, silent = true })
+vim.keymap.set("v", "<Leader>p", '"+p', { noremap = true, silent = true })
+
+-- up n down center
+vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "{", "{zz", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "}", "}zz", { noremap = true, silent = true })
 
 --[[ 
 #                    #
@@ -184,8 +199,8 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind [W]ord" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
-			vim.keymap.set("n", "<leader>fp", builtin.find_files, { desc = "[F]ind in [P]roject" })
-			vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = "[F]ind in [O]pened files" })
+			vim.keymap.set("n", "<leader>fo", builtin.find_files, { desc = "[F]ind in [P]roject" })
+			vim.keymap.set("n", "<leader>l", builtin.buffers, { desc = "[F]ind in [O]pened files" })
 			vim.keymap.set("n", "<leader>gp", builtin.live_grep, { desc = "[G]rep in [P]roject" })
 			-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 

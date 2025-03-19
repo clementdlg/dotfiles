@@ -9,7 +9,7 @@ function tmuxMain() {
 
 	# check if inside of tmux
 	if [[ -n $TMUX ]]; then
-		PS1='\[\e[38;5;153;1m\] \[\e[0m\]' # inside of tmux
+		PS1='\[\e[38;5;153;1m\][$?] \[\e[0m\]' # inside of tmux
 	else
 		openSession # not inside of tmux
 	fi

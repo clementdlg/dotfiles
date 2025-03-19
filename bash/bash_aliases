@@ -6,6 +6,7 @@ alias neofetch="fastfetch"
 alias sl="ls"
 alias vim="$EDITOR"
 alias nano="$EDITOR"
+alias ..="cd .."
 
 # Conf file
 alias vawesome="$EDITOR ~/.config/awesome/rc.lua"

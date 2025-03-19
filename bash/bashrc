@@ -1,8 +1,5 @@
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+[[ $- != *i* ]] && return
 
 # don't put duplicate lines
 HISTCONTROL=erasedups
@@ -120,6 +117,7 @@ if which fzf &>/dev/null; then
 	fi
 fi
 
+
 ### EVAL ###
 if which zoxide &>/dev/null; then
 	eval "$(zoxide init bash)"
@@ -134,4 +132,3 @@ bind "TAB:menu-complete"
 
 sourceFile '/home/krem/.bash_completions/labctl.sh'
 unset -f sourceFile
-
