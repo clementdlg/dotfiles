@@ -48,12 +48,12 @@
 		}
 	},
  "widgets": [
+        "mpris",
         "volume",
         "backlight",
         "dnd",
         "title",
-        "notifications",
-        "mpris"
+        "notifications"
     ],
     "widget-config": {
         "title": {
