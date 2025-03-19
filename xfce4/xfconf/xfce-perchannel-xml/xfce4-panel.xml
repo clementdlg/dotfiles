@@ -143,6 +143,8 @@
         <value type="string" value="17416345523.desktop"/>
       </property>
       <property name="show-label" type="bool" value="true"/>
+      <property name="disable-tooltips" type="bool" value="true"/>
+      <property name="move-first" type="bool" value="false"/>
     </property>
     <property name="plugin-21" type="string" value="launcher">
       <property name="items" type="array">
@@ -150,6 +152,26 @@
       </property>
       <property name="disable-tooltips" type="bool" value="true"/>
       <property name="show-label" type="bool" value="true"/>
+    </property>
+    <property name="plugin-7" type="string" value="launcher">
+      <property name="disable-tooltips" type="bool" value="true"/>
+      <property name="items" type="array">
+        <value type="string" value="17416570453.desktop"/>
+      </property>
+      <property name="show-label" type="bool" value="true"/>
+    </property>
+    <property name="plugin-22" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-23" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-24" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-8" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="known-players" type="string" value="Brave"/>
     </property>
   </property>
 </channel>
