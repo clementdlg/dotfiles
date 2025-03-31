@@ -10,7 +10,7 @@ window#waybar {
 	transition-property: background-color;
 	transition-duration: .5s;
 	color: #00FF00;
-	background-color: rgba(35, 32, 54, 0.8);
+	/* background-color: rgba(35, 32, 54, 0.8); */
 }
 
 window#waybar.hidden {
@@ -141,7 +141,10 @@ window#waybar.empty #window {
 	margin-left: 12px;
 	margin-right: 12px;
 	box-shadow: none;
-	background-color: #f7768e;
+	/* red */
+	/* background-color: #f7768e; */
+	/* violet */
+	background-color: #bb9af7;
 	/* override of override */
 	font-size: 24px;
 	padding: 0 10px;
