@@ -56,14 +56,21 @@ connect() {
 	read -r choice_clean <<< "${choice:2}"
 	
 	# check if network is known
-	if nmcli -g NAME connection | grep $choice_clean; then
+	if nmcli -g NAME connection | grep "$choice_clean"; then
 		nmcli connection up id "$choice_clean"
+		notify "Successfully connected to '$choice_clean'"
 	else
-		password=$(echo "" | rofi_cmd "Password:")
-		nmcli device wifi connect "$choice_clean" password "$password"
+		# prompt for password
+		password=$(echo "" | rofi show -dmenu -i -password -p "Wi-Fi Applet" -theme "${theme}" "Password:")
+
+		# check the password
+		if ! nmcli device wifi connect "$choice_clean" password "$password"; then
+			nmcli connection delete id "$choice_clean"
+			notify "Wrong Password !"
+		fi
+		notify "Successfully connected to '$choice_clean'"
 	fi
 
-	notify "Successfully connected to '$choice_clean'"
 }
 
 connect_hidden() {
