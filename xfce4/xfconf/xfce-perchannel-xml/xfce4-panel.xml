@@ -44,7 +44,7 @@
         <value type="int" value="17"/>
         <value type="int" value="19"/>
       </property>
-      <property name="position" type="string" value="p=9;x=959;y=16"/>
+      <property name="position" type="string" value="p=2;x=1738;y=17"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="size" type="uint" value="34"/>
       <property name="span-monitors" type="bool" value="false"/>
@@ -70,7 +70,7 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-15" type="string" value="genmon">
-      <property name="command" type="string" value="./.config/xfce4/scripts/layout.bin"/>
+      <property name="command" type="string" value="/home/krem/.config/xfce4/scripts/layout.bin"/>
       <property name="enable-single-row" type="bool" value="false"/>
       <property name="font" type="string" value="DejaVu Sans Mono Bold 14"/>
       <property name="text" type="string" value="(genmon)"/>
@@ -109,10 +109,6 @@
         <value type="string" value="dnfdragora-updater"/>
       </property>
       <property name="known-items" type="array">
-        <value type="string" value="flameshot"/>
-        <value type="string" value="remmina-icon"/>
-        <value type="string" value="chrome_status_icon_1"/>
-        <value type="string" value="blueman"/>
         <value type="string" value="dnfdragora-updater"/>
       </property>
       <property name="known-legacy-items" type="array">
@@ -168,10 +164,6 @@
     </property>
     <property name="plugin-24" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
-    </property>
-    <property name="plugin-8" type="string" value="pulseaudio">
-      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="known-players" type="string" value="Brave"/>
     </property>
   </property>
 </channel>
