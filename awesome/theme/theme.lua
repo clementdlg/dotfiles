@@ -34,7 +34,8 @@ theme.fg_minimize = "#ffffff"
 theme.useless_gap = dpi(2)
 theme.border_width = dpi(3)
 theme.border_normal = "#48597d"
-theme.border_focus = "#f7768e"
+theme.border_focus = "#bb9af7"
+-- theme.border_focus = "#f7768e"
 theme.border_marked = "#00FF00"
 
 -- There are other variable sets
@@ -100,7 +101,8 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titleba
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = "~/.config/awesome/theme/skonewp-ultrawide.png"
+-- theme.wallpaper = "~/.config/awesome/theme/skonewp-ultrawide.png"
+theme.wallpaper = "~/.config/awesome/theme/background.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
