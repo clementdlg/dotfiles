@@ -61,7 +61,7 @@ connect() {
 		notify "Successfully connected to '$choice_clean'"
 	else
 		# prompt for password
-		password=$(echo "" | rofi show -dmenu -i -password -p "Wi-Fi Applet" -theme "${theme}" "Password:")
+		password=$(echo "" | rofi show -dmenu -i -password -p "Wi-Fi Applet" -theme "${theme}" -mesg "Input password")
 
 		# check the password
 		if ! nmcli device wifi connect "$choice_clean" password "$password"; then
