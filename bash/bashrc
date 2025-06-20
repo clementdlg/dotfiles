@@ -98,8 +98,6 @@ unset -f addToPath
 
 ### SOURCE ###
 
-# source ~/.config/bash/.env
-
 # source aliases and functions at the end
 function sourceFile() {
 	[[ ! -f "$1" ]] && return # $1 must be a valid file
@@ -108,6 +106,8 @@ function sourceFile() {
 
 sourceFile "$HOME/.config/bash/bash_tmux.sh"
 sourceFile "$HOME/.config/bash/bash_aliases"
+sourceFile "$HOME/.bash_completions/labctl.sh"
+sourceFile "$HOME/.config/bash/labinfra_bastion.sh"
 
 if which fzf &>/dev/null; then
 	# trying to source the lightweight file
@@ -117,11 +117,7 @@ if which fzf &>/dev/null; then
 	fi
 fi
 
-
-### EVAL ###
-if which zoxide &>/dev/null; then
-	eval "$(zoxide init bash)"
-fi
+unset -f sourceFile
 
 # remap capslock to ctrl
 if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
@@ -129,6 +125,3 @@ if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
 fi
 
 bind "TAB:menu-complete"
-
-sourceFile '/home/krem/.bash_completions/labctl.sh'
-unset -f sourceFile
