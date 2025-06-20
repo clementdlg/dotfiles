@@ -18,7 +18,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 local funcs = require("main.screen")
-local widetile = require("main.tile")
+--local widetile = require("main.tile")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
