@@ -26,6 +26,25 @@ return gears.table.join(
 		end,
 		{ description = "display settings", group = "Multimedia" }
 	),
+
+	--redshift screen 1
+	awful.key(
+		{ modkey }, --Modifier
+		"F7", --Key
+		function() --Action
+			awful.spawn("/home/krem/scripts/redshift-tweaker.sh -b +10")
+		end,
+		{ description = "redshift brightness up", group = "Desktop" }
+	),
+
+	awful.key(
+		{ modkey }, --Modifier
+		"F6", --Key
+		function() --Action
+			awful.spawn("/home/krem/scripts/redshift-tweaker.sh -b -10")
+		end,
+		{ description = "redshift brightness down", group = "Desktop" }
+	),
 	--[[--------------------
 	|					   |
 	|	WINDOW BINDINGS    |
