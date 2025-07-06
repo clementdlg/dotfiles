@@ -38,7 +38,7 @@ window#waybar.empty #window {
 /* LEFT SIDE  */
 
 #workspaces {
-	font-size: 24px;
+	font-size: 20px;
 }
 
 #workspaces button {
@@ -60,6 +60,8 @@ window#waybar.empty #window {
 
 #workspaces button:hover {
 	/* background: rgba(0, 0, 0, 0.65); */
+
+	transition-duration: .5s;
 	box-shadow: none;
 }
 
@@ -146,7 +148,7 @@ window#waybar.empty #window {
 	/* violet */
 	background-color: #bb9af7;
 	/* override of override */
-	font-size: 24px;
+	font-size: 20px;
 	padding: 0 10px;
 }
 
@@ -186,11 +188,6 @@ window#waybar.empty #window {
 	box-shadow: inset 2px -4px #83a6f2;
 	/* color: #ff9e64; */
 	/* box-shadow: inset 2px -4px #ff9e64; */
-}
-
-#network.disconnected {
-	/* background-color: #f53c3c; */
-	color: #f53c3c;
 }
 
 #pulseaudio {
