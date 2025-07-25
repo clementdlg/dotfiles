@@ -3,6 +3,7 @@ set -x
 set -euo pipefail
 
 SCAN_TIMEOUT=2
+SCAN_FLAG=false
 
 theme="$HOME/.config/rofi/theme/main.rasi"
 device_list=()
@@ -72,10 +73,15 @@ device_basename() {
 }
 
 scan_devices() {
-	while (true); do
-		bluetoothctl -t 2 scan on
-		sleep 1
-	done
+	bluetoothctl -t 8 scan on &
+	sleep 8 
+	get_devices "all"
+
+	# for i in {1..4}; do 
+	# 	sleep 2
+	# 	get_devices "all"
+	# done
+	# echo "log: scan : $SCAN_FLAG"
 }
 
 device_menu() {
@@ -83,11 +89,10 @@ device_menu() {
 	local dev_name="$(device_basename "$choice")"
 	local index="$(device_to_index "$dev_name")"
 
-	local connect_true=" Disconnect device"
 	local connect_false=" Connect device"
-	local pairing_true=" Remove device"
 	local pairing_false=" Pair device"
-
+	local connect_true=" Disconnect device"
+	local pairing_true=" Remove device"
 	local connection_status="$connect_false"
 	local pairing_status="$pairing_false"
 
@@ -130,11 +135,14 @@ get_devices() {
 			keyword="Connected"
 			icon=""
 			;;
+		"all")
+			icon=">" ;;
 		*)
 			return 1
 	esac
 
-	local devices_raw="$(bluetoothctl devices ${keyword} | grep Device | grep -vE "[0-9A-F]{2}(-[0-9A-F]{2}){5}")"
+	local regex="[0-9A-F]{2}(-[0-9A-F]{2}){5}"
+	local devices_raw="$(bluetoothctl devices ${keyword} | grep Device | grep -vE "$regex")"
 
 	[[ -z "$devices_raw" ]] && return
 
@@ -173,12 +181,23 @@ menu_enabled() {
 	
 	all_dev="$(printf '%s\n' "${device_list[@]}")"
 
-	local menu="$scan\n$all_dev\n$disable\n"
+	local menu="$scan\n$all_dev\n$disable\n$exit\n"
 	local choice=$(printf "$menu" | rofi_cmd "" )
 
+	# show device menu dynamically
 	if printf '%s\n' "${device_list[@]}" | grep -Fxq "$choice"; then
 		device_menu "$choice"
+		return
 	fi
+	
+	# static buttons
+	case "$choice" in
+		$scan)
+			scan_devices ;;
+		$exit)
+			EXIT_FLAG=true
+			return
+	esac
 }
 
 menu_disabled() {
@@ -193,6 +212,9 @@ menu_disabled() {
 			;;
 		"$editor")
 			silent blueman-manager & ;;
+		$exit)
+			EXIT_FLAG=true
+			return
 	esac
 }
 
@@ -202,11 +224,16 @@ main() {
 	is_installed rofi
 	is_installed notify-send
 
-	if bluetoothctl show | grep "Powered: yes" >/dev/null ; then
-		menu_enabled
-	else
-		menu_disabled
-	fi
+	EXIT_FLAG=false
+	exit=" Exit"
+
+	while [[ $EXIT_FLAG == false ]]; do
+		if bluetoothctl show | grep "Powered: yes" >/dev/null ; then
+			menu_enabled
+		else
+			menu_disabled
+		fi
+	done
 }
 
 main
