@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -x
+set -x
 set -euo pipefail
 
 SCAN_TIMEOUT=4
@@ -7,6 +7,7 @@ SCAN_TIMEOUT=4
 theme="$HOME/.config/rofi/theme/main.rasi"
 device_list=()
 mac_list=()
+state_list=()
 
 rofi_cmd() {
 	local msg="$1"
@@ -45,6 +46,42 @@ silent() {
 
 # 	bluetoothctl connect "$mac"
 
+device_to_index() {
+	local dev_name="$(device_basename "$1")"
+	
+	for i in "${!device_list[@]}"; do
+		if [[ "${device_list[$i]}" == "$dev_name" ]]; then
+			echo "$i"
+			return
+		fi
+	done
+	echo "-1"
+}
+
+# remove status from device string
+device_basename() {
+	local dev="$1"
+
+	if [[ "${dev:0:1}" == " " ]]; then
+		echo "${dev:3}"
+	else
+		echo "$dev"
+	fi
+}
+
+device_menu() {
+
+	local choice="$1"
+	local dev_name="$(device_basename "$choice")"
+	local connection_status=""
+	local pairing_status=""
+
+	# local menu="$connection_status\n$pairing_status\n"
+	local index="$(device_to_index "$dev_name")"
+	local menu="${state_list[$index]}"
+	local choice=$(printf "$menu" | rofi_cmd "" )
+}
+
 get_devices() {
 	local dev_type="$1"
 	local cmd=""
@@ -71,9 +108,25 @@ get_devices() {
 		dev_name="${line_clean//"$dev_mac "/}"
 
 		if ! printf '%s\n' "${mac_list[@]}" | grep -Fxq "$dev_mac"; then
-			device_list+=("$icon $dev_name")
+			device_list+=("$icon | $dev_name")
 			mac_list+=("$dev_mac")
+			state_list+=("$dev_type")
+
+			echo "state_list= ${state_list[@]}" # debug
 		fi
+
+		local index="$(device_to_index "$dev_name")"
+		echo "i= $index" # debug
+
+
+		if (( index == -1 )); then
+			return 1
+		fi
+
+		echo "pre: ${state_list[$index]}"
+		state_list[$index]="${state_list[$index]}:$dev_type"
+		echo "post: ${state_list[$index]}"
+
 	done <<< "$devices_raw"
 }
 
@@ -94,9 +147,11 @@ menu_enabled() {
 	all_dev="$(printf '%s\n' "${device_list[@]}")"
 
 	local menu="$scan\n$all_dev\n$disable\n"
-
 	local choice=$(printf "$menu" | rofi_cmd "" )
 
+	if printf '%s\n' "${device_list[@]}" | grep -Fxq "$choice"; then
+		device_menu "$choice"
+	fi
 }
 
 menu_disabled() {
@@ -132,9 +187,9 @@ main
 # mockup device menu 1 :
 
 # Device_name
-#  Connect
-#   Trust
-#   Pair
+#  connect
+#   trust
+#   pair
 
 # mockup device menu 2 :
 
