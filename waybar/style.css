@@ -9,7 +9,7 @@ window#waybar {
 	color: rgba(255, 255, 255, 0);
 	transition-property: background-color;
 	transition-duration: .5s;
-	color: #00FF00;
+	color: #FF00FF;
 	/* background-color: rgba(35, 32, 54, 0.8); */
 }
 
@@ -38,14 +38,13 @@ window#waybar.empty #window {
 /* LEFT SIDE  */
 
 #workspaces {
-	font-size: 20px;
+	font-size: 26px;
 }
 
 #workspaces button {
-	padding: 0 15px;
+	padding: 2 21 2 15;
 	margin: 0 1px;
 	background-color: #232036;
-	/* color: #FFFFFF; */
 	color: #e0e6ff;
 	border-radius: 30px;
 	box-shadow: inset -2px -4px #83a6f2;
@@ -100,6 +99,7 @@ window#waybar.empty #window {
 #custom-media,
 #tray,
 #mode,
+#bluetooth,
 #power-profiles-daemon,
 #custom-power,
 #custom-menu,
@@ -108,7 +108,7 @@ window#waybar.empty #window {
 	background-color: #232036;
 	font-weight: bold;
 	border-radius: 30px;
-	padding: 0 10 0 13px;
+	padding: 0 15 0 13px;
 	color: #ffffff;
 	margin: 0 2px;
 	color: #232036;
@@ -128,6 +128,7 @@ window#waybar.empty #window {
 #custom-media:hover,
 #tray:hover,
 #mode:hover,
+#bluetooth:hover,
 #power-profiles-daemon:hover,
 #custom-power:hover,
 #custom-menu:hover,
@@ -140,23 +141,23 @@ window#waybar.empty #window {
 
 #custom-power,
 #custom-menu {
-	margin-left: 12px;
-	margin-right: 12px;
+	/* margin-left: 12px; */
+	padding: 0 15 0 10;
+	/* margin-right: 12px; */
 	box-shadow: none;
-	/* red */
-	/* background-color: #f7768e; */
-	/* violet */
 	background-color: #bb9af7;
 	/* override of override */
-	font-size: 20px;
-	padding: 0 10px;
+	font-size: 22px;
+}
+
+#bluetooth {
+	color: #e0e6ff;
 }
 
 #custom-swaync {
+	padding: 0 15 0 10;
 	color: #e0e6ff;
 	box-shadow: inset 2px -4px #83a6f2;
-	/* color: #bb9af7; */
-	/* box-shadow: inset 2px -4px #bb9af7; */
 }
 
 #clock {

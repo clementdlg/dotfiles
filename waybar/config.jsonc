@@ -160,7 +160,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}    {format_source}",
         "format-alt": "{volume}% {icon} {format_source}",
 		"format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -201,7 +201,7 @@
         "on-click": "/home/krem/.config/rofi/applets/rofi-powermenu.sh"
 	},
     "custom/menu": {
-        "format" : "󰣇",
+        "format" : "",
 		"tooltip": false,
         "on-click": "rofi -show drun"
     }

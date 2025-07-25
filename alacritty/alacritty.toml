@@ -28,7 +28,7 @@ white = "#787c99"
 yellow = "#e0af68"
 
 [font]
-size = 16.0
+size = 17.0
 
 [font.bold]
 family = "DejaVuSansM Nerd Font Propo"
