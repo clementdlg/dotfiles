@@ -72,15 +72,28 @@ device_basename() {
 }
 
 device_menu() {
-
 	local choice="$1"
 	local dev_name="$(device_basename "$choice")"
-	local connection_status=""
-	local pairing_status=""
 
-	# local menu="$connection_status\n$pairing_status\n"
+	local connect_true=" Disconnect device"
+	local connect_false=" Connect device"
+	local pairing_true=" Unpair device"
+	local pairing_false=" Pair device"
+
+	local connection_status="$connect_false"
+	local pairing_status="$pairing_false"
+
 	local index="$(device_to_index "$dev_name")"
-	local menu="${state_list[$index]}"
+
+	if [[ "${state_list[$index]}" == *"connected"* ]]; then
+			connection_status="$connect_true" ;
+	fi
+
+	if [[ "${state_list[$index]}" == *"paired"* ]]; then
+			pairing_status="$pairing_true" ;
+	fi
+
+	local menu="$connection_status\n$pairing_status\n"
 	local choice=$(printf "$menu" | rofi_cmd "" )
 }
 
@@ -111,13 +124,12 @@ get_devices() {
 
 		echo "log: line = $line_clean"
 
-		if ! printf '%s\n' "${mac_list[@]}" | grep -Fxq "$dev_mac"; then
+		local index="$(device_to_index "$dev_name")"
+		if (( index == -1 )); then
 			device_list+=(" $icon $dev_name")
 			mac_list+=("$dev_mac")
 			state_list+=("$dev_type")
 		else
-			local index="$(device_to_index "$dev_name")"
-			(( index == -1 )) && return 1
 			state_list[$index]="${state_list[$index]}:$dev_type"
 		fi
 
