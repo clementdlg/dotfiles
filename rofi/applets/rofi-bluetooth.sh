@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+# set -x
+set -euo pipefail
 
 SCAN_TIMEOUT=4
 
 theme="$HOME/.config/rofi/theme/main.rasi"
+device_list=()
+mac_list=()
 
 rofi_cmd() {
 	local msg="$1"
@@ -33,103 +36,67 @@ silent() {
 	"$@" &>/dev/null
 }
 
-choose_device() {
-	local type="$1"
-	if ! echo "$type" | grep -E "Connected|Paired"; then
-		type=""
-	fi
-	
-	local message="$2"
-	[[ -z "$message" ]] && return 1
+# 	silent bluetoothctl disconnect "$mac"
 
-	local devices="$(bluetoothctl devices $type | awk '{$1=$2=""; print substr($0,3)}')"
+# 	silent bluetoothctl remove "$mac"
 
-	# printf "%s\n" "$devices" # debug
+# 	silent bluetoothctl -t $SCAN_TIMEOUT scan on
+# }
 
-	device="$(printf "%s\n" "$devices" | rofi_cmd "$message")"
+# 	bluetoothctl connect "$mac"
 
-	echo "$device"
-}
+get_devices() {
+	local dev_type="$1"
+	local cmd=""
+	local icon=""
 
-get_mac_addr() {
-	device="$1"
-	[[ -z "$device" ]] && return 1
+	case "$dev_type" in
+		"paired") 
+			cmd="bluetoothctl devices Paired"
+			icon=""
+			;;
+		"connected") 
+			cmd="bluetoothctl devices Connected"
+			icon=""
+			;;
+		*)
+			return 1
+	esac
 
-	bluetoothctl devices | grep "$device" | cut -f2 -d' '
-}
+	local devices_raw="$($cmd | grep Device)"
 
-disconnect_device_menu() {
-	device="$(choose_device "Connected" "Disconnect a device")"
-	mac="$(get_mac_addr "$device")"
+	while IFS= read -r line; do
+		line_clean="${line//"Device "/}"
+		dev_mac="$(echo "$line_clean" | cut '-d ' -f1)"	
+		dev_name="${line_clean//"$dev_mac "/}"
 
-	notify "Disconnecting $device"
-	silent bluetoothctl disconnect "$mac"
-}
-
-rm_devices_menu() {
-	device="$(choose_device "Paired" "Remove a device")"
-	mac="$(get_mac_addr "$device")"
-
-	notify "Removing $device"
-	silent bluetoothctl remove "$mac"
-}
-
-get_scanned_device() {
-	notify "Scanning for devices..."
-
-	silent bluetoothctl -t $SCAN_TIMEOUT scan on
-
-	device="$(choose_device "" "Connect a device")"
-
-	echo "$device"
-}
-
-connect_device() {
-	local device="$1"
-	[[ -z "$device" ]] && return 1
-
-	mac="$(get_mac_addr "$device")"
-
-	notify "Attempting to connect to $device"
-	bluetoothctl connect "$mac"
+		if ! printf '%s\n' "${mac_list[@]}" | grep -Fxq "$dev_mac"; then
+			device_list+=("$icon $dev_name")
+			mac_list+=("$dev_mac")
+		fi
+	done <<< "$devices_raw"
 }
 
 menu_enabled() {
-	# menu items
-	local connect_menu="󰂱 Connected devices 󰜴"
-	local paired_menu=" Paired devices 󰜴"
-	local scan_menu="󰂰 Scan devices 󰜴"
-	local remove_menu=" Remove devices 󰜴"
-	local disable=" Disable Bluetooth"
-	local editor="󰘙 Blueman Manager"
+	
+	#   Scan Devices
+	# Device_name1 |  |  | 󰜴
+	# Device_name2 |  | 󰢤 | 󰜴
+	# Device_name3 | 󰢤 | 󰢤 | 󰜴
+	#   Disable Bluetooth
 
-	# menu
-	local menu="$connect_menu\n$paired_menu\n$scan_menu\n$remove_menu\n$disable\n$editor\n"
+	local scan=" Scan Devices"
+	local disable=" Disable Bluetooth"
+
+	get_devices "connected"
+	get_devices "paired"
+	
+	all_dev="$(printf '%s\n' "${device_list[@]}")"
+
+	local menu="$scan\n$all_dev\n$disable\n"
 
 	local choice=$(printf "$menu" | rofi_cmd "" )
 
-	case "$choice" in
-		"$connect_menu")
-			disconnect_device_menu
-			;;
-		"$paired_menu")
-			device="$(choose_device "Paired" "Connect a device")"
-			connect_device "$device"
-			;;
-		"$scan_menu")
-			device="$(get_scanned_device)"
-			connect_device "$device"
-			;;
-		"$remove_menu")
-			rm_devices_menu
-			;;
-		"$disable")
-			silent bluetoothctl power off
-			notify "Bluetooth has been disabled"
-			;;
-		"$editor")
-			silent blueman-manager & ;;
-	esac
 }
 
 menu_disabled() {
@@ -153,10 +120,25 @@ main() {
 	is_installed rofi
 	is_installed notify-send
 
-	if bluetoothctl show | grep -q "Powered: yes"; then
+	if bluetoothctl show | grep "Powered: yes" >/dev/null ; then
 		menu_enabled
 	else
 		menu_disabled
 	fi
 }
+
 main
+
+# mockup device menu 1 :
+
+# Device_name
+#  Connect
+#   Trust
+#   Pair
+
+# mockup device menu 2 :
+
+# Device_name
+#  Disconnect
+#    Untrust
+#   Unpair
