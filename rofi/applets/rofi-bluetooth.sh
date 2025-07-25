@@ -50,7 +50,9 @@ device_to_index() {
 	local dev_name="$(device_basename "$1")"
 	
 	for i in "${!device_list[@]}"; do
-		if [[ "${device_list[$i]}" == "$dev_name" ]]; then
+		local device_basename_i="$(device_basename "${device_list[$i]}")"
+
+		if [[ "$device_basename_i" == "$dev_name" ]]; then
 			echo "$i"
 			return
 		fi
@@ -108,24 +110,18 @@ get_devices() {
 		dev_name="${line_clean//"$dev_mac "/}"
 
 		if ! printf '%s\n' "${mac_list[@]}" | grep -Fxq "$dev_mac"; then
-			device_list+=("$icon | $dev_name")
+			device_list+=(" $icon $dev_name")
 			mac_list+=("$dev_mac")
 			state_list+=("$dev_type")
-
-			echo "state_list= ${state_list[@]}" # debug
 		fi
 
 		local index="$(device_to_index "$dev_name")"
-		echo "i= $index" # debug
-
 
 		if (( index == -1 )); then
 			return 1
 		fi
 
-		echo "pre: ${state_list[$index]}"
 		state_list[$index]="${state_list[$index]}:$dev_type"
-		echo "post: ${state_list[$index]}"
 
 	done <<< "$devices_raw"
 }
