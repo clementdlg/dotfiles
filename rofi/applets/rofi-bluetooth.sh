@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+# set -x
 set -euo pipefail
 
 SCAN_TIMEOUT=4
@@ -109,19 +109,17 @@ get_devices() {
 		dev_mac="$(echo "$line_clean" | cut '-d ' -f1)"	
 		dev_name="${line_clean//"$dev_mac "/}"
 
+		echo "log: line = $line_clean"
+
 		if ! printf '%s\n' "${mac_list[@]}" | grep -Fxq "$dev_mac"; then
 			device_list+=(" $icon $dev_name")
 			mac_list+=("$dev_mac")
 			state_list+=("$dev_type")
+		else
+			local index="$(device_to_index "$dev_name")"
+			(( index == -1 )) && return 1
+			state_list[$index]="${state_list[$index]}:$dev_type"
 		fi
-
-		local index="$(device_to_index "$dev_name")"
-
-		if (( index == -1 )); then
-			return 1
-		fi
-
-		state_list[$index]="${state_list[$index]}:$dev_type"
 
 	done <<< "$devices_raw"
 }
