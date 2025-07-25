@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# set -x
+set -x
 set -euo pipefail
 
-SCAN_TIMEOUT=4
+SCAN_TIMEOUT=2
 
 theme="$HOME/.config/rofi/theme/main.rasi"
 device_list=()
@@ -71,19 +71,25 @@ device_basename() {
 	fi
 }
 
+scan_devices() {
+	while (true); do
+		bluetoothctl -t 2 scan on
+		sleep 1
+	done
+}
+
 device_menu() {
 	local choice="$1"
 	local dev_name="$(device_basename "$choice")"
+	local index="$(device_to_index "$dev_name")"
 
 	local connect_true=" Disconnect device"
 	local connect_false=" Connect device"
-	local pairing_true=" Unpair device"
+	local pairing_true=" Remove device"
 	local pairing_false=" Pair device"
 
 	local connection_status="$connect_false"
 	local pairing_status="$pairing_false"
-
-	local index="$(device_to_index "$dev_name")"
 
 	if [[ "${state_list[$index]}" == *"connected"* ]]; then
 			connection_status="$connect_true" ;
@@ -95,27 +101,42 @@ device_menu() {
 
 	local menu="$connection_status\n$pairing_status\n"
 	local choice=$(printf "$menu" | rofi_cmd "" )
+	
+	case "$choice" in
+		"$connect_false")
+			bluetoothctl pair "${mac_list[$index]}"
+			bluetoothctl connect "${mac_list[$index]}" 
+			;;
+		"$connect_true")
+			bluetoothctl disconnect "${mac_list[$index]}" ;;
+		"$pairing_false")
+			bluetoothctl pair "${mac_list[$index]}" ;;
+		"$pairing_true")
+			bluetoothctl remove "${mac_list[$index]}" ;;
+	esac
 }
 
 get_devices() {
 	local dev_type="$1"
-	local cmd=""
+	local keyword=""
 	local icon=""
 
 	case "$dev_type" in
 		"paired") 
-			cmd="bluetoothctl devices Paired"
+			keyword="Paired"
 			icon=""
 			;;
 		"connected") 
-			cmd="bluetoothctl devices Connected"
+			keyword="Connected"
 			icon=""
 			;;
 		*)
 			return 1
 	esac
 
-	local devices_raw="$($cmd | grep Device)"
+	local devices_raw="$(bluetoothctl devices ${keyword} | grep Device | grep -vE "[0-9A-F]{2}(-[0-9A-F]{2}){5}")"
+
+	[[ -z "$devices_raw" ]] && return
 
 	while IFS= read -r line; do
 		line_clean="${line//"Device "/}"
@@ -190,16 +211,5 @@ main() {
 
 main
 
-# mockup device menu 1 :
-
-# Device_name
-#  connect
-#   trust
-#   pair
-
-# mockup device menu 2 :
-
-# Device_name
-#  Disconnect
-#    Untrust
-#   Unpair
+# TODO
+# add support for trusted devices (trust, untrust)
