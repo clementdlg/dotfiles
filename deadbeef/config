@@ -3,12 +3,12 @@ deadbeef_version 1.10.0
 filechooser.lastdir file:///home/krem/Desktop/MIXX3
 filechooser.playlist.lastdir file:///home/krem
 gtkui.color.bar_foreground 38036 46773 65535
-gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"},{"title":"Cover","id":"8","format":"","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffeeeeec"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"463","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"129","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track Number","id":"-1","format":"%tracknumber%","sort_format":"","size":"100","align":"0","color_override":"0","color":"#ffeeeeec"}]
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"},{"title":"Cover","id":"8","format":"","sort_format":"","size":"114","align":"0","color_override":"0","color":"#ffeeeeec"},{"title":"Track Number","id":"-1","format":"%tracknumber%","sort_format":"","size":"40","align":"0","color_override":"0","color":"#ffeeeeec"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"463","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"129","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.columns.search [{"title":"Artist / Album","id":"-1","format":"$if(%artist%,%artist%,Unknown Artist)[ - %album%]","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","sort_format":"","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","sort_format":"","size":"150","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","sort_format":"","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
 gtkui.eq.visible 0
 gtkui.font.tabstrip_text Sans 14
 gtkui.hide_remove_from_disk 1
-gtkui.layout.1.9.0 {"type":"vsplitter","legacy_params":" locked=0 ratio=0.042328 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"playtb"},{"type":"button","legacy_params":" color=\"#000000\" textcolor=\"#000000\" use_color=0 use_textcolor=0"}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"volumebar","settings":{"scale":"db"}},{"type":"button","legacy_params":" color=\"#000000\" textcolor=\"#000000\" label=\"🔇\" action=\"toggle_mute\" use_color=0 use_textcolor=0"}]}]}]},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.763578 pos=0 size2=0","children":[{"type":"playlist","legacy_params":" hideheaders=0 width=717"},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.869855 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"multichannel","scaleMode":"auto","fragmentDuration":"300"}}]}]}]}
+gtkui.layout.1.9.0 {"type":"hsplitter","legacy_params":" locked=0 ratio=0.486272 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.903704 pos=0 size2=0","children":[{"type":"vsplitter","legacy_params":" locked=0 ratio=0.935597 pos=0 size2=0","children":[{"type":"coverart","settings":{"mode":"selected"}},{"type":"scope","settings":{"renderMode":"mono","scaleMode":"auto","fragmentDuration":"500"}}]},{"type":"vsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"seekbar"},{"type":"hsplitter","legacy_params":" locked=0 ratio=0.500000 pos=0 size2=0","children":[{"type":"playtb"},{"type":"hbox","legacy_params":" expand=\"0 1 1 0\" fill=\"1 1 1 0\" homogeneous=0","children":[{"type":"button","legacy_params":" color=\"#000000\" textcolor=\"#000000\" use_color=0 use_textcolor=0"},{"type":"placeholder"},{"type":"volumebar","settings":{"scale":"linear"}},{"type":"button","legacy_params":" color=\"#000000\" textcolor=\"#000000\" label=\"🔇\" action=\"toggle_mute\" use_color=0 use_textcolor=0"}]}]}]}]},{"type":"playlist","legacy_params":" hideheaders=0 width=967"}]}
 gtkui.name_playlist_from_folder 1
 gtkui.override_bar_colors 1
 gtkui.override_listview_colors 0
@@ -88,8 +88,8 @@ prefwin.geometry.x 523
 prefwin.geometry.y 244
 resume.paused 0
 resume.playlist 0
-resume.position 0.0928798
-resume.track 0
+resume.position 92.415802
+resume.track 6
 searchwin.geometry.h 150
 searchwin.geometry.maximized 1
 searchwin.geometry.w 450
