@@ -42,7 +42,7 @@ window#waybar.empty #window {
 }
 
 #workspaces button {
-	padding: 2 21 2 15;
+	padding: 2 15;
 	margin: 0 1px;
 	background-color: #232036;
 	color: #e0e6ff;
@@ -108,7 +108,7 @@ window#waybar.empty #window {
 	background-color: #232036;
 	font-weight: bold;
 	border-radius: 30px;
-	padding: 0 15 0 13px;
+	padding: 0 13 0 15px;
 	color: #ffffff;
 	margin: 0 2px;
 	color: #232036;
@@ -142,7 +142,7 @@ window#waybar.empty #window {
 #custom-power,
 #custom-menu {
 	/* margin-left: 12px; */
-	padding: 0 15 0 10;
+	padding: 0 12;
 	/* margin-right: 12px; */
 	box-shadow: none;
 	background-color: #bb9af7;
@@ -155,7 +155,7 @@ window#waybar.empty #window {
 }
 
 #custom-swaync {
-	padding: 0 15 0 10;
+	padding: 0 12;
 	color: #e0e6ff;
 	box-shadow: inset 2px -4px #83a6f2;
 }

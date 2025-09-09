@@ -160,8 +160,9 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
+		"tooltip": false,
         "format": "{volume}% {icon}    {format_source}",
-        "format-alt": "{volume}% {icon} {format_source}",
+        // "format-alt": "{volume}% {icon} {format_source}",
 		"format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": "󰝟 {format_source}",
@@ -177,7 +178,8 @@
             "default": ["a", "", "", ""]
         },
         // "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
-		"on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
+		// "on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
+		"on-click": "/home/krem/scripts/toggle_applet.sh cosmic-applets/target/debug/cosmic-applet-audio"
     },
     "custom/media": {
         "format": "{icon} {text}",
