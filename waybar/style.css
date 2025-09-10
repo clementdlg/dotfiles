@@ -145,7 +145,7 @@ window#waybar.empty #window {
 	padding: 0 12;
 	/* margin-right: 12px; */
 	box-shadow: none;
-	background-color: #bb9af7;
+	background-color: #aba1ed;
 	/* override of override */
 	font-size: 22px;
 }

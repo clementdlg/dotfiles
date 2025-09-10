@@ -179,7 +179,7 @@
         },
         // "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
 		// "on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
-		"on-click": "/home/krem/scripts/toggle_applet.sh cosmic-applets/target/debug/cosmic-applet-audio"
+		"on-click": "/home/krem/.config/scripts/toggle_applet.sh /home/krem/github/cosmic-applets/target/release/cosmic-applet-audio"
     },
     "custom/media": {
         "format": "{icon} {text}",
