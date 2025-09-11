@@ -102,8 +102,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "format": "{:%H:%M} 󰥔",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+		"on-click" : "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-time"
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -144,9 +143,10 @@
 		"format": " {status}",
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": " {num_connections} connected",
-		"tooltip-format": "{controller_alias}\t{controller_address}",
-		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+		// "tooltip-format": "{controller_alias}\t{controller_address}",
+		// "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		// "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+		"on-click": "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-bluetooth"
 	},
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -155,8 +155,8 @@
         "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "No Network ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"on-click-right": "$HOME/.config/rofi/applets/rofi-wifi.sh"
+        // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"on-click": "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-network"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

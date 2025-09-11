@@ -19,7 +19,7 @@ main() {
 		"$lockscreen")
 			xfce4-screensaver-command -l ;;
 		"$logoff")
-			hyprctl dispatch exit ;;
+			loginctl kill-session $XDG_SESSION_ID ;;
 		"$shutdown")
 			systemctl poweroff ;;
 		"$restart")
