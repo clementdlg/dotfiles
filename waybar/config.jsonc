@@ -102,7 +102,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "format": "{:%H:%M} 󰥔",
-		"on-click" : "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-time"
+		"on-click" : "~/.config/scripts/toggle_applet.sh ~/.config/scripts/cosmic-applet-time"
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -146,7 +146,7 @@
 		// "tooltip-format": "{controller_alias}\t{controller_address}",
 		// "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
 		// "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
-		"on-click": "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-bluetooth"
+		"on-click": "~/.config/scripts/toggle_applet.sh ~/.config/scripts/cosmic-applet-bluetooth"
 	},
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -156,7 +156,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "No Network ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"on-click": "~/.config/scripts/toggle_applet.sh ~/github/cosmic-applets/target/release/cosmic-applet-network"
+		"on-click": "~/.config/scripts/toggle_applet.sh ~/.config/scripts/cosmic-applet-network"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -179,7 +179,7 @@
         },
         // "on-click": "$HOME/.config/rofi/applets/rofi-audio-io.sh",
 		// "on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
-		"on-click": "/home/krem/.config/scripts/toggle_applet.sh /home/krem/github/cosmic-applets/target/release/cosmic-applet-audio"
+		"on-click": "/home/krem/.config/scripts/toggle_applet.sh ~/.config/scripts/cosmic-applet-audio"
     },
     "custom/media": {
         "format": "{icon} {text}",
