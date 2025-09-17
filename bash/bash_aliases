@@ -10,7 +10,6 @@ alias ..="cd .."
 alias c="clear"
 
 # Conf file
-alias vawesome="$EDITOR ~/.config/awesome/rc.lua"
 alias nvimrc="$EDITOR ~/.config/nvim/init.lua"
 alias vimrc="$EDITOR ~/.config/vim/vimrc"
 

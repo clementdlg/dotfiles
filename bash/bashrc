@@ -70,8 +70,6 @@ if ! shopt -oq posix; then
 fi
 
 ###	EXPORTS	###
-
-export LIBVIRT_DEFAULT_URI="qemu:///system"
 export PROMPT_COMMAND='history -a; history -n'
 
 # pick the best possible editor
@@ -90,7 +88,8 @@ function addToPath() {
 	export PATH=$PATH:$1
 	return 0
 }
-addToPath "$HOME/scripts"
+addToPath "$HOME/scripts/dev/"
+addToPath "$HOME/scripts/desktop/"
 addToPath "$HOME/scripts/utils"
 addToPath "$HOME/.local/bin"
 
@@ -106,8 +105,6 @@ function sourceFile() {
 
 sourceFile "$HOME/.config/bash/bash_tmux.sh"
 sourceFile "$HOME/.config/bash/bash_aliases"
-sourceFile "$HOME/.bash_completions/labctl.sh"
-sourceFile "$HOME/.config/bash/labinfra_bastion.sh"
 
 if which fzf &>/dev/null; then
 	# trying to source the lightweight file
@@ -119,9 +116,7 @@ fi
 
 unset -f sourceFile
 
-# remap capslock to ctrl
-if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
-	setxkbmap -option caps:ctrl_modifier
-fi
+# eval
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 bind "TAB:menu-complete"
