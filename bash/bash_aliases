@@ -38,9 +38,7 @@ if [[ -f "$HOME/scripts/utils/quick-wg" ]]; then
 fi
 
 # Basic color support
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-
+if [[ "$TERM" == *"-256color" ]]; then
 	alias ip='ip -c'
 	alias grep='grep --color=auto'
 	alias ls="ls --color=always"

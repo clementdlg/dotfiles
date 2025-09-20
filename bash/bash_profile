@@ -1,2 +1,7 @@
 #!/bin/bash
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Source .bashrc for interactive sessions
+case $- in
+  *i*) [ -r ~/.bashrc ] && . ~/.bashrc ;;
+esac
