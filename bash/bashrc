@@ -122,6 +122,8 @@ export LANG=C
 export LC_ALL=C
 
 # eval
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ -f /opt/homebrew/bin/brew ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 bind "TAB:menu-complete"
