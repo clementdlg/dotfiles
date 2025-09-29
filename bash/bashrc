@@ -116,6 +116,11 @@ fi
 
 unset -f sourceFile
 
+# export
+export TERM=screen-256color
+export LANG=C
+export LC_ALL=C
+
 # eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
