@@ -384,13 +384,13 @@ require("lazy").setup({
 				docker_compose_language_service = {},
 				dockerls = {},
 				bashls = {},
-				html = {},
-				ts_ls = {},
+				-- html = {},
+				-- ts_ls = {},
 				pylsp = {},
-				clangd = {},
+				-- clangd = {},
 				-- gopls = {},
-				pyright = {},
-				intelephense = {},
+				-- pyright = {},
+				-- intelephense = {},
 
 				lua_ls = {
 					-- cmd = {...},
