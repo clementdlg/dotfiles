@@ -43,7 +43,7 @@ if [ "$color_prompt" = yes ]; then
 	if [[ -z $ip ]]; then
 		ip=$(hostname)
 	fi
-	PS1='\[\e[38;5;63;1m\][\[\e[0;38;5;216m\]\u\[\e[38;5;63;1m\]@\[\e[0;38;5;216m\]$ip\[\e[38;5;63;1m\]]–(\[\e[0;97m\]\W\[\e[38;5;63;1m\])\[\e[0;97m\]\$\[\e[97m\] \[\e[0m\]'
+	PS1='\[\e[38;5;153;1m\][$?] \[\e[0m\]'
 fi
 
 unset color_prompt force_color_prompt
