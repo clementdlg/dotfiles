@@ -17,7 +17,7 @@ vim.opt.scrolloff = 10 --Max cursor scroll
 vim.opt.clipboard = "" -- Do not use system clipboard
 vim.opt.hidden = true --Put buffer in background
 vim.opt.mouse = "a" --Mouse support
-vim.g.have_nerd_font = true --Use nerd font
+vim.g.have_nerd_font = false --Use nerd font
 -- backspace
 vim.opt.showmode = false --Do not show mode
 -- recursive path
