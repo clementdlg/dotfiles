@@ -39,11 +39,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-	ip=$(\ip route get 1.1.1.1 2>/dev/null | awk '{ print $7 }')
-	if [[ -z $ip ]]; then
-		ip=$(hostname)
-	fi
-	PS1='\[\e[38;5;153;1m\][$?] \[\e[0m\]'
+	PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
 fi
 
 unset color_prompt force_color_prompt
