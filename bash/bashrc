@@ -99,7 +99,6 @@ function sourceFile() {
 	source "$1"
 }
 
-sourceFile "$HOME/.config/bash/bash_tmux.sh"
 sourceFile "$HOME/.config/bash/bash_aliases"
 
 if which fzf &>/dev/null; then
@@ -111,11 +110,6 @@ if which fzf &>/dev/null; then
 fi
 
 unset -f sourceFile
-
-# export
-export TERM=screen-256color
-export LANG=C
-export LC_ALL=C
 
 # eval
 if [[ -f /opt/homebrew/bin/brew ]]; then
