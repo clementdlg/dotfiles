@@ -39,7 +39,12 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-	PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
+	host="$(hostname |cut -d. -f1)"
+	if [[ -v TMUX ]]; then
+		PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
+	else
+		PS1='\[\e[38;5;153;1m\][$host]($?)> \[\e[0m\]'
+	fi
 fi
 
 unset color_prompt force_color_prompt
@@ -69,9 +74,7 @@ fi
 export PROMPT_COMMAND='history -a; history -n'
 
 # pick the best possible editor
-if which nvim &>/dev/null; then
-	export EDITOR=nvim
-elif which vim &>/dev/null; then
+if which vim &>/dev/null; then
 	export EDITOR=vim
 elif which vi &>/dev/null; then
 	export EDITOR=vi
@@ -110,6 +113,12 @@ if which fzf &>/dev/null; then
 fi
 
 unset -f sourceFile
+
+# export
+export TERM=screen-256color
+export COLORTERM=truecolor
+# export LANG=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 
 # eval
 if [[ -f /opt/homebrew/bin/brew ]]; then
