@@ -7,3 +7,4 @@ source ~/.config/vim/settings.vim
 source ~/.config/vim/statusline.vim
 source ~/.config/vim/mappings.vim
 source ~/.config/vim/build-cmd.vim
+source ~/.config/vim/term-wrapper.vim

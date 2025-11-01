@@ -23,9 +23,6 @@ nnoremap }						}zz
 " scripting
 nnoremap <silent><leader>rc    		:source %<CR>
 nnoremap <silent><leader>x			:!chmod +x %
-nnoremap <silent><Leader>br			:call RunBuildCmd()<CR>
-nnoremap <silent><Leader>bs			:call SetBuildCmd()<CR>
 
 " toggle cursorline when entering/leaving insert mode
 autocmd InsertEnter,InsertLeave * set cursorline!
-
