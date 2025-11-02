@@ -42,11 +42,12 @@ window#waybar.empty #window {
 }
 
 #workspaces button {
-	padding: 2 15;
-	margin: 0 1px;
+	/* padding: 2 15; */
+	padding: 2 20 2 15;
+	/* margin: 0 1px; */
 	background-color: #232036;
 	color: #e0e6ff;
-	border-radius: 30px;
+	border-radius: 18px;
 	box-shadow: inset -2px -4px #83a6f2;
 }
 
@@ -107,13 +108,13 @@ window#waybar.empty #window {
 #mpd {
 	background-color: #232036;
 	font-weight: bold;
-	border-radius: 30px;
+	border-radius: 18px;
 	padding: 0 13 0 15px;
 	color: #ffffff;
-	margin: 0 2px;
 	color: #232036;
 	font-size: 20px;
 	box-shadow: inset 2px -4px #83a6f2;
+	transition-duration: 0.7s;
 }
 
 
@@ -142,7 +143,7 @@ window#waybar.empty #window {
 #custom-power,
 #custom-menu {
 	/* margin-left: 12px; */
-	padding: 0 12;
+	padding: 0 18 0 10;
 	/* margin-right: 12px; */
 	box-shadow: none;
 	background-color: #aba1ed;
@@ -155,7 +156,7 @@ window#waybar.empty #window {
 }
 
 #custom-swaync {
-	padding: 0 12;
+	padding: 0 18 0 10;
 	color: #e0e6ff;
 	box-shadow: inset 2px -4px #83a6f2;
 }

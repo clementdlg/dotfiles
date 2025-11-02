@@ -4,7 +4,7 @@ opacity = 0.87
 padding = { x = 5, y = 5 }
 
 [colors.primary]
-background = "0x232036"
+background = "0x222436"
 foreground = "0xFFFFFF"
 
 [colors.bright]
