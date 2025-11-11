@@ -152,7 +152,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "No Network ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
-		"on-click": "better-control -m --network"
+		"on-click": "better-control -m --wifi"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
