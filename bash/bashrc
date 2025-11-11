@@ -39,11 +39,12 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-	ip=$(\ip route get 1.1.1.1 2>/dev/null | awk '{ print $7 }')
-	if [[ -z $ip ]]; then
-		ip=$(hostname)
+	host="$(hostname |cut -d. -f1)"
+	if [[ -v TMUX ]]; then
+		PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
+	else
+		PS1='\[\e[38;5;153;1m\][$host]($?)> \[\e[0m\]'
 	fi
-	PS1='\[\e[38;5;63;1m\][\[\e[0;38;5;216m\]\u\[\e[38;5;63;1m\]@\[\e[0;38;5;216m\]$ip\[\e[38;5;63;1m\]]–(\[\e[0;97m\]\W\[\e[38;5;63;1m\])\[\e[0;97m\]\$\[\e[97m\] \[\e[0m\]'
 fi
 
 unset color_prompt force_color_prompt
@@ -70,14 +71,10 @@ if ! shopt -oq posix; then
 fi
 
 ###	EXPORTS	###
-
-export LIBVIRT_DEFAULT_URI="qemu:///system"
 export PROMPT_COMMAND='history -a; history -n'
 
 # pick the best possible editor
-if which nvim &>/dev/null; then
-	export EDITOR=nvim
-elif which vim &>/dev/null; then
+if which vim &>/dev/null; then
 	export EDITOR=vim
 elif which vi &>/dev/null; then
 	export EDITOR=vi
@@ -90,7 +87,8 @@ function addToPath() {
 	export PATH=$PATH:$1
 	return 0
 }
-addToPath "$HOME/scripts"
+addToPath "$HOME/scripts/dev/"
+addToPath "$HOME/scripts/desktop/"
 addToPath "$HOME/scripts/utils"
 addToPath "$HOME/.local/bin"
 
@@ -98,37 +96,28 @@ unset -f addToPath
 
 ### SOURCE ###
 
-# source ~/.config/bash/.env
-
 # source aliases and functions at the end
 function sourceFile() {
 	[[ ! -f "$1" ]] && return # $1 must be a valid file
 	source "$1"
 }
 
-sourceFile "$HOME/.config/bash/bash_tmux.sh"
 sourceFile "$HOME/.config/bash/bash_aliases"
 
 if which fzf &>/dev/null; then
-	# trying to source the lightweight file
-	sourceFile "$HOME/.config/bash/fzf_history.sh"
-	if [[ $? -ne 0 ]]; then # else, running the whole script
-		eval "$(fzf --bash)"
-	fi
+	eval "$(fzf --bash)"
 fi
 
+unset -f sourceFile
 
-### EVAL ###
-if which zoxide &>/dev/null; then
-	eval "$(zoxide init bash)"
-fi
+# export
+export COLORTERM=truecolor
+# export LANG=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 
-# remap capslock to ctrl
-if [[ $XDG_SESSION_TYPE == "x11" ]] && which setxkbmap &>/dev/null ; then
-	setxkbmap -option caps:ctrl_modifier
+# eval
+if [[ -f /opt/homebrew/bin/brew ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 bind "TAB:menu-complete"
-
-sourceFile '/home/krem/.bash_completions/labctl.sh'
-unset -f sourceFile

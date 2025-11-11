@@ -7,9 +7,9 @@ alias sl="ls"
 alias vim="$EDITOR"
 alias nano="$EDITOR"
 alias ..="cd .."
+alias c="clear"
 
 # Conf file
-alias vawesome="$EDITOR ~/.config/awesome/rc.lua"
 alias nvimrc="$EDITOR ~/.config/nvim/init.lua"
 alias vimrc="$EDITOR ~/.config/vim/vimrc"
 
@@ -24,27 +24,24 @@ alias wgu="/bin/sudo wg-quick up"
 
 # docker
 alias dockerrm="docker ps -a | awk '{ print \$1 }' | tail -n+2 | xargs -I {} sudo docker rm {}"
-alias docker="sudo docker"
-alias d="sudo docker"
+alias dcu="docker compose up -d --build && docker compose logs -f"
+alias d="docker"
+alias dcd="docker compose down"
 
 # other
 alias kernel="echo \$(curl -s https://kernel.org/ | grep -A1 '<td>mainline:</td>' | tail -1 | sed 's/[a-z<>\/ ]//g')"
 alias html="w3m -T text/html"
+alias music=ncmpcpp
 
 if [[ -f "$HOME/scripts/utils/quick-wg" ]]; then
 	alias wireg="/bin/sudo /home/krem/scripts/utils/quick-wg"
 fi
 
 # Basic color support
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-
+if [[ "$TERM" == *"-256color" ]]; then
 	alias ip='ip -c'
 	alias grep='grep --color=auto'
 	alias ls="ls --color=always"
-
-	alias pacman="pacman --color=always"
-	alias paru="paru --color=always"
 
 	# eza aliases
 	if which eza &>/dev/null; then
@@ -64,3 +61,8 @@ function noerr() { "$@" 2>/dev/null; }
 function silent() { "$@" &>/dev/null; }
 function sbg() { "$@" &>/dev/null & }
 function wk() { source $HOME/scripts/utils/cdz "$HOME/Desktop/2e-annee" ;}
+
+
+function eve() {
+	telnet my-eveng "32${1}"
+}
