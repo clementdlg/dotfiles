@@ -44,16 +44,16 @@ window#waybar.empty #window {
 #workspaces button {
 	/* padding: 2 15; */
 	padding: 2 20 2 15;
-	background-color: #232036;
+	background-color: #222436;
 	color: #e0e6ff;
-	border-radius: 14px;
-	box-shadow: inset 0px -4px #83a6f2;
+	border-radius: 8px;
+	box-shadow: inset 0px -3px #83a6f2;
 }
 
 #workspaces button.active {
 	background-color: #83a6f2;
 	/* color: #000000; */
-	color: #232036;
+	color: #222436;
 }
 
 
@@ -75,8 +75,9 @@ window#waybar.empty #window {
 	padding: 0 15px;
 	color: rgb(210, 210, 210);
 	background: rgba(35, 32, 54, 1);
-	border-radius: 14px;
-	box-shadow: inset 0px -4px #83a6f2;
+	border-radius: 8px;
+	box-shadow: inset 0px -3px #83a6f2;
+	margin: 0px 10px;
 }
 
 
@@ -103,12 +104,12 @@ window#waybar.empty #window {
 #custom-menu,
 #custom-swaync,
 #mpd {
-	background-color: #232036;
-	border-radius: 14px;
-	padding: 0 13 0 15px;
-	color: #232036;
-	font-size: 18px;
-	box-shadow: inset 0px -4px #83a6f2;
+	background-color: #222436;
+	border-radius: 8px;
+	padding: 0px 15px;
+	color: #222436;
+	font-size: 20px;
+	box-shadow: inset 0px -3px #83a6f2;
 }
 
 
@@ -141,6 +142,15 @@ window#waybar.empty #window {
 	background-color: #aba1ed;
 	/* override of override */
 	font-size: 22px;
+	border-radius: 30px;
+}
+
+#custom-menu {
+	margin-right: 8px;
+}
+
+#custom-power {
+	margin-left: 8px;
 }
 
 #bluetooth {
@@ -160,7 +170,7 @@ window#waybar.empty #window {
 
 #backlight {
 	/* background-color: #90b1b1; */
-	color: #90b1b1;
+	color: #e0e6ff;
 }
 
 #network {
@@ -210,13 +220,14 @@ window#waybar.empty #window {
 
 #battery {
 	/* background-color: #ffffff; */
-	color: #ffffff;
+	color: #e0e6ff;
 }
 
 #battery.charging,
 #battery.plugged {
-	color: #ffffff;
-	background-color: #26A65B;
+	/* color: #ffffff; */
+	/* background-color: #26A65B; */
+	/* background-color: #00FFFF; */
 }
 
 @keyframes blink {
