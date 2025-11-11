@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 rofi_cmd() {
-	rofi show -dmenu -i -p "Power Menu" -theme "${theme}" -mesg "$uptime"
+	rofi show -dmenu -i -p "$uptime" -theme "${theme}"
 }
 
 main() {
@@ -17,7 +17,7 @@ main() {
 
 	case "$choice" in
 		"$lockscreen")
-			xfce4-screensaver-command -l ;;
+			hyprlock ;;
 		"$logoff")
 			loginctl kill-session $XDG_SESSION_ID ;;
 		"$shutdown")
