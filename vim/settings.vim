@@ -13,6 +13,7 @@ set noshowmode                      " Do not show mode
 " display
 set number				            " Line numbers
 set wildmenu				        " List completion for commands
+set wildoptions=pum,fuzzy			" List completion for commands
 set showcmd				            " Display command keystrokes
 set wrap                            " Wrap lines that are too long
 set linebreak                       " Wrap lines without cutting words
@@ -32,6 +33,7 @@ filetype plugin on                  " Filetype specific operation
 set encoding=utf-8                  " Global encoding
 set fileencoding=utf-8              " Local encoding
 set formatoptions+=ro               " Add comment header auto
+set path+=**
 
 " indent settings
 set tabstop=4               		" Number of spaces tabs count for

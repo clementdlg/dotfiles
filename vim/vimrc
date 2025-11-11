@@ -6,3 +6,5 @@ source ~/.config/vim/env.vim
 source ~/.config/vim/settings.vim
 source ~/.config/vim/statusline.vim
 source ~/.config/vim/mappings.vim
+source ~/.config/vim/build-cmd.vim
+source ~/.config/vim/fzf.vim
