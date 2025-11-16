@@ -1,14 +1,7 @@
 {
   "logo": {
-    "type": "small",
-    "color": {
-      "1": "bright_",
-    },
-    "padding": {
-      "top": 1,
-      "left": 2,
-      "right": 2
-    }
+	"source": "~/.config/fastfetch/logos/fedora.txt",
+	"type": "file"
   },
   "display": {
     "separator": "  "
