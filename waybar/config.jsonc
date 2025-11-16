@@ -136,7 +136,7 @@
     },
 		"bluetooth": {
 		// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-		"format": " {status}",
+		"format": "{status} ",
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": " {num_connections} connected",
 		// "tooltip-format": "{controller_alias}\t{controller_address}",
@@ -147,7 +147,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname} 󰈀",
+        "format-ethernet": "Ethernet 󰈀",
         "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "No Network ⚠",

@@ -39,6 +39,7 @@ window#waybar.empty #window {
 
 #workspaces {
 	font-size: 26px;
+	font-weight: 500;
 }
 
 #workspaces button {
@@ -74,7 +75,7 @@ window#waybar.empty #window {
 	font-size: 20px;
 	padding: 0 15px;
 	color: rgb(210, 210, 210);
-	background: rgba(35, 32, 54, 1);
+	background: #222436;
 	border-radius: 8px;
 	box-shadow: inset 0px -3px #83a6f2;
 	margin: 0px 10px;
