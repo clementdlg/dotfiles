@@ -196,7 +196,7 @@
     "custom/power": {
         "format" : "",
 		"tooltip": false,
-        "on-click": "/home/krem/.config/rofi/applets/rofi-powermenu.sh"
+        "on-click": "/home/krem/.config/scripts/rofi-powermenu.sh"
 	},
     "custom/menu": {
         "format" : "",
