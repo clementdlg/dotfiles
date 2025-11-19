@@ -49,8 +49,6 @@
 	},
  "widgets": [
         "mpris",
-        "volume",
-        "backlight",
         "dnd",
         "title",
         "notifications"

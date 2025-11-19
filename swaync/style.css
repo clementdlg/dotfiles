@@ -272,7 +272,7 @@
 .control-center {
 	/* The Control Center which contains the old notifications + widgets */
 	/* background: @cc-bg; */
-	/* background-color: #232036; */
+	/* background-color: #000000; */
 	background: rgba(18, 18, 18, 0.6);
 	color: @text-color;
 	border-radius: 12px;
@@ -323,7 +323,7 @@
 	font-size: 1.5rem;
 	padding: 10px;
 	border-radius: 15px;
-	background-color: #232036;
+	background-color: #000000;
 
 	/* background-color: rgba(35, 32, 54, 0.5); */
 	box-shadow: inset 0px -4px rgba(131, 166, 242, 0.6);
@@ -338,8 +338,8 @@
 	border-radius: 12px;
 	background: #83a6f2;
 	color: black;
-	border: solid 1px #232036;
-	box-shadow: inset 0px -4px #232036;
+	border: solid 1px #000000;
+	box-shadow: inset 0px -4px #000000;
 }
 
 .widget-title>button:active {
@@ -351,7 +351,7 @@
 	color: @text-color;
 	margin: 6px;
 	font-size: 1.2rem;
-	background-color: #232036;
+	background-color: #000000;
 	padding: 10px;
 	border-radius: 12px;
 }
@@ -450,7 +450,7 @@
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
-	background-color: #232036;
+	background-color: #000000;
 	border: solid 1px #666666;
 	color: #FFFFFF;
 	border-radius: 12px;
@@ -489,7 +489,7 @@
 
 /* Volume widget */
 .widget-volume {
-	background-color: #232036;
+	background-color: #000000;
 	padding: 8px;
 	margin: 8px;
 	border-radius: 12px;
@@ -510,7 +510,7 @@
 
 /* Backlight widget */
 .widget-backlight {
-	background-color: #232036;
+	background-color: #000000;
 	padding: 8px;
 	margin: 8px;
 	border-radius: 12px;
