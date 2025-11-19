@@ -9,16 +9,15 @@
     "modules-left": [
 		"custom/menu",
         "hyprland/workspaces",
-        // "sway/mode",
-        // "sway/scratchpad",
-        "custom/media"
     ],
     "modules-center": [
 		"hyprland/window"
     ],
     "modules-right": [
+        "mpris",
         "tray",
-        "keyboard-state",
+        // "keyboard-state",
+        "mpris",
 		"bluetooth",
         "network",
         "pulseaudio",
@@ -146,9 +145,9 @@
 	},
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{signalStrength}% 󰖩",
         "format-ethernet": "Ethernet 󰈀",
-        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+        "tooltip-format": "{essid}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "No Network ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -160,14 +159,14 @@
         "format": "{volume}% {icon}   {format_source}",
         // "format-alt": "{volume}% {icon} {format_source}",
 		"format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-bluetooth-muted": "dbg1 {icon} {format_source}",
         "format-muted": "󰝟 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "dbg2",
+            "headset": "dbg3",
             "phone": "",
             "portable": "",
             "car": "",
@@ -177,17 +176,18 @@
 		// "on-click-right": "$HOME/.config/rofi/applets/rofi-audio-io.sh"
 		"on-click": "better-control -m --audio"
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
+	"mpris": {
+		"format": "DEFAULT: {player_icon} {dynamic}",
+		"format-paused": "DEFAULT: {status_icon} <i>{dynamic}</i>",
+		"player-icons": {
+			"default": "▶",
+			"mpv": "🎵"
+		},
+		"status-icons": {
+			"paused": "⏸"
+		},
+	// "ignored-players": ["firefox"]
+	},
     "custom/swaync": {
         "format" : "",
 		"tooltip": false,
