@@ -7151,3 +7151,15 @@ flowboxchild:selected image {
   */
   -gtk-icon-shadow: 0px 0px @theme_selected_bg_color;
 }
+
+/* SwayNc transparency fix */
+.control-center-list {
+  /* List of notifications */
+  background: transparent;
+}
+
+.blank-window {
+  /* Window behind control center and on all other monitors */
+  background: transparent;
+}
+
