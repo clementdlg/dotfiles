@@ -1,12 +1,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# don't put duplicate lines
-HISTCONTROL=erasedups
-
-# append to the history file, don't overwrite it
+# history control
 shopt -s histappend
-
+HISTCONTROL=erasedups
 HISTSIZE=1000 # max history size per session
 HISTFILESIZE=10000 # max history file size
 
@@ -14,110 +11,82 @@ HISTFILESIZE=10000 # max history file size
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
 if [ "$color_prompt" = yes ]; then
-	host="$(hostname |cut -d. -f1)"
 	if [[ -v TMUX ]]; then
 		PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
 	else
-		PS1='\[\e[38;5;153;1m\][$host]($?)> \[\e[0m\]'
+		PS1='\[\e[38;5;153;1m\][\h:\W]> \[\e[0m\]'
+	fi
+else
+	PS1='[\u@\h:\W]\$ '
+fi
+
+unset color_prompt
+
+# completion
+if ! shopt -oq posix; then
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
 	fi
 fi
 
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm|rxvt*|linux)
-	# [user@hostname](dir)$ 
-	PS1='\[\e[0m\][\[\e[38;5;43;1m\]\u\[\e[0m\]@\[\e[38;5;43;1m\]\h\[\e[0m\]](\[\e[97m\]\W\[\e[0m\])\[\e[97m\]\$ '
-    ;;
-*)
-    ;;
-esac
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-###	EXPORTS	###
+### EXPORTS ###
 export PROMPT_COMMAND='history -a; history -n'
 
 # pick the best possible editor
-if which vim &>/dev/null; then
+if which nvim &>/dev/null; then
+	export EDITOR=nvim
+elif which vim &>/dev/null; then
 	export EDITOR=vim
 elif which vi &>/dev/null; then
 	export EDITOR=vi
 fi
 
-function addToPath() {
-	[[ ! -d "$1" ]] && return 1	# dir must exist
-	[[ $PATH == *"$1"* ]] && return 1	# dir must not already be in path
 
+### PATH ###
+function addToPath() {
+	[[ ! -d "$1" ]] && return
+	[[ $PATH == *"$1"* ]] && return
 	export PATH=$PATH:$1
-	return 0
 }
-addToPath "$HOME/scripts/dev/"
-addToPath "$HOME/scripts/desktop/"
-addToPath "$HOME/scripts/utils"
+
 addToPath "$HOME/.local/bin"
 
 unset -f addToPath
 
-### SOURCE ###
 
-# source aliases and functions at the end
+### SOURCE ###
 function sourceFile() {
-	[[ ! -f "$1" ]] && return # $1 must be a valid file
+	[[ ! -f "$1" ]] && return
 	source "$1"
 }
 
 sourceFile "$HOME/.config/bash/bash_aliases"
+# sourceFile "$HOME/.config/bash/bash_tmux.sh"
 
+unset -f sourceFile
+
+
+### EVAL ###
+# fzf
 if which fzf &>/dev/null; then
 	eval "$(fzf --bash)"
 fi
 
-unset -f sourceFile
-
-# export
-export COLORTERM=truecolor
-# export LANG=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
-
-# eval
+# homebrew
 if [[ -f /opt/homebrew/bin/brew ]]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# direnv
+if type direnv; then
+	eval "$(direnv hook bash)"
 fi
 
 bind "TAB:menu-complete"
