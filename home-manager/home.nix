@@ -78,7 +78,7 @@
 		];
 
 		plugins = with pkgs.vimPlugins; [
-			(nvim-treesitter-legacy.withPlugins (p: [
+			(nvim-treesitter.withPlugins (p: [
 				p.nix
 				p.html
 				p.json
