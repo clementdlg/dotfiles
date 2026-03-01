@@ -8,3 +8,11 @@ htop/
 pulse/
 systemd/
 cosmic/com.system76.CosmicTheme.Light/
+
+gtk-3.0/
+gtk-4.0/
+kdeglobals
+qt5ct/
+qt6ct/
+user-dirs.dirs
+user-dirs.locale

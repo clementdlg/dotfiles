@@ -40,7 +40,8 @@ family = "DejaVuSansM Nerd Font Propo"
 style = "Italic"
 
 [font.normal]
-family = "DejaVuSansM Nerd Font Propo"
+family = "DejaVu Sans Mono"
+# family = "DejaVuSansM Nerd Font Propo"
 style = "Regular"
 
 [env]
