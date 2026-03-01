@@ -16,6 +16,8 @@
 # The home.packages option allows you to install Nix packages into your
 # environment.
 	home.packages = with pkgs; [
+		tmux
+		direnv
 		bash-completion
 		fzf
 		bat
@@ -24,7 +26,6 @@
 		git
 		uv
 		delta
-		htop
 		unzip
 		gnutar
 		tree
@@ -32,12 +33,13 @@
 		tokei
 		jq
 
-		ethtool
-		curl
 		traceroute
 		tcpdump
 		netcat
 		dig
+
+		cargo
+		go
 
 
 # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -114,7 +116,7 @@
 #  /etc/profiles/per-user/krem/etc/profile.d/hm-session-vars.sh
 #
 	home.sessionVariables = {
-# EDITOR = "emacs";
+		EDITOR = "nvim";
 	};
 
 # Let Home Manager install and manage itself.
