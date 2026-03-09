@@ -68,7 +68,7 @@ function sourceFile() {
 }
 
 sourceFile "$HOME/.config/bash/bash_aliases"
-# sourceFile "$HOME/.config/bash/bash_tmux.sh"
+sourceFile "$HOME/.config/bash/bash_tmux.sh"
 
 unset -f sourceFile
 
@@ -85,8 +85,13 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
 fi
 
 # direnv
-if type direnv; then
+if type direnv &>/dev/null; then
 	eval "$(direnv hook bash)"
+fi
+
+# nix
+if [[ -f /etc/profile.d/nix.sh ]]; then
+	source /etc/profile.d/nix.sh
 fi
 
 bind "TAB:menu-complete"

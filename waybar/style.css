@@ -1,0 +1,269 @@
+* {
+	/* `otf-font-awesome` is required to be installed for icons */
+	font-family: NotoSans Nerd Font;
+}
+
+window#waybar {
+	background-color: transparent;
+	/* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+	color: rgba(255, 255, 255, 0);
+	transition-property: background-color;
+	transition-duration: .5s;
+	color: #FF00FF;
+	/* background-color: rgba(35, 32, 54, 0.8); */
+}
+
+window#waybar.hidden {
+	opacity: 0.2;
+}
+
+button {
+	/* box-shadow: inset 0 -3px transparent; */
+	/* Avoid rounded borders under each button name */
+	border: none;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+	background: inherit;
+	/* box-shadow: inset 0 -3px #ffffff; */
+}
+
+
+window#waybar.empty #window {
+	box-shadow: none;
+	background-color: transparent;
+}
+
+/* LEFT SIDE  */
+
+#workspaces {
+	font-size: 26px;
+	font-weight: 500;
+}
+
+#workspaces button {
+	/* padding: 2 15; */
+	padding: 2 20 2 15;
+	background-color: #222436;
+	color: #e0e6ff;
+	border-radius: 8px;
+	box-shadow: inset 0px -3px #83a6f2;
+}
+
+#workspaces button.active {
+	background-color: #83a6f2;
+	/* color: #000000; */
+	color: #222436;
+}
+
+
+#workspaces button:hover {
+	/* background: rgba(0, 0, 0, 0.65); */
+
+	transition-duration: .5s;
+	box-shadow: none;
+}
+
+#workspaces button.urgent {
+	color: #ff9e64;
+}
+
+
+/* CENTER */
+#window {
+	font-size: 20px;
+	padding: 0 15px;
+	color: rgb(210, 210, 210);
+	background: #222436;
+	border-radius: 8px;
+	box-shadow: inset 0px -3px #83a6f2;
+	margin: 0px 10px;
+}
+
+
+/* RIGHT SIDE */
+
+#mode {
+	background-color: #64727D;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#mpris,
+#tray,
+#mode,
+#bluetooth,
+#power-profiles-daemon,
+#custom-power,
+#custom-menu,
+#custom-swaync,
+#mpd {
+	background-color: #222436;
+	border-radius: 8px;
+	padding: 0px 15px;
+	color: #222436;
+	font-size: 20px;
+	box-shadow: inset 0px -3px #83a6f2;
+}
+
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-media:hover,
+#tray:hover,
+#mode:hover,
+#bluetooth:hover,
+#power-profiles-daemon:hover,
+#custom-power:hover,
+#custom-menu:hover,
+#custom-swaync:hover,
+#mpd:hover {
+	box-shadow: none;
+	transition-duration: 0.7s;
+}
+
+
+#custom-power,
+#custom-menu {
+	padding: 0 18 0 10;
+	box-shadow: none;
+	background-color: #aba1ed;
+	/* override of override */
+	font-size: 22px;
+	border-radius: 30px;
+}
+
+#custom-menu {
+	margin-right: 8px;
+}
+
+#custom-power {
+	margin-left: 8px;
+}
+
+#bluetooth {
+	color: #e0e6ff;
+}
+
+#custom-swaync {
+	padding: 0 18 0 10;
+	color: #e0e6ff;
+	/* box-shadow: inset 2px -4px #83a6f2; */
+}
+
+#clock {
+	color: #e0e6ff;
+	/* box-shadow: inset 2px -4px #83a6f2; */
+}
+
+#backlight {
+	/* background-color: #90b1b1; */
+	color: #e0e6ff;
+}
+
+#network {
+	color: #e0e6ff;
+}
+
+#pulseaudio {
+	color: #e0e6ff;
+}
+
+#pulseaudio:hover {
+	box-shadow: none;
+}
+
+/* #pulseaudio.muted { */
+/* 	background-color: #90b1b1; */
+/* 	color: #2a5c45; */
+/* } */
+
+#wireplumber {
+	background-color: #fff0f5;
+	/* color: #000000; */
+}
+
+#wireplumber.muted {
+	background-color: #f53c3c;
+}
+
+#custom-media {
+	background-color: #66cc99;
+	color: #2a5c45;
+	min-width: 100px;
+}
+
+#tray {
+	background-color: #222436;
+}
+
+#tray>.passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+	-gtk-icon-effect: highlight;
+	background-color: #eb4d4b;
+}
+
+#battery {
+	/* background-color: #ffffff; */
+	color: #e0e6ff;
+}
+
+#battery.charging,
+#battery.plugged {
+	/* color: #ffffff; */
+	/* background-color: #26A65B; */
+	/* background-color: #00FFFF; */
+}
+
+@keyframes blink {
+	to {
+		background-color: #ffffff;
+		color: #000000;
+	}
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+	background-color: #f53c3c;
+	color: #ffffff;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: steps(12);
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+#power-profiles-daemon {
+	padding-right: 15px;
+}
+
+#power-profiles-daemon.performance {
+	background-color: #f53c3c;
+	/* color: #ffffff; */
+}
+
+#power-profiles-daemon.balanced {
+	background-color: #2980b9;
+	/* color: #ffffff; */
+}
+
+#power-profiles-daemon.power-saver {
+	background-color: #2ecc71;
+	/* color: #000000; */
+}
