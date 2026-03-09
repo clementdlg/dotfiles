@@ -16,8 +16,9 @@
 # The home.packages option allows you to install Nix packages into your
 # environment.
 	home.packages = with pkgs; [
+		curl
 		tmux
-		direnv
+		# direnv
 		bash-completion
 		fzf
 		bat
@@ -83,6 +84,8 @@
 			ruff
 			docker-language-server
 			terraform-ls
+			ansible-language-server
+			ansible-lint
 		];
 
 		plugins = with pkgs.vimPlugins; [
