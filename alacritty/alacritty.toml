@@ -2,6 +2,7 @@
 opacity = 0.87
 # opacity = 1
 padding = { x = 5, y = 5 }
+decorations = "None"
 
 [colors.primary]
 background = "0x222436"
@@ -31,15 +32,18 @@ yellow = "#e0af68"
 size = 17.0
 
 [font.bold]
-family = "DejaVuSansM Nerd Font Propo"
+family = "DejaVu Sans Mono"
+# family = "DejaVuSansM Nerd Font Propo"
 style = "Bold"
 
 [font.italic]
-family = "DejaVuSansM Nerd Font Propo"
+family = "DejaVu Sans Mono"
+# family = "DejaVuSansM Nerd Font Propo"
 style = "Italic"
 
 [font.normal]
-family = "DejaVuSansM Nerd Font Propo"
+family = "DejaVu Sans Mono"
+# family = "DejaVuSansM Nerd Font Propo"
 style = "Regular"
 
 [env]
