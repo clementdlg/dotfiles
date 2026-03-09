@@ -6,3 +6,9 @@ go/
 htop/
 pulse/
 systemd/
+better-control/
+environment.d/
+libvirt/
+pavucontrol.ini
+visidata/
+vlc/
