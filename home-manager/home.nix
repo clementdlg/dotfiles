@@ -23,7 +23,6 @@
 		bat
 		btop
 
-		git
 		uv
 		delta
 		unzip
@@ -75,11 +74,14 @@
 	programs.neovim = {
 		enable = true;
 		extraPackages = with pkgs; [
-			nixd
+			ripgrep
 			lua-language-server
+			stylua
+			nixd
 			bash-language-server
-			ruff
 			pyright
+			ruff
+			docker-language-server
 			terraform-ls
 		];
 
@@ -92,9 +94,11 @@
 				p.bash
 				p.python
 				p.javascript
-				# p.go
-				# p.rust
-				# p.terraform
+				p.go
+				p.rust
+				p.terraform
+				p.just
+				p.make
 			]))
 		];
 	};
