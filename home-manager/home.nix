@@ -19,7 +19,6 @@
 		curl
 		tmux
 		# direnv
-		bash-completion
 		fzf
 		bat
 		btop
@@ -86,6 +85,7 @@
 			terraform-ls
 			ansible-language-server
 			ansible-lint
+			gitlab-ci-ls
 		];
 
 		plugins = with pkgs.vimPlugins; [

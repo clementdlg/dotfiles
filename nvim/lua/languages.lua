@@ -47,8 +47,8 @@ M.servers = {
 
 	ansiblels = {},
 
-	-- docker_language_server = {},
-	docker_compose_language_service = {},
+	docker_language_server = {},
+	-- docker_compose_language_service = {},
 	nixd = {},
 }
 

@@ -1,4 +1,3 @@
-DNF_PACKAGES := SERVER + " " + CLI + " " + NETWORK + " " + DESKTOP + " " + FIRMWARE
 SERVER := '''
 	@virtualization
 	podman
@@ -27,6 +26,7 @@ CLI := '''
 	openssh
 	curl
 	bash-completion
+	fzf 
 	dejavu-sans-mono-fonts
 '''
 
@@ -60,3 +60,6 @@ FLATPAKS := '''
 	org.onlyoffice.desktopeditors
 	org.prismlauncher.PrismLauncher
 '''
+
+DNF_PACKAGES := replace(SERVER + " " + CLI + " " + NETWORK + " " + DESKTOP + " " + FIRMWARE, "\n", " ")
+FLATPAK_LIST := replace(FLATPAKS, "\n", " ")

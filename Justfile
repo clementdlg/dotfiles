@@ -1,21 +1,29 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
+USER := "krem"
+
+# config lists
 import "config.just"
 
 [private]
 _check_root:
     @if [ "$EUID" -ne 0 ]; then echo "ERROR: Run this script as root" >&2; exit 1; fi
 
-## Base job definitions
 @default:
     just --list
 
-# installation
+# full developper setup based on Neovim
 nix: _check_root
-	curl -fsSL https://install.determinate.systems/nix \
-		| sh -s -- install --no-confirm
+	if [ ! -f /nix/receipt.json ]; then \
+		curl -fsSL https://install.determinate.systems/nix \
+		| sh -s -- install --no-confirm; \
+	fi
 
-flatpaks: _check_root
+	su {{USER}} -c "source /etc/profile.d/nix.sh && \
+	nix run nixpkgs#home-manager -- switch"
+
+# graphical apps for Linux desktop
+flatpak: _check_root
 	dnf install -y \
 		--setopt=install_weak_deps=False \
 			flatpak
@@ -26,24 +34,27 @@ flatpaks: _check_root
 
 	flatpak install flathub -y \
 		--noninteractive \
-		{{FLATPAKS}}
+		{{FLATPAK_LIST}}
 
+# fedora only packages
 dnf_packages: _check_root
 	dnf install -y \
 		--setopt=install_weak_deps=False \
 		{{DNF_PACKAGES}}
 
-# uninstallation
+# remove fedora packages
 clean_dnf_packages: _check_root
 	dnf remove -y {{DNF_PACKAGES}}
 
 
+# remove graphical apps for Linux
 clean_flatpaks: _check_root
 	flatpak remove -y \
 		--delete-data \
 		--noninteractive \
 		{{FLATPAKS}}
 
+# remove developer setup
 clean_nix:
 	curl -fsSL https://install.determinate.systems/nix \
 		| sh -s -- uninstall \
@@ -51,7 +62,11 @@ clean_nix:
 		--explain
 
 
-## meta jobs
-all: dnf_packages flatpak nix
+# install all
+install: dnf_packages flatpak nix
+
+# reset
 clean: clean_dnf_packages clean_flatpaks clean_nix
-re: clean all
+
+# reset then install all
+re: clean install
