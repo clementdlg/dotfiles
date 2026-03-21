@@ -1,60 +1,29 @@
-set shell := ["bash", "-euo", "pipefail", "-c"]
-
-USER := "krem"
-
-# config lists
-import "config.just"
-
 [private]
-_check_root:
-    @if [ "$EUID" -ne 0 ]; then echo "ERROR: Run this script as root" >&2; exit 1; fi
+# _check_root:
+    # @if [ "$EUID" -ne 0 ]; then echo "ERROR: Run this script as root" >&2; exit 1; fi
 
 @default:
     just --list
 
 # full developper setup based on Neovim
-nix: _check_root
+nix:
 	if [ ! -f /nix/receipt.json ]; then \
 		curl -fsSL https://install.determinate.systems/nix \
 		| sh -s -- install --no-confirm; \
 	fi
 
-	su {{USER}} -c "source /etc/profile.d/nix.sh && \
-	nix run nixpkgs#home-manager -- switch"
+	source /etc/profile.d/nix.sh
+	nix run "nixpkgs#home-manager" -- switch
 
-# graphical apps for Linux desktop
-flatpak: _check_root
-	dnf install -y \
-		--setopt=install_weak_deps=False \
-			flatpak
+# add bashrc
+bashrc:
+	command -v diff
+	if ! [ diff "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" >/dev/null ]; then
+		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old"  
+		ln -s "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc"
+	fi
 
-	flatpak remote-add \
-		--if-not-exists \
-		flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-	flatpak install flathub -y \
-		--noninteractive \
-		{{FLATPAK_LIST}}
-
-# fedora only packages
-dnf_packages: _check_root
-	dnf install -y \
-		--setopt=install_weak_deps=False \
-		{{DNF_PACKAGES}}
-
-# remove fedora packages
-clean_dnf_packages: _check_root
-	dnf remove -y {{DNF_PACKAGES}}
-
-
-# remove graphical apps for Linux
-clean_flatpaks: _check_root
-	flatpak remove -y \
-		--delete-data \
-		--noninteractive \
-		{{FLATPAKS}}
-
-# remove developer setup
+# remove nix setup
 clean_nix:
 	curl -fsSL https://install.determinate.systems/nix \
 		| sh -s -- uninstall \
@@ -62,11 +31,18 @@ clean_nix:
 		--explain
 
 
+# remove bashrc
+clean_bashrc:
+	if [ -f "$HOME/.bashrc.old" ]; then
+		rm "$HOME/.bashrc"
+		mv -v "$HOME/.bashrc.old" "$HOME/.bashrc"
+	fi
+
 # install all
-install: dnf_packages flatpak nix
+install: bashrc nix
 
 # reset
-clean: clean_dnf_packages clean_flatpaks clean_nix
+clean: clean_nix clean_bashrc
 
 # reset then install all
 re: clean install
