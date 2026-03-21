@@ -1,4 +1,4 @@
-[private]
+# [private]
 # _check_root:
     # @if [ "$EUID" -ne 0 ]; then echo "ERROR: Run this script as root" >&2; exit 1; fi
 
