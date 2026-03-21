@@ -1,7 +1,3 @@
-# [private]
-# _check_root:
-    # @if [ "$EUID" -ne 0 ]; then echo "ERROR: Run this script as root" >&2; exit 1; fi
-
 @default:
     just --list
 
@@ -18,9 +14,9 @@ nix:
 # add bashrc
 bashrc:
 	command -v diff
-	if ! [ diff "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" >/dev/null ]; then
-		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old"  
-		ln -s "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc"
+	if ! [ diff "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" >/dev/null ]; then \
+		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old" &&\
+		ln -s "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" \
 	fi
 
 # remove nix setup
@@ -33,9 +29,9 @@ clean_nix:
 
 # remove bashrc
 clean_bashrc:
-	if [ -f "$HOME/.bashrc.old" ]; then
-		rm "$HOME/.bashrc"
-		mv -v "$HOME/.bashrc.old" "$HOME/.bashrc"
+	if [ -f "$HOME/.bashrc.old" ]; then \
+		rm "$HOME/.bashrc" &&\
+		mv -v "$HOME/.bashrc.old" "$HOME/.bashrc" \
 	fi
 
 # install all
