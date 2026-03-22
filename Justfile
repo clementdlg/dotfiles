@@ -1,44 +1,47 @@
 @default:
     just --list
 
-# full developper setup based on Neovim
-nix:
-	if [ ! -f /nix/receipt.json ]; then \
-		curl -fsSL https://install.determinate.systems/nix \
-		| sh -s -- install --no-confirm; \
-	fi
+# ansible setup
+[working-directory: 'ansible']
+ansible:
+	command -v uv >/dev/null
+	uv python install
+	uv sync
 
-	source /etc/profile.d/nix.sh
-	nix run "nixpkgs#home-manager" -- switch
+# lsp installation
+[working-directory: 'nodejs']
+nodejs:
+	command -v bun >/dev/null
+	bun ci --production
 
 # add bashrc
 bashrc:
-	command -v diff
-	if ! [ diff "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" >/dev/null ]; then \
-		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old" &&\
-		ln -s "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc" \
+	#!/bin/sh
+	command -v diff >/dev/null
+	if ! diff "$HOME/.config/bash/bashrc" "$HOME/.bashrc" >/dev/null ; then
+		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old"
+		ln -s "$HOME/.config/bash/bashrc" "$HOME/.bashrc"
 	fi
 
-# remove nix setup
-clean_nix:
-	curl -fsSL https://install.determinate.systems/nix \
-		| sh -s -- uninstall \
-		--no-confirm \
-		--explain
+clean_nodejs:
+	rm -rfv nodejs/node_modules
 
+clean_ansible:
+	rm -rfv ansible/.venv
 
 # remove bashrc
 clean_bashrc:
-	if [ -f "$HOME/.bashrc.old" ]; then \
-		rm "$HOME/.bashrc" &&\
-		mv -v "$HOME/.bashrc.old" "$HOME/.bashrc" \
+	#!/bin/sh
+	if [ -f "$HOME/.bashrc.old" ]; then
+		rm "$HOME/.bashrc"
+		mv -v "$HOME/.bashrc.old" "$HOME/.bashrc"
 	fi
 
 # install all
-install: bashrc nix
+install: bashrc ansible nodejs
 
 # reset
-clean: clean_nix clean_bashrc
+clean: clean_bashrc clean_nodejs clean_ansible
 
 # reset then install all
 re: clean install
