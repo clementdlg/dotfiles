@@ -8,11 +8,19 @@ ansible:
 	uv python install
 	uv sync
 
+
 # lsp installation
 [working-directory: 'nodejs']
 nodejs:
 	command -v bun >/dev/null
 	bun ci --production
+
+
+golang:
+	command -v go >/dev/null
+	go install github.com/hashicorp/terraform-ls@latest
+	go install github.com/docker/docker-language-server/cmd/docker-language-server@latest
+
 
 # add bashrc
 bashrc:
