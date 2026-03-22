@@ -16,9 +16,10 @@
 # The home.packages option allows you to install Nix packages into your
 # environment.
 	home.packages = with pkgs; [
+		git
 		curl
 		tmux
-		# direnv
+		direnv
 		fzf
 		bat
 		btop
@@ -37,8 +38,10 @@
 		netcat
 		dig
 
-		cargo
 		go
+		glibcLocales
+		# ansible_2_18
+
 
 
 # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -124,6 +127,8 @@
 #
 	home.sessionVariables = {
 		EDITOR = "nvim";
+		LANG="C.UTF-8";
+		LC_ALL="C.UTF-8";
 	};
 
 # Let Home Manager install and manage itself.
