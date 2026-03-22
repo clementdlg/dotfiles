@@ -1,0 +1,8 @@
+{
+	"dependencies": {
+		"@ansible/ansible-language-server": "^1.2.3",
+		"@microsoft/compose-language-service": "^0.5.0",
+		"bash-language-server": "^5.6.0",
+		"pyright": "^1.1.408"
+	}
+}
