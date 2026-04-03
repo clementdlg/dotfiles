@@ -12,3 +12,8 @@ libvirt/
 pavucontrol.ini
 visidata/
 vlc/
+Thunar/
+autostart/
+galculator/
+mimeapps.list
+xfce4/
