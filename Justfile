@@ -6,8 +6,8 @@ bashrc:
 	#!/bin/sh
 	if [ -f "$HOME/.bashrc" ]; then
 		mv -v "$HOME/.bashrc" "$HOME/.bashrc.old$(date +%s)"
-		ln -s "$HOME/.config/bash/bashrc" "$HOME/.bashrc"
 	fi
+	ln -s "$HOME/.config/bash/bashrc" "$HOME/.bashrc"
 
 # install Nix (without a daemon)
 nix:
