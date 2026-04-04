@@ -26,4 +26,5 @@ home-manager:
 
 # preload Neovim config
 nvim:
+	source /etc/profile.d/nix.sh && \
 	nvim -l "$XDG_CONFIG_HOME/nvim/init.lua"
