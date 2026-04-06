@@ -40,7 +40,7 @@
 		pyright
 
 		ansible-language-server
-		ansible-lint
+		# ansible-lint
 
 		lua-language-server
 		stylua
@@ -138,7 +138,7 @@
 	home.sessionVariables = {
 		EDITOR = "nvim";
 		LANG="C.UTF-8";
-		LC_ALL="C.UTF-8";
+		# LC_ALL="C.UTF-8";
 	};
 
 # Let Home Manager install and manage itself.
