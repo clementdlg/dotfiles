@@ -25,7 +25,7 @@
 		fzf
 		git
 		tmux
-		neovim
+		btop
 
 		delta
 		bottom
@@ -34,20 +34,7 @@
 		tealdeer
 		glibcLocales
 
-		bash-language-server
 		uv
-		ruff
-		pyright
-
-		ansible-language-server
-		# ansible-lint
-
-		lua-language-server
-		stylua
-
-		docker-language-server
-		yaml-language-server
-		terraform-ls
 		gitlab-ci-local
 		crane
 		kubectl
@@ -84,40 +71,40 @@
 # '';
 	};
 
-	# programs.neovim = {
-	# 	enable = true;
-	# 	extraPackages = with pkgs; [
-	# 		ripgrep
-	# 		lua-language-server
-	# 		stylua
-	# 		nixd
-	# 		bash-language-server
-	# 		pyright
-	# 		ruff
-	# 		docker-language-server
-	# 		terraform-ls
-	# 		ansible-language-server
-	# 		ansible-lint
-	# 		yaml-language-server
-	# 	];
-	#
-	# 	plugins = with pkgs.vimPlugins; [
-	# 		(nvim-treesitter.withPlugins (p: [
-	# 			p.nix
-	# 			p.html
-	# 			p.json
-	# 			p.yaml
-	# 			p.bash
-	# 			p.python
-	# 			p.javascript
-	# 			p.go
-	# 			p.rust
-	# 			p.hcl
-	# 			p.just
-	# 			# p.make
-	# 		]))
-	# 	];
-	# };
+	programs.neovim = {
+		enable = true;
+		extraPackages = with pkgs; [
+			ripgrep
+			lua-language-server
+			stylua
+			nixd
+			bash-language-server
+			pyright
+			ruff
+			docker-language-server
+			terraform-ls
+			ansible-language-server
+			ansible-lint
+			yaml-language-server
+		];
+
+		plugins = with pkgs.vimPlugins; [
+			(nvim-treesitter.withPlugins (p: [
+				p.nix
+				p.html
+				p.json
+				p.yaml
+				p.bash
+				p.python
+				p.javascript
+				p.go
+				p.rust
+				p.hcl
+				p.just
+				# p.make
+			]))
+		];
+	};
 
 # Home Manager can also manage your environment variables through
 # 'home.sessionVariables'. These will be explicitly sourced when using a

@@ -1,7 +1,7 @@
 -- [[ LSP config ]]
 -- use lspconfig's config and override them with my own preferences
-local servers = require('languages').servers
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+local servers = require("core.languages").servers
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 for name, config in pairs(servers) do
 	config.capabilities = capabilities
@@ -10,10 +10,10 @@ for name, config in pairs(servers) do
 end
 
 -- [[ Completion ]]
-require('blink.cmp').setup {
+require("blink.cmp").setup({
 	sources = {
-		default = { 'lsp', 'path' }
+		default = { "lsp", "path" },
 	},
-	fuzzy = { implementation = 'lua' },
+	fuzzy = { implementation = "lua" },
 	signature = { enabled = true },
-}
+})

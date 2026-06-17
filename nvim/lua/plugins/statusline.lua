@@ -1,11 +1,10 @@
-MiniDeps.now(function()
-  local statusline = require('mini.statusline')
+local statusline = require('mini.statusline')
 
-  statusline.setup({
-    use_icons = true,
-  })
+statusline.setup({
+  use_icons = true,
+})
 
-  statusline.section_location = function()
-    return '%2l:%-2v'
-  end
-end)
+-- Override the location section
+statusline.section_location = function()
+  return '%2l:%-2v'
+end

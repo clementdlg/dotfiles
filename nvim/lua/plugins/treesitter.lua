@@ -1,4 +1,4 @@
-local languages = require('languages').highlight_syntax
+local languages = require('core.languages').highlight_syntax
 
 -- -- nvim-treesitter-legacy config
 -- require('nvim-treesitter.configs').setup({
