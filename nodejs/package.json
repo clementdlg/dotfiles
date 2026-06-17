@@ -1,7 +1,0 @@
-{
-	"dependencies": {
-		"@ansible/ansible-language-server": "^1.2.3",
-		"bash-language-server": "^5.6.0",
-		"pyright": "^1.1.408"
-	}
-}
