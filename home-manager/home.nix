@@ -1,134 +1,136 @@
-{ config, pkgs, ... }:
-
 {
-	home.stateVersion = "25.11"; # Please read the comment before changing.
-	home.username = "krem";
-	home.homeDirectory = "/home/krem";
+  config,
+  pkgs,
+  ...
+}: {
+  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.username = "krem";
+  home.homeDirectory = "/home/krem";
 
-# This value determines the Home Manager release that your configuration is
-# compatible with. This helps avoid breakage when a new Home Manager release
-# introduces backwards incompatible changes.
-#
-# You should not change this value, even if you update Home Manager. If you do
-# want to update the value, then make sure to first check the Home Manager
-# release notes.
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
 
-# The home.packages option allows you to install Nix packages into your
-# environment.
-	home.packages = with pkgs; [
-		curl
-		gnutar
-		jq
-		netcat
-		lsof
-		tree
-		fzf
-		git
-		tmux
-		btop
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+  home.packages = with pkgs; [
+    curl
+    gnutar
+    jq
+    netcat
+    lsof
+    tree
+    fzf
+    git
+    tmux
+    btop
 
-		delta
-		bottom
-		bat
-		tokei
-		tealdeer
-		glibcLocales
+    delta
+    bottom
+    bat
+    tokei
+    tealdeer
+    glibcLocales
 
-		uv
-		gitlab-ci-local
-		crane
-		kubectl
+    uv
+    gitlab-ci-local
+    crane
+    kubectl
+    opentofu
 
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
+  ];
 
-# # It is sometimes useful to fine-tune packages, for example, by applying
-# # overrides. You can do that directly here, just don't forget the
-# # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-# # fonts?
-# (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
 
-# # You can also create simple shell scripts directly inside your
-# # configuration. For example, this adds a command 'my-hello' to your
-# # environment:
-# (pkgs.writeShellScriptBin "my-hello" ''
-#   echo "Hello, ${config.home.username}!"
-# '')
-	];
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
 
+  programs.neovim = {
+    enable = true;
+    sideloadInitLua = true;
+    extraPackages = with pkgs; [
+      ripgrep
+      lua-language-server
+      stylua
+      nixd
+      alejandra
+      pyright
+      ruff
+      docker-language-server
+      terraform-ls
+      ansible-language-server
+      ansible-lint
+      yaml-language-server
+    ];
 
-# Home Manager is pretty good at managing dotfiles. The primary way to manage
-# plain files is through 'home.file'.
-	home.file = {
-# # Building this configuration will create a copy of 'dotfiles/screenrc' in
-# # the Nix store. Activating the configuration will then make '~/.screenrc' a
-# # symlink to the Nix store copy.
-# ".screenrc".source = dotfiles/screenrc;
+    plugins = with pkgs.vimPlugins; [
+      (nvim-treesitter.withPlugins (p: [
+        p.nix
+        p.html
+        p.json
+        p.yaml
+        p.bash
+        p.python
+        p.javascript
+        p.go
+        p.rust
+        p.hcl
+        p.just
+        # p.make
+      ]))
+    ];
+  };
 
-# # You can also set the file content immediately.
-# ".gradle/gradle.properties".text = ''
-#   org.gradle.console=verbose
-#   org.gradle.daemon.idletimeout=3600000
-# '';
-	};
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/krem/etc/profile.d/hm-session-vars.sh
+  #
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    LANG = "C.UTF-8";
+    # LC_ALL="C.UTF-8";
+  };
 
-	programs.neovim = {
-		enable = true;
-		extraPackages = with pkgs; [
-			ripgrep
-			lua-language-server
-			stylua
-			nixd
-			bash-language-server
-			pyright
-			ruff
-			docker-language-server
-			terraform-ls
-			ansible-language-server
-			ansible-lint
-			yaml-language-server
-		];
-
-		plugins = with pkgs.vimPlugins; [
-			(nvim-treesitter.withPlugins (p: [
-				p.nix
-				p.html
-				p.json
-				p.yaml
-				p.bash
-				p.python
-				p.javascript
-				p.go
-				p.rust
-				p.hcl
-				p.just
-				# p.make
-			]))
-		];
-	};
-
-# Home Manager can also manage your environment variables through
-# 'home.sessionVariables'. These will be explicitly sourced when using a
-# shell provided by Home Manager. If you don't want to manage your shell
-# through Home Manager then you have to manually source 'hm-session-vars.sh'
-# located at either
-#
-#  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-#
-# or
-#
-#  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-#
-# or
-#
-#  /etc/profiles/per-user/krem/etc/profile.d/hm-session-vars.sh
-#
-	home.sessionVariables = {
-		EDITOR = "nvim";
-		LANG="C.UTF-8";
-		# LC_ALL="C.UTF-8";
-	};
-
-# Let Home Manager install and manage itself.
-	programs.home-manager.enable = true;
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }
 # vim: ts=2 sw=2
+
