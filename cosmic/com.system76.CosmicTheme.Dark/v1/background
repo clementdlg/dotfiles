@@ -43,15 +43,15 @@
             alpha: 1.0,
         ),
         divider: (
-            red: 0.8169308,
-            green: 0.8169311,
-            blue: 0.8169302,
+            red: 0.816931,
+            green: 0.816931,
+            blue: 0.8169299,
             alpha: 0.2,
         ),
         on: (
-            red: 0.8169308,
-            green: 0.8169311,
-            blue: 0.8169302,
+            red: 0.816931,
+            green: 0.816931,
+            blue: 0.8169299,
             alpha: 1.0,
         ),
         disabled: (
@@ -61,9 +61,9 @@
             alpha: 0.5,
         ),
         on_disabled: (
-            red: 0.8169308,
-            green: 0.8169311,
-            blue: 0.8169302,
+            red: 0.816931,
+            green: 0.816931,
+            blue: 0.8169299,
             alpha: 0.65,
         ),
         border: (
@@ -80,21 +80,21 @@
         ),
     ),
     divider: (
-        red: 0.30355814,
-        green: 0.30955204,
+        red: 0.3035582,
+        green: 0.309552,
         blue: 0.35150862,
         alpha: 1.0,
     ),
     on: (
-        red: 0.97342604,
-        green: 0.9734263,
-        blue: 0.9734252,
+        red: 0.9734263,
+        green: 0.97342616,
+        blue: 0.9734251,
         alpha: 1.0,
     ),
     small_widget: (
         red: 0.20212594,
         green: 0.202126,
-        blue: 0.20212579,
+        blue: 0.2021259,
         alpha: 0.25,
     ),
 )
