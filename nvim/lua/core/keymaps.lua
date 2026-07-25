@@ -24,6 +24,7 @@ vim.keymap.set("n", "<Leader>bp", ":bp<CR>", { noremap = true, silent = true })
 
 -- pop up terminal
 vim.keymap.set("n", "<Leader>t", ":belowright terminal<CR>", { noremap = true, silent = true })
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- [[ Basic Autocommands ]]
 -- highlight text on yank

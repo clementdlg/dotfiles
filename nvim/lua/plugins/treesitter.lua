@@ -1,4 +1,4 @@
-local languages = require('core.languages').highlight_syntax
+local languages = require("core.languages").highlight_syntax
 
 -- -- nvim-treesitter-legacy config
 -- require('nvim-treesitter.configs').setup({
@@ -18,9 +18,9 @@ local languages = require('core.languages').highlight_syntax
 -- })
 
 -- treesitter config without plugin
- vim.api.nvim_create_autocmd('FileType', {
-    pattern = languages,
-    callback = function()
-      vim.treesitter.start()
-    end,
-  })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = languages,
+	callback = function()
+		vim.treesitter.start()
+	end,
+})

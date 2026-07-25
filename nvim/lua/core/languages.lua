@@ -2,14 +2,14 @@ local M = {}
 
 -- [[ Treesitter ]]
 M.highlight_syntax = {
-	'bash',
-	'python',
-	'lua',
-	'c',
-	'html',
-	'yaml',
-	'json',
-	'markdown',
+	"bash",
+	"python",
+	"lua",
+	"c",
+	"html",
+	"yaml",
+	"json",
+	"markdown",
 	-- 'rust',
 	-- 'go',
 	-- 'terraform',
@@ -17,7 +17,7 @@ M.highlight_syntax = {
 
 -- [[ LSP servers ]]
 M.servers = {
-	terraformls = {},
+	tofu_ls = {},
 	bashls = {},
 	ruff = {},
 	pyright = {
@@ -29,7 +29,7 @@ M.servers = {
 			python = {
 				analysis = {
 					-- Ignore all files for analysis to exclusively use Ruff for linting
-					ignore = { '*' },
+					ignore = { "*" },
 				},
 			},
 		},
@@ -40,7 +40,7 @@ M.servers = {
 			Lua = {
 				workspace = {
 					library = vim.api.nvim_get_runtime_file("", true),
-				}
+				},
 			},
 		},
 	},
