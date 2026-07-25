@@ -1,54 +1,10 @@
 #!/bin/env bash
-
-# Standard aliases
-alias ll="ls -al"
-alias neofetch="fastfetch"
-alias sl="ls"
-alias vim="$EDITOR"
-alias nano="$EDITOR"
-alias ..="cd .."
-alias c="clear"
-
-# Conf file
-alias nvimrc="$EDITOR ~/.config/nvim/init.lua"
-alias vimrc="$EDITOR ~/.config/vim/vimrc"
-
-# git
-alias g="git"
-alias st="git status"
-alias gd="git diff HEAD"
-
-# wireguard
-alias wgd="/bin/sudo wg-quick down"
-alias wgu="/bin/sudo wg-quick up"
-
-# docker
-alias dockerrm="docker ps -a | awk '{ print \$1 }' | tail -n+2 | xargs -I {} sudo docker rm {}"
-alias dcu="docker compose up -d --build && docker compose logs -f"
-alias d="docker"
-alias dcd="docker compose down"
-
-# other
-alias kernel="echo \$(curl -s https://kernel.org/ | grep -A1 '<td>mainline:</td>' | tail -1 | sed 's/[a-z<>\/ ]//g')"
-alias html="w3m -T text/html"
-alias music=ncmpcpp
-
-if [[ -f "$HOME/scripts/utils/quick-wg" ]]; then
-	alias wireg="/bin/sudo /home/krem/scripts/utils/quick-wg"
-fi
-
+#
 # Basic color support
 if [[ "$TERM" == *"-256color" ]]; then
 	alias ip='ip -c'
 	alias grep='grep --color=auto'
 	alias ls="ls --color=always"
-
-	# eza aliases
-	if which eza &>/dev/null; then
-		alias l="eza --color=always --icons"
-		alias la="eza --color=always --icons --all"
-		alias ll="eza --color=always --icons --all --long"
-	fi
 
 	# replace cat with bat
 	if which bat &>/dev/null; then
@@ -56,13 +12,20 @@ if [[ "$TERM" == *"-256color" ]]; then
 	fi
 fi
 
-# wrappers functions
-function noerr() { "$@" 2>/dev/null; }
-function silent() { "$@" &>/dev/null; }
-function sbg() { "$@" &>/dev/null & }
-function wk() { source $HOME/scripts/utils/cdz "$HOME/Desktop/2e-annee" ;}
+# Standard aliases
+alias ll="ls -al"
+alias vim="$EDITOR"
+alias nano="$EDITOR"
+alias ..="cd .."
+alias c="clear"
 
+# git
+alias g="git"
+alias st="git status"
+alias gd="git diff HEAD"
 
-function eve() {
-	telnet my-eveng "32${1}"
-}
+# docker
+alias dcu="docker compose up -d --build && docker compose logs -f"
+alias d="docker"
+
+alias tf=tofu
