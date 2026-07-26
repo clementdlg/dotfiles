@@ -29,3 +29,4 @@ alias dcu="docker compose up -d --build && docker compose logs -f"
 alias d="docker"
 
 alias tf=tofu
+alias getdl="mv  ~/Downloads/\"\$(ls --color=never -trh ~/Downloads/ | tail -1)\""

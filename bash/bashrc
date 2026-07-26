@@ -16,13 +16,16 @@ case "$TERM" in
 esac
 
 if [ "$color_prompt" = yes ]; then
-	if [[ -v TMUX ]]; then
-		PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
-	else
-		PS1='\[\e[38;5;153;1m\][\h:\W]> \[\e[0m\]'
-	fi
+    if [[ -v TMUX ]]; then
+        # get the tmux prompt
+        PS1='\[\e[38;5;153;1m\][$?]> \[\e[0m\]'
+    else
+        # get the default prompt
+        PS1='\[\e[38;5;153;1m\][\h:\W]\$ \[\e[0m\]'
+    fi
 else
-	PS1='[\u@\h:\W]\$ '
+    # get the default prompt
+    PS1='[\u@\h:\W]\$ '
 fi
 
 unset color_prompt
