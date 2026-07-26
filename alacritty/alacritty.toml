@@ -5,7 +5,8 @@ padding = { x = 5, y = 5 }
 decorations = "None"
 
 [colors.primary]
-background = "0x222436"
+# background = "0x222436"
+background = "0x292b3b"
 foreground = "0xFFFFFF"
 
 [colors.bright]
