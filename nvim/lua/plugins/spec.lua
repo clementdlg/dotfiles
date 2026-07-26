@@ -52,6 +52,9 @@ local plugins = {
 
 	-- dedicated markdown plugin
 	"https://github.com/OXY2DEV/markview.nvim",
+
+	-- show indent
+	"https://github.com/folke/snacks.nvim",
 }
 
 -- 3. Conditionally add fzf-native

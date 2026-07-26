@@ -1,7 +1,7 @@
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.mouse = "a"
 vim.o.showmode = false
 vim.o.clipboard = ""

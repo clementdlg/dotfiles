@@ -26,3 +26,5 @@ require("plugins.difftool")
 
 -- Language specific
 require("plugins.markview")
+-- identation
+require("plugins.snacks")
