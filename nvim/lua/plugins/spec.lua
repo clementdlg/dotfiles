@@ -55,6 +55,12 @@ local plugins = {
 
 	-- show indent
 	"https://github.com/folke/snacks.nvim",
+
+	-- function signature
+	{
+		src = "https://github.com/nvim-treesitter/nvim-treesitter-context",
+		version = "master",
+	},
 }
 
 -- 3. Conditionally add fzf-native

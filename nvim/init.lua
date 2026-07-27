@@ -8,7 +8,7 @@ require("core.runcmd")
 require("plugins.spec")
 
 -- cosmetic
-require("plugins.colorscheme")
+require("plugins.tokyonight")
 
 -- UI
 require("plugins.statusline")

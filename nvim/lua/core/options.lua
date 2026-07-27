@@ -19,7 +19,7 @@ vim.opt.listchars = { tab = "│ ", trail = "·", nbsp = "␣" }
 vim.opt.autoindent = true
 vim.o.inccommand = "split"
 vim.o.cursorline = true
-vim.o.scrolloff = 10
+vim.o.scrolloff = 8
 vim.o.confirm = true
 vim.opt.winborder = "rounded"
 vim.opt.path:append("**")
