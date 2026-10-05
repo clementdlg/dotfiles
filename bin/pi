@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Global `pi` wrapper: run the Pi sandbox against the current directory (or $PI_PROJECT).
+# Install to ~/.config/bin/pi and make sure ~/.config/bin is on your PATH.
+set -euo pipefail
+
+# Where the sandbox repo (compose.yml, .env, models.json) lives on the host.
+PI_SANDBOX_DIR="${PI_SANDBOX_DIR:-$HOME/.config/pi-sandbox}"
+
+# The project to expose as /workspace. Defaults to the current directory.
+export PI_PROJECT="${PI_PROJECT:-$PWD}"
+
+# Env file with API keys. Defaults to the sandbox's .env.
+export PI_ENV_FILE="${PI_ENV_FILE:-$PI_SANDBOX_DIR/.env}"
+
+if [[ -f "$PI_SANDBOX_DIR/compose.yml" ]]; then
+    exec docker compose -f "$PI_SANDBOX_DIR/compose.yml" run --rm pi-sandbox "$@"
+else
+    echo "Error: pi-sandbox is not installed. It must be in `~/.config/pi-sandbox`"
+fi

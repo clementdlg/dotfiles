@@ -60,6 +60,7 @@ function addToPath() {
 }
 
 addToPath "$HOME/.local/bin"
+addToPath "$HOME/.config/bin"
 
 unset -f addToPath
 
