@@ -28,6 +28,9 @@
     git
     tmux
     btop
+    dnsutils
+    openssl
+    gcc
 
     delta
     bottom
@@ -41,6 +44,10 @@
     crane
     kubectl
     opentofu
+    direnv
+    just
+    gnumake
+    nmap
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -73,6 +80,8 @@
 
   programs.neovim = {
     enable = true;
+    withPython3 = false;
+    withRuby = false;
     sideloadInitLua = true;
     extraPackages = with pkgs; [
       ripgrep
@@ -83,10 +92,10 @@
       pyright
       ruff
       docker-language-server
-      terraform-ls
+      tofu-ls
       ansible-language-server
-      ansible-lint
       yaml-language-server
+      clang-tools
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -100,9 +109,8 @@
         p.javascript
         p.go
         p.rust
-        p.hcl
-        p.just
-        # p.make
+        # p.hcl
+        p.css
       ]))
     ];
   };
