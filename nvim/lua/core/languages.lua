@@ -2,22 +2,26 @@ local M = {}
 
 -- [[ Treesitter ]]
 M.highlight_syntax = {
-	"bash",
-	"python",
 	"lua",
 	"c",
-	"html",
-	"yaml",
-	"json",
 	"markdown",
-	-- 'rust',
-	-- 'go',
-	-- 'terraform',
+	"nix",
+	"html",
+	"json",
+	"yaml",
+	"bash",
+	"python",
+	"javascript",
+	"go",
+	"rust",
+	-- "hcl",
+	"css",
 }
 
 -- [[ LSP servers ]]
 M.servers = {
 	tofu_ls = {},
+	clangd = {},
 	bashls = {},
 	ruff = {},
 	pyright = {

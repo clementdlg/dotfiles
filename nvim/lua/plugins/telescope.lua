@@ -14,7 +14,7 @@ local dropdown = function(picker)
 end
 
 -- [[ Keymaps ]]
-vim.keymap.set("n", "<leader>bl", dropdown(builtin.buffers)) -- list buffers
+vim.keymap.set("n", "<leader>l", dropdown(builtin.buffers)) -- list buffers
 vim.keymap.set("n", "<leader>o", builtin.find_files) -- find file in project
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics) -- diagnostics
 vim.keymap.set("n", "<leader>fg", builtin.live_grep) -- grep projectwide
