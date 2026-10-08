@@ -135,7 +135,7 @@ Commands persist for the session in `vim.g` — per-project overrides work by se
 - **Persistent undo**, clipboard left empty (system-independent, yank via `<leader>y`)
 - **UI:** rounded window borders, cursor line, `scrolloff 8`, visible whitespace, sign column always on
 - **Diagnostics:** virtual text with Nerd Font glyphs, underline only for errors, floating windows with rounded borders
-- **Markdown:** markview in hybrid mode (rendered in normal mode, raw in insert)
+- **Markdown:** markview renders in all modes; in insert mode, the paragraph under the cursor stays raw for editing
 
 ## Installing / updating plugins
 
