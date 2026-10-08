@@ -110,10 +110,15 @@ Leader is `<Space>`.
 | `<leader>dr` | Prompt to change the run command (stored to register `r`) |
 | `<leader>jt` | Run test command (default `just test`) in terminal split |
 | `<leader>dt` | Prompt to change the test command (stored to register `t`) |
-| `<leader>jp` | Run pi command (default `pi --continue`) in terminal split |
-| `<leader>dp` | Prompt to change the pi command (stored to register `p`) |
+| `<leader>ja` | Pick a Justfile recipe (shown with its doc comment) from a Telescope dropdown and run it |
 
 Commands persist for the session in `vim.g` — per-project overrides work by setting them once per session.
+
+### Pi agent (floating terminal, snacks.nvim)
+| Key | Action |
+|---|---|
+| `<leader>ar` | Open (or focus) the pi agent in a rounded floating terminal (`pi --continue`) |
+| `<leader>at` | Toggle (hide/show) the floating pi terminal — the job keeps running while hidden |
 
 ### Files & code
 | Key | Action |
